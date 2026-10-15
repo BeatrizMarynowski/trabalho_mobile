@@ -1,6 +1,14 @@
 import { Stack } from "expo-router";
+import { useFonts, Fredoka_600SemiBold } from "@expo-google-fonts/fredoka";
+import { Nunito_400Regular } from "@expo-google-fonts/nunito";   // ← linha nova
+
 
 export default function RootLayout() {
+  const [fontsLoaded] = useFonts({ Fredoka_600SemiBold, Nunito_400Regular });   // ← linha alterada
+  if (!fontsLoaded) return null;
+
+
+
   return (
       <Stack>
         {/*dos dois*/}
@@ -28,4 +36,9 @@ export default function RootLayout() {
       </Stack>
   );
 }
+
+
+
+
+
 
