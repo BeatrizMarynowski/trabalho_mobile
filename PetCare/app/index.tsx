@@ -12,7 +12,6 @@ return (
       <Image source={require('../assets/images/icone_cachorro.png')} style={styles.imagem_pata}/>
       <Text style={styles.index_slogan}> Cuidado e carinho em todos os momentos.
         </Text>
-
     </View>
 {/*view do meio*/}
     <View style={styles.view_metade}>

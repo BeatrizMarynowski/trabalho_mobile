@@ -97,6 +97,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     color: colors.roxo_escuro,
     opacity: 0.8,
+    fontSize: 16,
     paddingHorizontal: 32,
   },
 
@@ -507,6 +508,7 @@ titulo_vacinas_pagina: {
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 6,
+     marginTop: 14,
   },
 
      view_metade: {
