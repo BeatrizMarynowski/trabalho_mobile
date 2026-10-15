@@ -1,8 +1,11 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Image, Pressable, ScrollView, View } from "react-native";
+import { Alert, Image, Pressable, ScrollView, View } from "react-native";
 import { Icon, Text, TextInput } from 'react-native-paper';
 import { colors, styles } from '../style';
+
+import { getAuth } from "firebase/auth";
+import { getFirestore, collection, addDoc,} from "firebase/firestore";
 
 export default function Index() {
     const [nomepet, setnomepet] = useState("");
@@ -18,7 +21,49 @@ export default function Index() {
     const [endereco, setendereco] = useState("");
     const [telefone, settelefone] = useState("");
     const [email, setemail] = useState("");
-    const [notas, setnotas] = useState("")
+    const [notas, setnotas] = useState("");
+
+    const novopet = async () => {
+    if (!nomepet || !nometutor || !especie || !raca || !idade || !peso || !sexo || !castrado || !cpf || !endereco || !telefone || !email) {
+      Alert.alert("Atenção", "Por favor, preencha todos os campos!");
+      return;
+    }
+    const auth = getAuth();
+    const db = getFirestore();
+    const user = auth.currentUser;
+    try {
+
+      const docRef = await addDoc(collection(db, "ficha_pet"), {
+        nomepet,
+        nometutor,
+        especie,
+        raca,
+        idade,
+        peso,
+        sexo,
+        castrado,
+        cpf,
+        endereco,
+        telefone,
+        email,
+        notas,
+        vetId: user?.uid
+      });
+    router.push({
+    pathname: "./compartilhar_ficha_veterinario",
+      params: { 
+        petId: docRef.id, 
+        petNome: nomepet 
+      }
+    });
+    
+    } catch (error) {
+      console.error("Erro ao salvar veterinário:", error);
+      Alert.alert("Erro", "Não foi possível criar a conta. Tente novamente.");
+    }
+  };
+
+
 return (
 /*view principal*/
     <View style={styles.view_principal}>
@@ -192,11 +237,9 @@ return (
                         style={styles.quadrinho_vizu}/>
                 </View>
             </View>
-            <Link href="./compartilhar_ficha_veterinario" asChild>
-                <Pressable style={styles.botao_principal}>
+                <Pressable style={styles.botao_principal} onPress={novopet}>
                     <Text style={styles.texto_botao_principal}>Criar ficha</Text>
                 </Pressable>
-            </Link>
         </View>
         </ScrollView>
         {/*view para dar espaço na tela - 5*/}

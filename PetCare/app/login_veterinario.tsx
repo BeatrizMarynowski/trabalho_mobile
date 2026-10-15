@@ -4,7 +4,6 @@ import { Alert, Image, Pressable, View } from "react-native";
 import { Text, TextInput } from 'react-native-paper';
 import { styles } from '../style';
 
-
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebaseconfig";
 
@@ -13,7 +12,7 @@ export default function Index() {
   const [email, setemail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const realizarLogin = async () => {
+  const login = async () => {
     if (!email || !senha) {
       Alert.alert("Atenção", "Por favor, preencha todos os campos!");
       return;
@@ -38,7 +37,7 @@ export default function Index() {
     }
   };
 
-  const EsqueceuSenha = async () => {
+  const esqueceu = async () => {
   if (!email) {
     Alert.alert("Atenção", "Por favor, digite seu e-mail no campo acima primeiro!");
     return;
@@ -93,15 +92,21 @@ return (
       secureTextEntry={true}
       mode="flat"
     />
-    <Pressable style={styles.press} onPress={realizarLogin}>
+    <Pressable style={styles.press} onPress={login}>
         <Text>Entrar</Text>
     </Pressable>
 
-      <Pressable onPress={EsqueceuSenha}>
+      <Pressable onPress={esqueceu}>
         <Text style={{ color: '#fff', marginTop: 10 }}>Esqueceu sua senha?</Text>
       </Pressable>
 
-    </View>
+      <Link href={"/menu_veterinario"} asChild>
+        <Pressable style={styles.press}>
+          <Text>entrar sem autenticacao (remover depois)</Text>
+        </Pressable>
+      </Link>
+
+  </View>
 {/*view para dar espaço na tela*/}
     <View style={styles.espaco_10}/>
     </View>

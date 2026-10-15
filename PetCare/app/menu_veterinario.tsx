@@ -4,10 +4,48 @@ import { Image, Pressable, ScrollView, View } from 'react-native';
 import { BottomNavigation, FAB, Icon, List, Switch, Text } from 'react-native-paper';
 import { colors, styles } from '../style';
 
+import { getFirestore, collection, onSnapshot, query, where } from "firebase/firestore"; 
+import { getAuth } from "firebase/auth";
+
 export default function App() {
   /* codigo pro switch funcionar - vem do componente do react paper*/
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+  const [pets, setPets] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const db = getFirestore();
+    const auth = getAuth();
+    const usuarioLogado = auth.currentUser;
+    
+
+    if (!usuarioLogado) {
+      setLoading(false);
+      return;
+    }
+
+    const q = query(
+      collection(db, "ficha_pet"),
+      where("vetId", "==", usuarioLogado.uid)
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const listaPets = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setPets(listaPets);
+      setLoading(false);
+    }, (error) => {
+      console.error("Erro ao carregar os seus pets:", error);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   /*codigo que mostra a tela dos pets/criacao da rota da tela do navbar - vem do componente do react native*/
   const petsRoute = () =>
       /*view principal*/
@@ -18,89 +56,32 @@ export default function App() {
       {/*nome da pessoa*/}
       <View style={styles.caixa_ola}>
         <Icon source="account" size={20} color={colors.preto} />
-        <Text style={styles.titulo_ola}>Olá,(nome da do medico)</Text>
+        <Text style={styles.titulo_ola}>Olá</Text>
       </View>
       {/*rolagem dos animais*/}
       <ScrollView style={{padding:10}}>
         {/*view exemplo de um animal*/}
-        <Link href="./ficha_animal_visualizacao_veterinario" asChild>
+        {pets.map((pet) => (
+        <Link 
+          key={pet.id} 
+          // Passamos o ID diretamente na URL usando ?petId=
+          href={`./ficha_animal_visualizacao_veterinario?petId=${pet.id}`} 
+          asChild
+        >
           <Pressable style={styles.botao_animal}>
             <View style={styles.view_botao}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
+              <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
             </View>
             <View style={styles.view_animal}>
-                <Text style={styles.nomePet}>Rodolfo</Text>
-                <Text style={styles.nomeDono}>Dono: (nome do dono)</Text>
-            </View>
-          </Pressable>
-        </Link>
-        <Link href="./ficha_animal_visualizacao_veterinario" asChild>
-          <Pressable style={styles.botao_animal}>
-            <View style={styles.view_botao}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-            </View>
-            <View style={styles.view_animal}>
-                <Text style={styles.nomePet}>Rodolfo</Text>
-                <Text style={styles.nomeDono}>Dono: (nome do dono)</Text>
-            </View>
-          </Pressable>
-        </Link>
-        <Link href="./ficha_animal_visualizacao_veterinario" asChild>
-          <Pressable style={styles.botao_animal}>
-            <View style={styles.view_botao}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-            </View>
-            <View style={styles.view_animal}>
-                <Text style={styles.nomePet}>Rodolfo</Text>
-                <Text style={styles.nomeDono}>Dono: (nome do dono)</Text>
-            </View>
-          </Pressable>
-        </Link>
-        <Link href="./ficha_animal_visualizacao_veterinario" asChild>
-          <Pressable style={styles.botao_animal}>
-            <View style={styles.view_botao}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-            </View>
-            <View style={styles.view_animal}>
-                <Text style={styles.nomePet}>Rodolfo</Text>
-                <Text style={styles.nomeDono}>Dono: (nome do dono)</Text>
-            </View>
-          </Pressable>
-        </Link>
-        <Link href="./ficha_animal_visualizacao_veterinario" asChild>
-          <Pressable style={styles.botao_animal}>
-            <View style={styles.view_botao}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-            </View>
-            <View style={styles.view_animal}>
-                <Text style={styles.nomePet}>Rodolfo</Text>
-                <Text style={styles.nomeDono}>Dono: (nome do dono)</Text>
-            </View>
-          </Pressable>
-        </Link>
-        <Link href="./ficha_animal_visualizacao_veterinario" asChild>
-          <Pressable style={styles.botao_animal}>
-            <View style={styles.view_botao}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-            </View>
-            <View style={styles.view_animal}>
-                <Text style={styles.nomePet}>Rodolfo</Text>
-                <Text style={styles.nomeDono}>Dono: (nome do dono)</Text>
-            </View>
-          </Pressable>
-        </Link>
-        <Link href="./ficha_animal_visualizacao_veterinario" asChild>
-          <Pressable style={styles.botao_animal}>
-            <View style={styles.view_botao}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-            </View>
-            <View style={styles.view_animal}>
-                <Text style={styles.nomePet}>Rodolfo</Text>
-                <Text style={styles.nomeDono}>Dono: (nome do dono)</Text>
-            </View>
-          </Pressable>
-        </Link>
+              <Text style={styles.nomePet}>{pet.nomepet}</Text>
+                  <Text style={styles.nomeDono}>Dono: {pet.nometutor}</Text>
+                </View>
+                </Pressable>
+              </Link>
+                ))}
       </ScrollView>
+
+
       {/*botao para a criacao de uma nova ficha*/}
       <Link href="./ficha_animal_criacao_veterinario" asChild >
         <FAB icon="plus" style={{position:"absolute",bottom:"3%",right:"3%"}}/>

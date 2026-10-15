@@ -1,61 +1,109 @@
-import { Link } from "expo-router";
-import { Image, Pressable, ScrollView, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Link, useLocalSearchParams } from "expo-router"; // 1. Importa para pegar o petId da rota
+import { Image, Pressable, ScrollView, View, ActivityIndicator } from "react-native";
 import { Icon, Text } from 'react-native-paper';
 import { colors, styles } from '../style';
 
+// 2. Importações do Firestore
+import { getFirestore, doc, getDoc } from "firebase/firestore"; 
+
 export default function Index() {
-return (
-/*view principal*/
+  const { petId } = useLocalSearchParams<{ petId: string }>(); // Captura o ID do pet enviado pela lista
+  const [pet, setPet] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const carregarFichaDoPet = async () => {
+      if (!petId) return;
+      const db = getFirestore();
+      try {
+        const docRef = doc(db, "ficha_pet", petId);
+        const docSnap = await getDoc(docRef); // 3. Busca o pet no Firestore pelo ID
+
+        if (docSnap.exists()) {
+          setPet(docSnap.data());
+        } else {
+          console.log("Ficha não encontrada!");
+        }
+      } catch (error) {
+        console.error("Erro ao carregar dados do pet:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarFichaDoPet();
+  }, [petId]);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.roxo_fundodatela }}>
+        <ActivityIndicator size="large" color={colors.verde} />
+      </View>
+    );
+  }
+
+  if (!pet) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Ficha do pet não encontrada.</Text>
+      </View>
+    );
+  }
+
+  return (
+    /*view principal*/
     <View style={styles.view_principal}>
-{/*seta que volta para o menu*/}
+        {/*seta que volta para o menu*/}
         <Link href="./menu_tutor" style={styles.seta_voltar}>
             <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
-{/*view para dar espaço na tela - 10*/}
+        {/*view para dar espaço na tela - 10*/}
         <View style={styles.espaco_10}/>
-{/*view da ficha*/}
-        <ScrollView style={styles.view_secundaria_largura}>
+        
         {/*view da ficha*/}
-        <View style={styles. view_ficha}>
+        <ScrollView style={styles.view_secundaria_largura}>
+        <View style={styles.view_ficha}>
             {/*view da imagem e nome do pet*/}
             <View style={styles.cabecalho}>
                 <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
                 <View>
-                    <Text style={styles.nomePet}>Rodolfo</Text>
-                    <Text style={styles.nomeDono}>Dono: Leonardo Menegazzo </Text> 
+                    {/* 4. Nome e Dono DINÂMICOS do banco */}
+                    <Text style={styles.nomePet}>{pet.nomepet}</Text>
+                    <Text style={styles.nomeDono}>Dono: {pet.nometutor}</Text> 
                 </View>
             </View>
-            {/*view do pet e do dono*/}
+            
+            {/*view do pet e do dono com os dados dinâmicos do Firestore */}
             <View style={styles.view_das_info}>
                 <View style={styles.dados_animal_e_dono}>
                     <View style={styles.dados_div_animal_dono}>
                         <Text style={styles.titulo_verde_pequeno}>Animal</Text>
-                        <Text style={styles.dadosTexto}>Espécie: gato</Text>
-                        <Text style={styles.dadosTexto}>Raça: persa</Text>
-                        <Text style={styles.dadosTexto}>Idade: 2 anos</Text>
-                        <Text style={styles.dadosTexto}>Peso: 7Kg</Text>
-                        <Text style={styles.dadosTexto}>Sexo: macho</Text>
-                        <Text style={styles.dadosTexto}>Castrado: sim</Text>
+                        <Text style={styles.dadosTexto}>Espécie: {pet.especie}</Text>
+                        <Text style={styles.dadosTexto}>Raça: {pet.raca}</Text>
+                        <Text style={styles.dadosTexto}>Idade: {pet.idade}</Text>
+                        <Text style={styles.dadosTexto}>Peso: {pet.peso}</Text>
+                        <Text style={styles.dadosTexto}>Sexo: {pet.sexo}</Text>
+                        <Text style={styles.dadosTexto}>Castrado: {pet.castrado}</Text>
                     </View>
                     <View style={styles.dados_div_animal_dono}>
                         <Text style={styles.titulo_verde_pequeno}>Dono</Text>
-                        <Text style={styles.dadosTexto}>CPF: 000.111.222-44</Text>
-                        <Text style={styles.dadosTexto}>Endereço: Rua Rio Libéria, 456</Text>
-                        <Text style={styles.dadosTexto}>Telefone: 41 90321-9645</Text>
-                        <Text style={styles.dadosTexto}>Email: leozinhodograu@gmail.com</Text>
+                        <Text style={styles.dadosTexto}>CPF: {pet.cpf}</Text>
+                        <Text style={styles.dadosTexto}>Endereço: {pet.endereco}</Text>
+                        <Text style={styles.dadosTexto}>Telefone: {pet.telefone}</Text>
+                        <Text style={styles.dadosTexto}>Email: {pet.email}</Text>
                     </View>
                 </View>
             </View>
-            {/*linha divisoria*/}
-            <View style={styles.linha} />
+            
+            <View style={styles.linha}/>
+            
             {/*view das vacinas*/}          
             <View style={styles.view_das_info}>
-                {/*nome bonitin*/}  
                 <View style={styles.Titulo_div}>
                     <Icon source="needle" size={18} color={colors.verde} />
                     <Text style={styles.titulo_conf}>Vacinas</Text>
                 </View>
-                {/*cards da vacina*/}
                 <View style={styles.vacinasLista}>
                     <View style={styles.vacina_card}>
                         <Text style={styles.vacina_nome}>Polivalente</Text>
@@ -72,29 +120,27 @@ return (
                         </View>
                     </View>
                 </View>
-                {/*link dos detalhes*/}
                 <Link href="./vacinas_tutor" asChild>
                     <Pressable style={styles.botaodetalhes}>
-                        <Text style={styles.texto_botao_detalhes}>detalhes</Text><Icon source="chevron-right" size={14} color={colors.roxo_escuro}/>
+                        <Text style={styles.texto_botao_detalhes}>detalhes</Text>
+                        <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
                     </Pressable>
                 </Link>
             </View>
-            {/*linha divisoria*/}
+            
             <View style={styles.linha}/>
+            
             {/*view dos exames*/} 
             <View style={styles.view_das_info}>
-                {/*nome bonitin*/}
                 <View style={styles.Titulo_div}> 
                     <Icon source="flask-outline" size={18} color={colors.verde} /> 
                     <Text style={styles.titulo_conf}>Exames</Text>
                 </View>
-                {/*card dos exames*/}
                 <View style={styles.dados_card_exame}>
                     <Text style={styles.titulo_card_exame}>Hemograma completo</Text>
                     <Text style={styles.dados_exame}>dr. Carlos Silva</Text>
                     <Text style={styles.dados_exame}>22/02/2222</Text>
                 </View>
-                {/*link dos detalhes*/}
                 <Link href="./exames_tutor" asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
@@ -102,31 +148,29 @@ return (
                     </Pressable>
                 </Link>
             </View>
-            {/*linha divisoria*/}
+            
             <View style={styles.linha}/>
-            {/*view das notas*/} 
+            
+            {/*view das notas dinâmicas*/} 
             <View style={styles.view_das_info}>
-                {/*nome bonitin*/}
                 <View style={styles.Titulo_div}>
-                    <Icon source="note-text-outline" size={18} color={colors.verde}/>
+                    <Icon source="note-text-outline" size={18} color={colors.verde} />
                     <Text style={styles.titulo_conf}>Notas</Text>
                 </View>
-                {/*card das notas*/}
                 <View style={styles.dados_card_exame}>
                     <Text style={styles.dados_exame}>dr. Carlos Silva</Text>
-                    <Text style={styles.titulo_card_exame}>Informação</Text>
+                    {/* Exibe as notas criadas na ficha */}
+                    <Text style={styles.titulo_card_exame}>{pet.notas || "Sem observações."}</Text>
                 </View>
-                {/*link dos detalhes*/}
                 <Link href="./notas_tutor" asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
-                        <Icon source="chevron-right" size={14} color={colors.roxo_escuro}/>
+                        <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
                     </Pressable>
                 </Link>
             </View>
         </View>
         </ScrollView>
-        {/*view para dar espaço na tela - 5*/}
         <View style={styles.espaco_5}/>
     </View>
   );

@@ -4,7 +4,7 @@ import { Alert, Image, Pressable, View } from "react-native";
 import { Text, TextInput } from 'react-native-paper';
 import { styles } from '../style';
 
-
+/*todos os imports necessarios para fazer o cadatros pelo database do google ja com a criptografia em hash da senha*/
 import { auth, db } from './firebaseconfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
@@ -16,7 +16,8 @@ export default function Index() {
   const [crmv, setcrmv] = useState("");
   const [senha, setsenha] = useState("");
 
-  const handleCadastro = async () => {
+/*essa ja eh a constante que cadastra e salva no banco os dados coletados na hora da criacao da conta do veterinario*/
+  const Cadastro = async () => {
     if (!nome || !email || !telefone || !crmv || !senha) {
       Alert.alert("Atenção", "Por favor, preencha todos os campos!");
       return;
@@ -93,7 +94,7 @@ return (
       secureTextEntry={true}
       mode="flat"
     />
-      <Pressable style={styles.press} onPress={handleCadastro}>
+      <Pressable style={styles.press} onPress={Cadastro}>
             <Text>criar conta</Text>
       </Pressable>
   </View>

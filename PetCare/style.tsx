@@ -1,11 +1,13 @@
 import { StyleSheet} from 'react-native';
 
+
 export const colors = {
-  roxo_fundodatela: "#ae98cc",
-  roxo_escuro: "#271033",    
-  roxo_medio: "#3d2154",     
-  roxo_claro: "#54326e",
-  roxo_bem_claro: "#dfbcfc", 
+roxo_fundodatela: "#E4EBD6",  // fundo da tela (creme)
+  roxo_escuro: "#4A5759",       // cartões (cinza-azulado)
+  roxo_medio: "#6E8060",        // cabeçalhos e caixas dentro dos cartões (verde escuro)
+  roxo_claro: "#A3B18A",        // cards internos e botões (verde sálvia)
+  roxo_bem_claro: "#FBC4D5", 
+
   branco: "#ffffff",
   preto: "#030303",
   verde: "#3ecf8e",         
@@ -43,6 +45,7 @@ export const styles = StyleSheet.create({
   
   /*INDEX*/
   
+  
   view_25: {
     width:"100%",
     height:"25%",
@@ -55,16 +58,48 @@ export const styles = StyleSheet.create({
     alignItems:"center",
     padding:"10%"
   },
-  imagem_pata: {
-    width:"50%", 
-    height:"50%", 
-    objectFit: "contain",
+   imagem_pata: {
+    width: 160,
+    height: 160,
+    resizeMode: "contain",
+    marginTop: 30,
+  },
+
+
+ index_nome: {
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 44,
+    lineHeight: 52,
+    letterSpacing: 1.5,
+    color: colors.roxo_escuro,
+    textAlign: "center",
+    textShadowColor: "rgba(74, 87, 89, 0.25)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 3,
+  },
+  index_slogan: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 14,
+    color: colors.roxo_escuro,
+    textAlign: "center",
+    marginTop: 2,
+  },
+  index_titulo: {
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 26,
+    color: colors.roxo_escuro,
+    textAlign: "center",
+    marginBottom: 4,
+    paddingHorizontal: 24,
   },
   texto_conecte: {
-    textAlign:"center", 
-    gap:"2%", 
-    padding:"2%"
+    fontFamily: "Nunito_400Regular",
+    textAlign: "center",
+    color: colors.roxo_escuro,
+    opacity: 0.8,
+    paddingHorizontal: 32,
   },
+
   posicao_seta:{
         position:"absolute",
         top:"30%",
@@ -80,9 +115,13 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "10%",
   },
-
-
-
+  imagem_pets: {
+    width: "80%",
+    height: "100%",
+    resizeMode: "contain",
+    alignSelf: "center",
+     opacity: 0.7,
+  },
 
 
 /*FICHA ANIMAL VISUALIZAÇÃO TUTOR*/
@@ -442,27 +481,39 @@ titulo_vacinas_pagina: {
  },
 
  //index
-   pressable_l:{
-     width:"75%",
-     height:"40%",
-     backgroundColor: colors.roxo_claro,
-     borderRadius: 20,
-     alignItems: "center",
-     justifyContent: "center"
-   },
-   pressable_c:{
-     width:"75%",
-     height:"40%",
-     backgroundColor: colors.roxo_bem_claro,
-     borderRadius: 20,
-     alignItems: "center",
-     justifyContent: "center"
-   },
-   view_metade:{
-     width:"100%",
-     height:"50%",
-     alignItems:"center"
-   },
+   pressable_c: {
+    width: "80%",
+    height: "35%",
+    backgroundColor: colors.roxo_bem_claro,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    elevation: 4,
+    shadowColor: colors.roxo_escuro,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+  },
+  pressable_l: {
+    width: "80%",
+    height: "35%",
+    backgroundColor: colors.roxo_claro,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 4,
+    shadowColor: colors.roxo_escuro,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+  },
+
+     view_metade: {
+    width: "100%",
+    height: "35%",
+    alignItems: "center",
+  },
  
    //login
    view_fundo:{

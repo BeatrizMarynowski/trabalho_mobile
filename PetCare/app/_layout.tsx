@@ -1,6 +1,12 @@
 import { Stack } from "expo-router";
+import { useFonts, Fredoka_600SemiBold } from "@expo-google-fonts/fredoka";
+import { Nunito_400Regular } from "@expo-google-fonts/nunito";
+
 
 export default function RootLayout() {
+  const [fontsLoaded] = useFonts({ Fredoka_600SemiBold, Nunito_400Regular });   // ← linha alterada
+  if (!fontsLoaded) return null;
+
   return (
       <Stack>
         {/*dos dois*/}
@@ -11,6 +17,7 @@ export default function RootLayout() {
             <Stack.Screen name="login_tutor" options={{headerShown: false}} />
             <Stack.Screen name="cadastro_tutor" options={{headerShown: false}} />
             <Stack.Screen name="menu_tutor" options={{headerShown: false}} />
+            <Stack.Screen name="scan_qr_tutor" options={{headerShown: false}} />
             <Stack.Screen name="ficha_animal_visualizacao_tutor" options={{headerShown: false}} />
             <Stack.Screen name="vacinas_tutor" options={{headerShown: false}} />
             <Stack.Screen name="exames_tutor" options={{headerShown: false}} />
@@ -28,4 +35,3 @@ export default function RootLayout() {
       </Stack>
   );
 }
-

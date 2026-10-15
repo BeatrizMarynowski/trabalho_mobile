@@ -1,8 +1,13 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Image, Pressable, View } from "react-native";
+import { Alert, Image, Pressable, View } from "react-native";
 import { Text, TextInput } from 'react-native-paper';
 import { styles } from '../style';
+
+/*todos os imports necessarios para fazer o cadatros pelo database do google ja com a criptografia em hash da senha*/
+import { auth, db } from './firebaseconfig';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Index() {
   const [nome, setnome] = useState("");
@@ -10,7 +15,31 @@ export default function Index() {
   const [telefone, settelefone] = useState("");
   const [cpf, setcpf] = useState("");
   const [senha, setsenha] = useState("");
-return (
+
+  const Cadastro = async () => {
+    if (!nome || !email || !telefone || !cpf || !senha) {
+      Alert.alert("Atenção", "Por favor, preencha todos os campos!");
+      return;
+    }
+  
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+      const user = userCredential.user;
+  
+      await setDoc(doc(db, "tutores", user.uid), {
+        nome,
+        email,
+        telefone,
+        cpf,
+      });
+      router.push("./login"); 
+    } catch (error) {
+      console.error("Erro ao salvar tutor:", error);
+      Alert.alert("Erro", "Não foi possível criar a conta. Tente novamente.");
+    }
+  };
+
+  return (
 /*view principal*/
   <View style={styles.view_principal}>
 {/*view da logo - 25*/}
@@ -64,11 +93,9 @@ return (
       secureTextEntry={true}
       mode="flat"
     />
-    <Link href="./login" asChild>
-      <Pressable style={styles.press}>
-            <Text>criar conta</Text>
-      </Pressable>
-    </Link>
+    <Pressable style={styles.press}  onPress={Cadastro}>
+          <Text>criar conta</Text>
+    </Pressable>
   </View>
 {/*view para dar espaço na tela*/}
     <View style={styles.espaco_7}/>
