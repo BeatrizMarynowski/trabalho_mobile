@@ -58,13 +58,8 @@ export const styles = StyleSheet.create({
     alignItems:"center",
     padding:"10%"
   },
-   imagem_pata: {
-    width: 160,
-    height: 160,
-    resizeMode: "contain",
-    marginTop: 30,
-  },
-
+   
+  
 
  index_nome: {
     fontFamily: "Fredoka_600SemiBold",
@@ -122,6 +117,15 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
     alignSelf: "center",
      opacity: 0.7,
+    
+  },
+  imagem_pata: {
+    width: "70%",
+    height: "100%",
+    resizeMode: "contain",
+    alignSelf: "center",
+     opacity: 0.8,
+    
   },
 
 
@@ -489,7 +493,7 @@ titulo_vacinas_pagina: {
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 60,
     elevation: 4,
     shadowColor: colors.roxo_escuro,
     shadowOffset: { width: 0, height: 4 },
@@ -508,12 +512,12 @@ titulo_vacinas_pagina: {
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 6,
-     marginTop: 14,
+     marginTop: 7,
   },
 
      view_metade: {
     width: "100%",
-    height: "35%",
+    height: "30%",
     alignItems: "center",
   },
  

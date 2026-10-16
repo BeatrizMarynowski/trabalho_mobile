@@ -9,19 +9,30 @@ return (
   <View style={styles.view_principal}>
 {/*view da logo*/}
     <View style={styles.view_25}>
-      <Image source={require('../assets/images/icone_cachorro.png')} style={styles.imagem_pata}/>
-      <Text style={styles.index_slogan}> Cuidado e carinho em todos os momentos.
-        </Text>
+     
+     <Image
+    source={require('../assets/images/icone_pata.png')}
+    style={styles.imagem_pata}
+    resizeMode="contain"
+  />
+
+
+
     </View>
 {/*view do meio*/}
-    <View style={styles.view_metade}>
-      <Image source={require('../assets/images/pets.png')} style={styles.imagem_pets}/>
-    </View>
+   <View style={styles.view_metade}>
+  <Image
+    source={require('../assets/images/pets.png')}
+    style={styles.imagem_pets}
+    resizeMode="contain"
+  />
 
+ 
+</View>
       <Text style={styles.index_titulo}>
           Seu pet merece o melhor!
         </Text>
-      <Text variant="bodyMedium" style={styles.texto_conecte}>Conecte-se ao veterinário do seu pet,onde ele estiver</Text>
+      <Text variant="bodyMedium" style={styles.texto_conecte}>Conecte-se ao cuidado que seu pet merece, onde você estiver</Text>
 
 {/*view dos botao*/}
     <View style={[styles.view_25, { gap: '5%' }]}>
