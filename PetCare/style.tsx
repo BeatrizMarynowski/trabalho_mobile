@@ -2,11 +2,11 @@ import { StyleSheet} from 'react-native';
 
 
 export const colors = {
-roxo_fundodatela: "#E4EBD6",  // fundo da tela (creme)
-  roxo_escuro: "#4A5759",       // cartões (cinza-azulado)
-  roxo_medio: "#6E8060",        // cabeçalhos e caixas dentro dos cartões (verde escuro)
-  roxo_claro: "#A3B18A",        // cards internos e botões (verde sálvia)
-  roxo_bem_claro: "#FBC4D5", 
+ fundodatela: "#E4EBD6", 
+  cinza: "#4A5759",       
+  medio: "#6E8060",        // cabeçalhos e caixas dentro dos cartões (verde_cinza)
+  claro: "#A3B18A",        // cards internos e botões (verde sálvia)
+  bem_claro: "#FBC4D5", 
 
   branco: "#ffffff",
   preto: "#030303",
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     view_principal:{
     flex: 1,
     alignItems:"center", 
-    backgroundColor: colors.roxo_fundodatela
+    backgroundColor: colors.fundodatela
     },
 
   /* Configuração da Seta */
@@ -44,7 +44,12 @@ export const styles = StyleSheet.create({
 
   
   /*INDEX*/
-  
+  view_20: {
+    width:"100%",
+    height:"20%",
+    alignItems:"center",
+    padding:"10%"
+  },
   
   view_25: {
     width:"100%",
@@ -59,30 +64,10 @@ export const styles = StyleSheet.create({
     padding:"10%"
   },
    
-  
-
- index_nome: {
-    fontFamily: "Fredoka_600SemiBold",
-    fontSize: 44,
-    lineHeight: 52,
-    letterSpacing: 1.5,
-    color: colors.roxo_escuro,
-    textAlign: "center",
-    textShadowColor: "rgba(74, 87, 89, 0.25)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 3,
-  },
-  index_slogan: {
-    fontFamily: "Nunito_400Regular",
-    fontSize: 14,
-    color: colors.roxo_escuro,
-    textAlign: "center",
-    marginTop: 2,
-  },
   index_titulo: {
     fontFamily: "Fredoka_600SemiBold",
     fontSize: 26,
-    color: colors.roxo_escuro,
+    color: colors.cinza,
     textAlign: "center",
     marginBottom: 4,
     paddingHorizontal: 24,
@@ -90,7 +75,7 @@ export const styles = StyleSheet.create({
   texto_conecte: {
     fontFamily: "Nunito_400Regular",
     textAlign: "center",
-    color: colors.roxo_escuro,
+    color: colors.cinza,
     opacity: 0.8,
     fontSize: 16,
     paddingHorizontal: 32,
@@ -125,7 +110,15 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
     alignSelf: "center",
      opacity: 0.8,
-    
+  },
+  imagem_pata_cadastro: {
+    width: "80%",
+    height: "100%",
+    resizeMode: "contain",
+    alignSelf: "center",
+     opacity: 0.8,
+     marginTop: 40,
+
   },
 
 
@@ -142,7 +135,7 @@ export const styles = StyleSheet.create({
 
   view_ficha: {
     width: "90%",
-    backgroundColor: colors.roxo_escuro,
+    backgroundColor: colors.cinza,
     borderRadius: 24,
     overflow: "hidden",
     alignSelf:"center"
@@ -151,7 +144,7 @@ export const styles = StyleSheet.create({
   compartilha: {
     width: "90%",
     height: "43%",
-    backgroundColor: colors.roxo_escuro,
+    backgroundColor: colors.cinza,
     borderRadius: 24,
     justifyContent:"center",
     alignItems:"center"
@@ -174,7 +167,7 @@ export const styles = StyleSheet.create({
   qr_tamanho: {
     width:"70%",
     height:"70%",
-    backgroundColor:colors.roxo_claro,
+    backgroundColor:colors.claro,
     borderRadius: 36,
     borderWidth: 3,
     borderColor: colors.verde,
@@ -184,7 +177,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.roxo_medio,
+    backgroundColor: colors.medio,
     padding: 17,
     gap: 14,
   },
@@ -229,7 +222,7 @@ export const styles = StyleSheet.create({
   },
   dados_div_animal_dono: {
     flex: 1,
-    backgroundColor: colors.roxo_medio,
+    backgroundColor: colors.medio,
     borderRadius: 16,
     padding: 12,
     gap: 4,
@@ -248,7 +241,7 @@ export const styles = StyleSheet.create({
   linha: {
     width: "100%",
     height: 1,
-    backgroundColor: colors.roxo_medio,
+    backgroundColor: colors.medio,
   },
 
   /* vacinas*/
@@ -273,7 +266,7 @@ export const styles = StyleSheet.create({
   
   vacina_card: {
     flex: 1,
-    backgroundColor: colors.roxo_claro,
+    backgroundColor: colors.claro,
     borderRadius: 16,
     padding: 12,
     alignItems: "center",
@@ -357,7 +350,7 @@ pontovac_amarelo: {
     marginTop: 5
   },
   texto_botao_detalhes: {
-    color: colors.roxo_escuro,
+    color: colors.cinza,
     fontWeight: "bold",
     fontSize: 12,
   },
@@ -375,7 +368,7 @@ pontovac_amarelo: {
   /* exames*/ 
   dados_card_exame: {
     width: "100%",
-    backgroundColor: colors.roxo_claro,
+    backgroundColor: colors.claro,
     borderRadius: 16,
     padding: 12,
     gap: 2,
@@ -408,7 +401,7 @@ titulo_vacinas_pagina: {
 
 
     width: "32%",
-    backgroundColor: colors.roxo_escuro,
+    backgroundColor: colors.cinza,
     borderRadius: 16,
     alignSelf:  "center",
     padding: 8,
@@ -421,7 +414,7 @@ titulo_vacinas_pagina: {
     gap: 8,
     marginBottom: 15,
 
-    backgroundColor: colors.roxo_bem_claro,
+    backgroundColor: colors.bem_claro,
     borderRadius: 16,
     alignSelf:  "center",
     padding: 8,
@@ -438,13 +431,13 @@ titulo_vacinas_pagina: {
     width:"100%",
     height:"5%",
     alignItems:'center',
-    color: colors.roxo_claro
+    color: colors.claro
   },
   botao_animal:{
     width:340,
     height:100,
     alignItems:'center',
-    backgroundColor: colors.roxo_medio, 
+    backgroundColor: colors.medio, 
     borderRadius:30,
     flexDirection:'row',
     marginBottom:10
@@ -452,7 +445,7 @@ titulo_vacinas_pagina: {
   view_botao:{
     width:"30%",
     height:"100%",
-    backgroundColor: colors.roxo_medio,
+    backgroundColor: colors.medio,
     borderTopLeftRadius:30,
     borderBottomLeftRadius:30,
     alignItems: "center",
@@ -461,7 +454,7 @@ titulo_vacinas_pagina: {
   view_animal:{
     width:"70%",
     height:"100%",
-    color: colors.roxo_medio,
+    color: colors.medio,
     borderTopRightRadius:30,
     borderBottomRightRadius:30,
     alignItems:'center',
@@ -477,7 +470,7 @@ titulo_vacinas_pagina: {
     alignItems: "center",
     gap: 8,
     marginBottom: 15,
-    backgroundColor: colors.roxo_bem_claro,
+    backgroundColor: colors.bem_claro,
     borderRadius: 16,
     alignSelf:  "center",
     padding: 8,
@@ -489,26 +482,27 @@ titulo_vacinas_pagina: {
    pressable_c: {
     width: "80%",
     height: "35%",
-    backgroundColor: colors.roxo_bem_claro,
+    backgroundColor: colors.bem_claro,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 60,
     elevation: 4,
-    shadowColor: colors.roxo_escuro,
+    shadowColor: colors.cinza,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 6,
+   
   },
   pressable_l: {
     width: "80%",
     height: "35%",
-    backgroundColor: colors.roxo_claro,
+    backgroundColor: colors.claro,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     elevation: 4,
-    shadowColor: colors.roxo_escuro,
+    shadowColor: colors.cinza,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 6,
@@ -523,12 +517,12 @@ titulo_vacinas_pagina: {
  
    //login
    view_fundo:{
-     width:"80%",
-     height:"50%",
+     width:"75%",
+     height:"60%",
      alignItems:"center",
      justifyContent:"space-evenly",
-     padding:"5%",
-     backgroundColor:colors.roxo_escuro,
+     padding:"6%",
+     backgroundColor:colors.cinza,
      borderRadius:24
    },
    view_fundo2:{
@@ -537,14 +531,14 @@ titulo_vacinas_pagina: {
      alignItems:"center",
      justifyContent:"space-evenly",
      padding:"5%",
-     backgroundColor:colors.roxo_escuro,
+     backgroundColor:colors.cinza,
      borderRadius:24
    },
    //login
    b_tutor:{
      width:250,
      height:70,
-     backgroundColor:colors.roxo_bem_claro,
+     backgroundColor:colors.bem_claro,
      borderRadius: 20,
      alignItems: "center",
      justifyContent: "center"
@@ -553,7 +547,7 @@ titulo_vacinas_pagina: {
     b_vet:{
      width:250,
      height:70,
-     backgroundColor:colors.roxo_claro,
+     backgroundColor:colors.claro,
      borderRadius: 20,
      alignItems: "center",
      justifyContent: "center"
@@ -568,17 +562,99 @@ titulo_vacinas_pagina: {
      flexDirection:"column",
      alignItems:"center",
      justifyContent:"space-evenly",
-     backgroundColor:colors.roxo_escuro,
+     backgroundColor:colors.cinza,
      borderRadius:"5%"
    },
    //cadastro
- 
+
+   cadastro_card: {
+  width: "85%",
+  height:"65%",
+  padding: 24,
+  gap: 14,
+  alignItems: "center",
+  backgroundColor: colors.cinza,
+  borderRadius: 32,
+  elevation: 6,
+},
+   cadastro_botoes: {
+  width: "100%",
+  alignItems: "center",
+  gap: 16,
+  marginTop: 32,
+},
+
+bemvindo_titulo: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 32,
+  lineHeight: 38,
+  color: colors.branco,
+  textAlign: "center",
+  
+},
+bemvindo_linha: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 6,
+},
+bemvindo_destaque: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 32,
+  lineHeight: 30,
+  color: colors.claro,
+},
+
+bemvindo_sub: {
+  fontFamily: "Nunito_400Regular",
+  fontSize: 15,
+  color: colors.branco,
+  textAlign: "center",
+  opacity: 0.9,
+  marginBottom: 6,
+},
+
+botao_perfil: {
+  width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 14,
+  padding: 14,
+  borderRadius: 20,
+  
+},
+botao_divisor: {
+  width: 1,
+  height: 36,
+  backgroundColor: colors.cinza,
+  opacity: 0.4,
+},
+botao_perfil_titulo: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 17,
+  color: colors.cinza,
+},
+botao_perfil_sub: {
+  fontFamily: "Nunito_400Regular",
+  fontSize: 13,
+  color: colors.cinza,
+},
+link_login: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 14,
+  color: colors.branco,
+  textDecorationLine: "underline",
+  marginTop: 6,
+},
+
+
+
    view_c:{
      width:"80%",height:"65%",
      flexDirection:"column",
      alignItems:"center", 
      justifyContent:"space-evenly",
-     backgroundColor:colors.roxo_escuro,
+     backgroundColor:colors.cinza,
      borderRadius:"5%"
    },
    espaco_3:{
@@ -594,7 +670,7 @@ titulo_vacinas_pagina: {
   press:{
     width:"30%",
     height:"7%",
-    backgroundColor: colors.roxo_bem_claro,
+    backgroundColor: colors.bem_claro,
     borderRadius: 24,
     alignItems: "center",
     justifyContent: "center"
@@ -610,7 +686,7 @@ titulo_vacinas_pagina: {
 
 
 quadrinho_vizu_cabe: {
-  backgroundColor: colors.roxo_medio, 
+  backgroundColor: colors.medio, 
   width: 230, 
   height: 43,
   fontSize: 12,
@@ -624,7 +700,7 @@ quadrinho_vizu_cabe: {
 },
 
 quadrinho_vizu: {
-  backgroundColor: colors.roxo_medio, 
+  backgroundColor: colors.medio, 
   width: "100%", 
   height: 43,
   fontSize: 12,
@@ -650,7 +726,7 @@ botao_principal: {
   marginBottom: 25,
 },
 texto_botao_principal: {
-  color: colors.roxo_escuro,
+  color: colors.cinza,
   fontWeight: "bold",
   fontSize: 15,
 },
@@ -666,7 +742,7 @@ circulo_foto_vazia: {
   borderRadius: 35,
   borderWidth: 3,
   borderColor: colors.verde,
-  backgroundColor: colors.roxo_medio,
+  backgroundColor: colors.medio,
   alignItems: "center",
   justifyContent: "center",
 },
@@ -683,14 +759,14 @@ cabecalho_criacao: {
   width: "100%",
   flexDirection: "row",
   alignItems: "center",
-  backgroundColor: colors.roxo_claro,
+  backgroundColor: colors.claro,
   padding: 17,
   gap: 14,
 },
 
 dados_div_animal_dono_criacao: {
   flex: 1,
-  backgroundColor: colors.roxo_claro,
+  backgroundColor: colors.claro,
   borderRadius: 16,
   padding: 12,
   gap: 4,

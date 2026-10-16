@@ -45,8 +45,7 @@ export default function Index() {
 {/*view da logo - 25*/}
     <View style={styles.view_25}>  
       <Image source={require('../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
-      <Text variant="displayMedium" style="">PetCare</Text>
-      <Text variant="bodyMedium" style={styles.texto_conecte}>Conecte-se ao veterinário do seu pet,onde ele estiver</Text>
+
       {/*seta que volta para o login*/}
       <Link href="./cadastro" style={styles.posicao_seta}>
           <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>

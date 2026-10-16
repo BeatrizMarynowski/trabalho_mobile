@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { Image, Pressable, View } from "react-native";
-import { Text } from 'react-native-paper';
+import { Text, Button } from 'react-native-paper';
 import { styles } from '../style';
 
 export default function Index() {
@@ -16,8 +16,6 @@ return (
     resizeMode="contain"
   />
 
-
-
     </View>
 {/*view do meio*/}
    <View style={styles.view_metade}>
@@ -26,7 +24,6 @@ return (
     style={styles.imagem_pets}
     resizeMode="contain"
   />
-
  
 </View>
       <Text style={styles.index_titulo}>
@@ -45,7 +42,7 @@ return (
   {/*botao de login*/}
       <Link href="./login" asChild>
          <Pressable style={styles.pressable_l}>
-          <Text>Já tenho conta</Text>
+          <Text>Entra</Text>
         </Pressable>
       </Link>
     </View>
