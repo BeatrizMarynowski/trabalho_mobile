@@ -8,7 +8,7 @@ import { colors, styles } from '../../style';
 import { getFirestore, doc, getDoc } from "firebase/firestore"; 
 
 export default function Index() {
-  const { petId } = useLocalSearchParams<{ petId: string }>(); // Captura o ID do pet enviado pela lista
+  const { petId } = useLocalSearchParams<{ petId: string }>();
   const [pet, setPet] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +18,7 @@ export default function Index() {
       const db = getFirestore();
       try {
         const docRef = doc(db, "ficha_pet", petId);
-        const docSnap = await getDoc(docRef); // 3. Busca o pet no Firestore pelo ID
+        const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
           setPet(docSnap.data());

@@ -4,7 +4,7 @@ import { Alert, Image, ImageBackground, Pressable,ScrollView,TextInput, View } f
 import { Icon, Text } from "react-native-paper";
 import { colors, styles } from "../../style";
 
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseconfig";
 
 export default function Index() {

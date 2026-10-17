@@ -4,7 +4,6 @@ import { Image, Pressable, ScrollView, View, ActivityIndicator } from 'react-nat
 import { FAB, BottomNavigation, Icon, List, Switch, Text } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
-// 1. Importações do Firebase
 import { getFirestore, collection, onSnapshot, query, where } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
 
@@ -25,7 +24,6 @@ export default function App() {
       return;
     }
 
-    // Filtra no banco apenas onde o "tutorId" é igual ao UID do tutor logado [1]
     const q = query(
       collection(db, "ficha_pet"),
       where("tutorId", "==", usuarioLogado.uid)
@@ -60,12 +58,12 @@ export default function App() {
         
         {/*rolagem dos animais*/}
         <ScrollView style={{padding:10}}>
+          
           {loading ? (
             <ActivityIndicator size="large" color={colors.verde} style={{ marginTop: 20 }} />
           ) : pets.length === 0 ? (
             <Text style={{ textAlign: 'center', marginTop: 20 }}>Você ainda não escaneou nenhum pet.</Text>
           ) : (
-            // 4. Renderiza dinamicamente apenas os pets pertencentes a este tutor!
             pets.map((pet) => (
               <Link 
                 key={pet.id} 
@@ -82,6 +80,7 @@ export default function App() {
                     </View>
                 </Pressable>
               </Link>
+
             ))
           )}
         </ScrollView>

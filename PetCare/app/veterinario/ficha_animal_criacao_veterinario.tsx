@@ -80,9 +80,6 @@ return (
         <View style={styles. view_ficha}>
             {/*view da imagem e nome do pet*/}
             <View style={styles.cabecalho}>
-                <View style={styles.circulo_foto_vazia}>
-                 <Icon source="camera-plus-outline" size={28} color={colors.branco} />
-                </View>
                   <View>
                     <TextInput 
                     label="Nome do Pet"
