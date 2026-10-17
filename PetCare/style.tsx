@@ -16,6 +16,14 @@ export const colors = {
   alertafundo: "#e0575733",
   amarelo: "#e0c357",
   amarelofundo: "#e0c35733",
+
+
+
+  roxo_fundodatela: "#ae98cc",
+  roxo_escuro: "#271033",    
+  roxo_medio: "#3d2154",     
+  roxo_claro: "#54326e",
+  roxo_bem_claro: "#dfbcfc", 
 };
 
 
