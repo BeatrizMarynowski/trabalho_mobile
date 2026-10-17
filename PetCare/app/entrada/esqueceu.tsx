@@ -40,7 +40,7 @@ export default function Index() {
       style={{ flex: 1,alignItems: "center"  }}
       resizeMode="cover"
     >
-      <ScrollView keyboardShouldPersistTaps="handled">
+     
       <View style={styles.view_25}>  
         <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
         <Link href="./login" style={styles.posicao_seta}>
@@ -48,6 +48,7 @@ export default function Index() {
         </Link>
       </View>
       <View style={styles.form_card}>
+         <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.form_cabecalho}>
           <View style={styles.form_titulo_linha}>
             <Icon source="paw" size={44} color={colors.bem_claro} />
@@ -81,8 +82,9 @@ export default function Index() {
           </Pressable>
           
           </View>
+          </ScrollView>
       </View>
-    </ScrollView>
+    
     </ImageBackground>
   );
 }
