@@ -36,13 +36,13 @@ return (
   {/*botao de criar conta*/}
       <Link href="./cadastro" asChild> 
         <Pressable style={styles.pressable_c}>
-          <Text>Criar conta</Text>
+          <Text style={styles.fonteFredoka}>Criar conta</Text>
         </Pressable>
       </Link>
   {/*botao de login*/}
       <Link href="./login" asChild>
          <Pressable style={styles.pressable_l}>
-          <Text>Entra</Text>
+          <Text style={styles.fonteFredoka}>Entrar</Text>
         </Pressable>
       </Link>
     </View>

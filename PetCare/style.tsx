@@ -41,6 +41,12 @@ export const styles = StyleSheet.create({
       left: "5%",
     
   },
+   posicao_seta:{
+        position:"absolute",
+        top:"50%",
+        left:"8%",
+        zIndex:5
+  },
 
   
   /*INDEX*/
@@ -81,12 +87,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
 
-  posicao_seta:{
-        position:"absolute",
-        top:"30%",
-        left:"5%",
-        zIndex:5
-  },
+ 
   /*espacos de tela*/
   espaco_5:{
     width:"100%",
@@ -110,6 +111,17 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
     alignSelf: "center",
      opacity: 0.8,
+  },
+
+    imagem_pata2: {
+    marginTop: 20,
+    width: "70%",
+    height: "100%",
+    resizeMode: "contain",
+    alignSelf: "center",
+     opacity: 0.8,
+
+    
   },
   imagem_pata_cadastro: {
     width: "80%",
@@ -492,6 +504,7 @@ titulo_vacinas_pagina: {
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 6,
+  
    
   },
   pressable_l: {
@@ -507,6 +520,10 @@ titulo_vacinas_pagina: {
     shadowOpacity: 0.25,
     shadowRadius: 6,
      marginTop: 7,
+    
+  },
+  fonteFredoka: {
+    fontFamily: "Fredoka_600SemiBold",
   },
 
      view_metade: {
@@ -565,29 +582,139 @@ titulo_vacinas_pagina: {
      backgroundColor:colors.cinza,
      borderRadius:"5%"
    },
+
+   form_link: {
+  fontFamily: "Nunito_400Regular",
+  fontSize: 14,
+  color: colors.cinza,
+  textDecorationLine: "underline",
+  textAlign: "center",
+},
    //cadastro
+
+
+form_card: {
+  width: "85%",
+  backgroundColor: colors.bem_claro,
+  borderRadius: 32,
+  overflow: "hidden",
+
+},
+form_cabecalho: {
+  backgroundColor: colors.medio,
+  paddingVertical: 18,
+  paddingHorizontal: 20,
+  alignItems: "center",
+  gap: 10,
+  borderBottomLeftRadius: 32,
+  borderBottomRightRadius: 32,
+},
+form_titulo_linha: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+},
+form_titulo: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 32,
+  lineHeight: 36,
+  color: colors.branco,
+    textAlign: "center",
+
+},
+form_titulo_destaque: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 32,
+  lineHeight: 36,
+  color: colors.bem_claro,
+},
+form_sub: {
+  fontFamily: "Nunito_400Regular",
+  fontSize: 14,
+  color: colors.branco,
+  textAlign: "center",
+},
+form_campos: {
+  padding: 18,
+  gap: 12,
+  alignItems: "center",
+},
+campo: {
+  width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+  backgroundColor: "#FBEFF2",
+  borderRadius: 24,
+  padding: 8,
+},
+campo_icone: {
+  width: 44,
+  height: 44,
+  borderRadius: 16,
+  backgroundColor: colors.bem_claro,
+  alignItems: "center",
+  justifyContent: "center",
+},
+campo_input: {
+  flex: 1,
+  fontFamily: "Nunito_400Regular",
+  fontSize: 16,
+  color: colors.cinza,
+},
+form_botao: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+  backgroundColor: "#DB7C9C",
+  borderRadius: 998,
+  paddingVertical: 14,
+  paddingHorizontal: 40,
+  marginTop: 8,
+},
+form_botao_texto: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 18,
+  color: colors.branco,
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    cadastro_card: {
   width: "85%",
-  height:"65%",
+  height:"60%",
   padding: 24,
-  gap: 14,
+  gap: 10,
   alignItems: "center",
   backgroundColor: colors.cinza,
   borderRadius: 32,
-  elevation: 6,
-},
-   cadastro_botoes: {
-  width: "100%",
-  alignItems: "center",
-  gap: 16,
-  marginTop: 32,
 },
 
 bemvindo_titulo: {
   fontFamily: "Fredoka_600SemiBold",
   fontSize: 32,
-  lineHeight: 38,
+  lineHeight: 35,
   color: colors.branco,
   textAlign: "center",
   
@@ -598,7 +725,7 @@ bemvindo_linha: {
   justifyContent: "center",
   gap: 6,
 },
-bemvindo_destaque: {
+bemvindo_pet: {
   fontFamily: "Fredoka_600SemiBold",
   fontSize: 32,
   lineHeight: 30,
@@ -610,25 +737,30 @@ bemvindo_sub: {
   fontSize: 15,
   color: colors.branco,
   textAlign: "center",
-  opacity: 0.9,
-  marginBottom: 6,
 },
 
-botao_perfil: {
+botao_cad_tut: {
+  width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  padding: 14,
+  borderRadius: 20,
+  backgroundColor:  colors.bem_claro,
+  marginTop: 40,
+  gap: 14
+},
+botao_cad_vet: {
   width: "100%",
   flexDirection: "row",
   alignItems: "center",
   gap: 14,
   padding: 14,
   borderRadius: 20,
-  
+  backgroundColor: colors.claro,
+   marginTop: 15
 },
-botao_divisor: {
-  width: 1,
-  height: 36,
-  backgroundColor: colors.cinza,
-  opacity: 0.4,
-},
+
+
 botao_perfil_titulo: {
   fontFamily: "Fredoka_600SemiBold",
   fontSize: 17,
@@ -645,6 +777,8 @@ link_login: {
   color: colors.branco,
   textDecorationLine: "underline",
   marginTop: 6,
+  textDecorationColor: colors.branco,
+
 },
 
 

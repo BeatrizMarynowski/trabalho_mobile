@@ -24,7 +24,7 @@ return (
            
             {/*seta que volta para o index*/}
             <Link href="./" style={styles.posicao_seta}>
-                <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+                <Icon source="arrow-left" size={35} color={colors.cinza} />
             </Link>
         </View>
 {/*view para dar espaço na tela*/}
@@ -34,34 +34,40 @@ return (
             
     <Text style={styles.bemvindo_titulo}>Bem-vindo ao</Text>
     <View style={styles.bemvindo_linha}>
-      <Text style={styles.bemvindo_destaque}>PetCare</Text>
-      <Icon source="heart" size={22} color={colors.claro} />
+      <Text style={styles.bemvindo_pet}>PetCare</Text>
+      <Icon source="heart" size={23} color={colors.claro} />
     </View>
-
      <Text style={styles.bemvindo_sub}>
     Cuidado e carinho para quem faz parte da sua família.
   </Text>
-  
-            {/*botao do tutor*/}
+
+
+  {/*botao do tutor*/}
             <Link href="./cadastro_tutor" asChild>  
-            <Pressable style={styles.botao_perfil}>
+            <Pressable style={styles.botao_cad_tut}>
                 <Icon source="paw" size={30} color={colors.cinza} />
-      <View style={styles.botao_divisor} />
-      <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
         <Text style={styles.botao_perfil_titulo}>Sou tutor</Text>
         <Text style={styles.botao_perfil_sub}>Acesse e cuide dos seus pets</Text>
       </View>
+      <Icon source="chevron-right" size={30} color={colors.cinza} />
             </Pressable>
             </Link>
-            {/*botao do veterinario*/}
-           <Link href="./cadastro_veterinario" asChild>  
-            <Pressable style={styles.b_vet}>
-                    <Text>Sou veterinario, cuidar de pets</Text>
+
+            <Link href="./cadastro_veterinario" asChild>  
+            <Pressable style={styles.botao_cad_vet}>
+                <Icon source="stethoscope" size={30} color={colors.cinza} />
+      <View style={{ flex: 1 }}>
+        <Text style={styles.botao_perfil_titulo}>Sou veterinário</Text>
+        <Text style={styles.botao_perfil_sub}>Gerencie os cuidados dos animais</Text>
+      </View>
+      <Icon source="chevron-right" size={30} color={colors.cinza} />
             </Pressable>
             </Link>
-            <Link href="./login">
-                <Text style={{color:colors.branco}}>já tem conta? fazer login</Text>
+            <Link href="./login" style={styles.link_login}>
+                <Text style={{color:"white"}}>Já tem conta? Fazer login</Text>
             </Link>
+            
         </View>
 {/*view para dar espaço na tela*/}
         <View style={styles.espaco_5}/>

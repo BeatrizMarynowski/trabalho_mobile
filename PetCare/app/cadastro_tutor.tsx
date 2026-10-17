@@ -1,8 +1,8 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, Pressable, View } from "react-native";
-import { Text, TextInput } from 'react-native-paper';
-import { styles } from '../style';
+import { Alert, Image, ImageBackground, Pressable, View, TextInput  } from "react-native";
+import { Text, Icon } from 'react-native-paper';
+import { styles, colors} from '../style';
 
 /*todos os imports necessarios para fazer o cadatros pelo database do google ja com a criptografia em hash da senha*/
 import { auth, db } from './firebaseconfig';
@@ -41,63 +41,117 @@ export default function Index() {
 
   return (
 /*view principal*/
-  <View style={styles.view_principal}>
+  <ImageBackground
+    source={require("../assets/images/fundo.png")}
+    style={{ flex: 1, alignItems: "center" } }
+    resizeMode="cover"
+  >
 {/*view da logo - 25*/}
-    <View style={styles.view_25}>  
-      <Image source={require('../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
+    <View style={styles.view_20}>  
+      <Image source={require('../assets/images/icone_pata.png')} style={styles.imagem_pata2}/>
 
       {/*seta que volta para o login*/}
       <Link href="./cadastro" style={styles.posicao_seta}>
-          <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+           <Icon source="arrow-left" size={35} color={colors.cinza} />
       </Link>
-    </View>
-{/*view para dar espaço na tela*/}
-    <View style={styles.espaco_3}/>
-{/*view de cadastro*/}
-  <View style={styles.view_fundo2}>
-    <Text style={styles.titulo} variant="displayMedium">cadastro</Text>
-    <TextInput
-      style={styles.text_imput}
-      label="nome"
-      value={nome}
-      onChangeText={texto => setnome(texto)}
-      mode="flat"
-    />
-    <TextInput
-      style={styles.text_imput}
-      label="email"
-      value={email}
-      onChangeText={text => setemail(text)}
-      mode="flat"
-    />
-    <TextInput
-      style={styles.text_imput}
-      label="telefone"
-      value={telefone}
-      onChangeText={texto => settelefone(texto)}
-      mode="flat"
-    />
-    <TextInput
-      style={styles.text_imput}
-      label="CPF"
-      value={cpf}
-      onChangeText={texto => setcpf(texto)}
-      mode="flat"
-    />
-    <TextInput
-      style={styles.text_imput}
-      label="senha"
-      value={senha}
-      onChangeText={texto => setsenha(texto)}
-      secureTextEntry={true}
-      mode="flat"
-    />
-    <Pressable style={styles.press}  onPress={Cadastro}>
-          <Text>criar conta</Text>
-    </Pressable>
-  </View>
-{/*view para dar espaço na tela*/}
-    <View style={styles.espaco_7}/>
-    </View>
+      </View>
+
+
+      
+    <View style={styles.form_card}>
+        {/* cabeçalho escuro */}
+        <View style={styles.form_cabecalho}>
+          <View style={styles.form_titulo_linha}>
+            <Icon source="paw" size={44} color={colors.bem_claro} />
+            <View>
+              <Text style={styles.form_titulo}>Cadastro</Text>
+              <Text style={styles.form_titulo_destaque}>do Tutor</Text>
+            </View>
+          </View>
+          <Text style={styles.form_sub}>
+            Preencha seus dados para começar a cuidar do seu pet!
+          </Text>
+        </View>
+
+        {/* campos de escrita */}
+        <View style={styles.form_campos}>
+          <View style={styles.campo}>
+            <View style={styles.campo_icone}>
+              <Icon source="account" size={24} color={colors.cinza} />
+            </View>
+            <TextInput
+              style={styles.campo_input}
+              placeholder="Nome"
+              placeholderTextColor={colors.cinza}
+              value={nome}
+              onChangeText={setnome}
+            />
+          </View>
+
+          <View style={styles.campo}>
+            <View style={styles.campo_icone}>
+              <Icon source="email" size={24} color={colors.cinza} />
+            </View>
+            <TextInput
+              style={styles.campo_input}
+              placeholder="Email"
+              placeholderTextColor={colors.cinza}
+              value={email}
+              onChangeText={setemail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+
+          <View style={styles.campo}>
+            <View style={styles.campo_icone}>
+              <Icon source="phone" size={24} color={colors.cinza} />
+            </View>
+            <TextInput
+              style={styles.campo_input}
+              placeholder="Telefone"
+              placeholderTextColor={colors.cinza}
+              value={telefone}
+              onChangeText={settelefone}
+              keyboardType="phone-pad"
+            />
+          </View>
+
+          <View style={styles.campo}>
+            <View style={styles.campo_icone}>
+              <Icon source="file-document" size={24} color={colors.cinza} />
+            </View>
+            <TextInput
+              style={styles.campo_input}
+              placeholder="CPF"
+              placeholderTextColor={colors.cinza}
+              value={cpf}
+              onChangeText={setcpf}
+              keyboardType="numeric"
+            />
+          </View>
+
+          <View style={styles.campo}>
+            <View style={styles.campo_icone}>
+              <Icon source="paw" size={24} color={colors.cinza} />
+            </View>
+            <TextInput
+              style={styles.campo_input}
+              placeholder="Senha"
+              placeholderTextColor={colors.cinza}
+              value={senha}
+              onChangeText={setsenha}
+              secureTextEntry
+            />
+          </View>
+
+          {/* botão */}
+          <Pressable style={styles.form_botao} onPress={Cadastro}>
+            <Icon source="account-plus" size={24} color={colors.branco} />
+            <Text style={styles.form_botao_texto}>Criar conta</Text>
+          </Pressable>
+        </View>
+      </View>
+    </ImageBackground>
   );
-}
+ };

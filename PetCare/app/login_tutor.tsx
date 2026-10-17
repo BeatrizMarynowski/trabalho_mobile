@@ -1,8 +1,8 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, Pressable, View } from "react-native";
-import { Text, TextInput } from 'react-native-paper';
-import { styles } from '../style';
+import { Alert, Image, ImageBackground, Pressable,TextInput, View } from "react-native";
+import { Icon, Text } from "react-native-paper";
+import { colors, styles } from "../style";
 
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebaseconfig";
@@ -59,55 +59,84 @@ export default function Index() {
 
 return (
 /*view principal*/
-  <View style={styles.view_principal}>
+ <ImageBackground
+    source={require("../assets/images/fundo.png")}
+    style={{ flex: 1,alignItems: "center"  }}
+    resizeMode="cover"
+  >
 {/*view da logo*/}
     <View style={styles.view_25}>  
       <Image source={require('../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
-      <Text variant="displayMedium" style="">PetCare</Text>
-      <Text variant="bodyMedium" style={styles.texto_conecte}>Conecte-se ao veterinário do seu pet,onde ele estiver</Text>
-      {/*seta que volta para o login*/}
+     
       <Link href="./login" style={styles.posicao_seta}>
-          <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+                 <Icon source="arrow-left" size={35} color={colors.cinza} />
+        </Link>
+    </View>
+
+<View style={styles.form_card}>
+        {/* cabeçalho */}
+        <View style={styles.form_cabecalho}>
+          <View style={styles.form_titulo_linha}>
+            <Icon source="paw" size={44} color={colors.bem_claro} />
+            <View style={{ alignItems: "center" }}>
+              <Text style={styles.form_titulo}>Login</Text>
+              <Text style={styles.form_titulo_destaque}>do Tutor</Text>
+            </View>
+          </View>
+          <Text style={styles.form_sub}>      Que bom te ver de novo! Entre para cuidar do seu pet.
+          </Text>
+        </View>
+
+        {/* campos */}
+        <View style={styles.form_campos}>
+          <View style={styles.campo}>
+            <View style={styles.campo_icone}>
+              <Icon source="email" size={24} color={colors.cinza} />
+            </View>
+            <TextInput
+              style={styles.campo_input}
+              placeholder="E-mail"
+              placeholderTextColor={colors.cinza}
+              value={email}
+              onChangeText={setemail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+
+          <View style={styles.campo}>
+            <View style={styles.campo_icone}>
+              <Icon source="lock-outline" size={24} color={colors.cinza} />
+            </View>
+            <TextInput
+              style={styles.campo_input}
+              placeholder="Senha"
+              placeholderTextColor={colors.cinza}
+              value={senha}
+              onChangeText={setSenha}
+              secureTextEntry
+            />
+          </View>
+
+          <Pressable style={styles.form_botao} onPress={login}>
+            <Icon source="login" size={24} color={colors.branco} />
+            <Text style={styles.form_botao_texto}>Entrar</Text>
+          </Pressable>
+
+          <Pressable onPress={esqueceu} hitSlop={8}>
+            <Text style={styles.form_link}>Esqueceu sua senha?</Text>
+          </Pressable>
+
+          <Link href={"/menu_veterinario"} asChild>
+        <Pressable style={styles.press}>
+          <Text>entrar sem autenticacao (remover depois)</Text>
+        </Pressable>
       </Link>
-    </View>
-{/*view para dar espaço na tela*/}
-    <View style={styles.espaco_10}/>
-{/*view de login*/}
-  <View style={styles.view_l}>
-    <Text style={styles.titulo} variant="displayMedium">Login</Text>
-    <TextInput
-      style={styles.text_imput}
-      label="e-mail"
-      value={email}
-      onChangeText={texto => setemail(texto)}
-      mode="flat"
-    />
-    <TextInput
-      style={styles.text_imput}
-      label="Senha"
-      value={senha}
-      onChangeText={text => setSenha(text)}
-      secureTextEntry={true}
-      mode="flat"
-    />
-    <Pressable style={styles.press} onPress={login}>
-      <Text>Entrar</Text>
-    </Pressable>
 
 
-    <Pressable onPress={esqueceu}>
-      <Text style={{ color: '#fff', marginTop: 10 }}>Esqueceu sua senha?</Text>
-    </Pressable>
+        </View>
+      </View>
 
-    <Link href={"/menu_tutor"} asChild>
-      <Pressable style={styles.press}>
-        <Text>entrar sem autenticacao (remover depois)</Text>
-      </Pressable>
-    </Link>
-
-  </View>
-{/*view para dar espaço na tela*/}
-    <View style={styles.espaco_10}/>
-    </View>
+    </ImageBackground>
   );
 }
