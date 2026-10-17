@@ -22,7 +22,7 @@ export default function Index() {
     const [telefone, settelefone] = useState("");
     const [email, setemail] = useState("");
     const [notas, setnotas] = useState("");
-
+    const [exames, setexames] = useState("");
     const novopet = async () => {
     if (!nomepet || !nometutor || !especie || !raca || !idade || !peso || !sexo || !castrado || !cpf || !endereco || !telefone || !email) {
       Alert.alert("Atenção", "Por favor, preencha todos os campos!");
@@ -47,6 +47,7 @@ export default function Index() {
         telefone,
         email,
         notas,
+        exames,
         vetId: user?.uid
       });
     router.push({
@@ -227,6 +228,19 @@ return (
                         label="Notas"
                         value={notas}
                         onChangeText={texto => setnotas(texto)}
+                        mode="outlined"
+                        activeUnderlineColor={colors.verde}
+                        underlineColor={colors.roxo_claro}
+                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
+                        style={styles.quadrinho_vizu}/>
+                </View>
+
+                <View style={styles.dados_card_exame}>
+                    <Text style={styles.dados_exame}>Dr. Carlos Silva</Text>
+                    <TextInput 
+                        label="Exames"
+                        value={exames}
+                        onChangeText={texto => setexames(texto)}
                         mode="outlined"
                         activeUnderlineColor={colors.verde}
                         underlineColor={colors.roxo_claro}

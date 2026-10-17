@@ -53,11 +53,11 @@ export default function Index() {
           <View style={styles.form_titulo_linha}>
             <Icon source="paw" size={44} color={colors.bem_claro} />
             <View style={{ alignItems: "center" }}>
-              <Text style={styles.form_titulo}>Login</Text>
-              <Text style={styles.form_titulo_destaque}>do Tutor</Text>
+              <Text style={styles.form_titulo}>Recuperar senha</Text>
+    
             </View>
           </View>
-          <Text style={styles.form_sub}>Que bom te ver de novo! Entre para cuidar do seu pet.</Text>
+          <Text style={styles.form_sub}>Informe seu e-mail para receber o link de recuperação de senha</Text>
         </View>
         <View style={styles.form_campos}>
 
@@ -78,7 +78,7 @@ export default function Index() {
           
           <Pressable style={styles.form_botao} onPress={esqueceu}>
             <Icon source="login" size={24} color={colors.branco} />
-            <Text style={styles.form_botao_texto}>enviar email</Text>
+            <Text style={styles.form_botao_texto_email_rec}>Enviar e-mail de recuperação</Text>
           </Pressable>
           
           </View>

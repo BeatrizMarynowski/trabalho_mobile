@@ -693,7 +693,11 @@ form_botao_texto: {
   color: colors.branco,
 },
 
-
+form_botao_texto_email_rec: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 16.1,
+  color: colors.branco,
+},
 
    cadastro_card: {
   width: "85%",

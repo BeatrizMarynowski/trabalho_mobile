@@ -67,7 +67,7 @@ export default function Index() {
             <Text style={styles.form_titulo_destaque}>do Veterinário</Text>
             </View>
           </View>
-          <Text style={styles.form_sub}>Preencha seus dados para começar a cuidar do seu pet!</Text>
+          <Text style={styles.form_sub}>Preencha seus dados para começar a cuidar dos seus pets!</Text>
         </View>
 
         <View style={styles.form_campos}>
