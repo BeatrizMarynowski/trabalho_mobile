@@ -689,31 +689,11 @@ form_botao_texto: {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    cadastro_card: {
   width: "85%",
   height:"60%",
-  padding: 24,
-  gap: 10,
+  padding: "10%",
+  gap: "2%",
   alignItems: "center",
   backgroundColor: colors.cinza,
   borderRadius: 32,

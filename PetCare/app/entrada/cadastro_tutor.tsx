@@ -1,6 +1,6 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, ImageBackground, Pressable, View, TextInput  } from "react-native";
+import { Alert, Image, ImageBackground, Pressable, View, TextInput, ScrollView  } from "react-native";
 import { Text, Icon } from 'react-native-paper';
 import { styles, colors} from '../../style';
 
@@ -39,11 +39,16 @@ export default function Index() {
   };
 
   return (
-    <ImageBackground
-      source={require("../../assets/images/fundo.png")}
-      style={{ flex: 1, alignItems: "center" } }
-      resizeMode="cover"
-    >
+       <ImageBackground
+            source={require("../../assets/images/fundo.png")}
+            style={{ flex: 1 } }
+            resizeMode="cover"
+          >
+            <ScrollView style={{ flex: 1, width: "100%" }} contentContainerStyle={{alignItems: "center", paddingBottom: 40,
+        }}
+        keyboardShouldPersistTaps="handled"
+        
+      >
       <View style={styles.view_20}>  
         <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata2}/>
         <Link href="./cadastro" style={styles.posicao_seta}>
@@ -141,6 +146,7 @@ export default function Index() {
             </Pressable>
           </View>
         </View>
+      </ScrollView>
     </ImageBackground>
   );
  };

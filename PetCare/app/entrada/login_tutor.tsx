@@ -1,6 +1,6 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, ImageBackground, Pressable,TextInput, View } from "react-native";
+import { Alert, Image, ImageBackground, Pressable,ScrollView,TextInput, View } from "react-native";
 import { Icon, Text } from "react-native-paper";
 import { colors, styles } from "../../style";
 
@@ -36,7 +36,10 @@ export default function Index() {
   };
   const esqueceu = async () => {
     if (!email) {
-      Alert.alert("Atenção", "Por favor, digite seu e-mail no campo acima primeiro!");
+      Alert.alert(
+        "E-mail não encontrado",
+      "Digite seu e-mail no campo acima para recuperar sua senha."
+      );
       return;
     }
     try {
@@ -61,6 +64,7 @@ export default function Index() {
       style={{ flex: 1,alignItems: "center"  }}
       resizeMode="cover"
     >
+      <ScrollView keyboardShouldPersistTaps="handled">
       <View style={styles.view_25}>  
         <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
         <Link href="./login" style={styles.posicao_seta}>
@@ -120,7 +124,7 @@ export default function Index() {
           </Pressable>
           </View>
       </View>
-
+    </ScrollView>
     </ImageBackground>
   );
 }
