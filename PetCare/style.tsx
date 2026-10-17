@@ -55,6 +55,12 @@ export const styles = StyleSheet.create({
         left:"8%",
         zIndex:5
   },
+    posicao_seta2:{
+        position:"absolute",
+        top:"70%",
+        left:"8%",
+        zIndex:5
+  },
 
   
   /*INDEX*/
