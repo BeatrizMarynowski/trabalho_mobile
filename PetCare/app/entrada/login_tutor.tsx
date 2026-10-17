@@ -4,7 +4,7 @@ import { Alert, Image, ImageBackground, Pressable,ScrollView,TextInput, View } f
 import { Icon, Text } from "react-native-paper";
 import { colors, styles } from "../../style";
 
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseconfig";
 
 export default function Index() {
@@ -34,29 +34,6 @@ export default function Index() {
         }
       }
   };
-  const esqueceu = async () => {
-    if (!email) {
-      Alert.alert(
-        "E-mail não encontrado",
-      "Digite seu e-mail no campo acima para recuperar sua senha."
-      );
-      return;
-    }
-    try {
-      await sendPasswordResetEmail(auth, email.trim().toLowerCase());
-      Alert.alert("Sucesso!", "E-mail de redefinição enviado! Verifique sua caixa de entrada.");
-    } catch (error) {
-      console.error(error);
-  
-      const err = error as any; 
-  
-      if (err.code === 'auth/user-not-found') {
-        Alert.alert("Erro", "Nenhum usuário encontrado com este e-mail.");
-      } else {
-        Alert.alert("Erro", "Ocorreu um erro ao tentar enviar o e-mail de recuperação.");
-      }
-    }
-  };
 
   return (
     <ImageBackground
@@ -64,6 +41,7 @@ export default function Index() {
       style={{ flex: 1,alignItems: "center"  }}
       resizeMode="cover"
     >
+
       <ScrollView keyboardShouldPersistTaps="handled">
       <View style={styles.view_25}>  
         <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
@@ -119,9 +97,12 @@ export default function Index() {
             <Text style={styles.form_botao_texto}>Entrar</Text>
           </Pressable>
 
-          <Pressable onPress={esqueceu} hitSlop={8}>
-            <Text style={styles.form_link}>Esqueceu sua senha?</Text>
-          </Pressable>
+          <Link href="./esqueceu" asChild>
+            <Pressable hitSlop={8}>
+              <Text style={styles.form_link}>Esqueceu sua senha?</Text>
+            </Pressable>
+          </Link>
+
           </View>
       </View>
     </ScrollView>

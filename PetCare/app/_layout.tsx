@@ -10,6 +10,7 @@ export default function RootLayout() {
         {/*app*/}
         <Stack.Screen name="index" options={{headerShown: false}} />
         {/*entrada*/}
+          <Stack.Screen name="entrada/esqueceu" options={{headerShown: false}} />
           {/*login*/}
           <Stack.Screen name="entrada/login" options={{headerShown: false}} />
           <Stack.Screen name="entrada/login_tutor" options={{headerShown: false}} />
