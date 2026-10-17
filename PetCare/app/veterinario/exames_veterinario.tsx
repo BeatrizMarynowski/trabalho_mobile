@@ -1,15 +1,15 @@
 import { Link } from "expo-router";
 import { Image, ScrollView, View } from "react-native";
-import { Icon, Text } from 'react-native-paper';
-import { colors, styles } from '../style';
+import { FAB, Icon, Text } from 'react-native-paper';
+import { colors, styles } from '../../style';
 
 export default function Index() {
 return (
 /*view principal*/
     <View style={styles.view_principal}>
         {/*seta que volta para o menu*/}
-        <Link href="./ficha_animal_visualizacao_tutor" style={styles.seta_voltar}>
-            <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+        <Link href="./ficha_animal_visualizacao_veterinario" style={styles.seta_voltar}>
+            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
         {/*view para dar espaço na tela*/}
         <View style={styles.espaco_10}/>
@@ -47,6 +47,7 @@ return (
                 </View>
             </View>
         </ScrollView>
+        <FAB icon="pencil" style={{position:"absolute",bottom:"5%",right:"5%"}}/>
     </View>
   );
 }

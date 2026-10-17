@@ -3,33 +3,38 @@ import { useFonts, Fredoka_600SemiBold } from "@expo-google-fonts/fredoka";
 import { Nunito_400Regular } from "@expo-google-fonts/nunito";
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({ Fredoka_600SemiBold, Nunito_400Regular });   // ← linha alterada
+  const [fontsLoaded] = useFonts({ Fredoka_600SemiBold, Nunito_400Regular });
   if (!fontsLoaded) return null;
   return (
       <Stack>
-        {/*dos dois*/}
+        {/*app*/}
         <Stack.Screen name="index" options={{headerShown: false}} />
-        <Stack.Screen name="login" options={{headerShown: false}} />
-        <Stack.Screen name="cadastro" options={{headerShown: false}} />
-        {/*do tutor*/}
-            <Stack.Screen name="login_tutor" options={{headerShown: false}} />
-            <Stack.Screen name="cadastro_tutor" options={{headerShown: false}} />
-            <Stack.Screen name="menu_tutor" options={{headerShown: false}} />
-            <Stack.Screen name="scan_qr_tutor" options={{headerShown: false}} />
-            <Stack.Screen name="ficha_animal_visualizacao_tutor" options={{headerShown: false}} />
-            <Stack.Screen name="vacinas_tutor" options={{headerShown: false}} />
-            <Stack.Screen name="exames_tutor" options={{headerShown: false}} />
-            <Stack.Screen name="notas_tutor" options={{headerShown: false}} />
-        {/*do veterinario*/}
-    <Stack.Screen name="login_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="cadastro_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="menu_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="ficha_animal_visualizacao_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="vacinas_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="exames_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="notas_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="ficha_animal_criacao_veterinario" options={{headerShown: false}} />
-    <Stack.Screen name="compartilhar_ficha_veterinario" options={{headerShown: false}} />
+        {/*entrada*/}
+          {/*login*/}
+          <Stack.Screen name="entrada/login" options={{headerShown: false}} />
+          <Stack.Screen name="entrada/login_tutor" options={{headerShown: false}} />
+          <Stack.Screen name="entrada/login_veterinario" options={{headerShown: false}} />
+          {/*cadastro*/}
+          <Stack.Screen name="entrada/cadastro" options={{headerShown: false}} />
+          <Stack.Screen name="entrada/cadastro_tutor" options={{headerShown: false}} />
+          <Stack.Screen name="entrada/cadastro_veterinario" options={{headerShown: false}} />
+        {/*tutor*/}
+          <Stack.Screen name="tutor/menu_tutor" options={{headerShown: false}} />
+          <Stack.Screen name="tutor/scan_qr_tutor" options={{headerShown: false}} />
+          <Stack.Screen name="tutor/ficha_animal_visualizacao_tutor" options={{headerShown: false}} />
+
+          <Stack.Screen name="tutor/vacinas_tutor" options={{headerShown: false}} />
+          <Stack.Screen name="tutor/exames_tutor" options={{headerShown: false}} />
+          <Stack.Screen name="tutor/notas_tutor" options={{headerShown: false}} />
+        {/*veterinario*/}
+          <Stack.Screen name="veterinario/menu_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/ficha_animal_visualizacao_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/ficha_animal_criacao_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/compartilhar_ficha_veterinario" options={{headerShown: false}} />
+
+          <Stack.Screen name="veterinario/vacinas_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/exames_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/notas_veterinario" options={{headerShown: false}} />
       </Stack>
   );
 }

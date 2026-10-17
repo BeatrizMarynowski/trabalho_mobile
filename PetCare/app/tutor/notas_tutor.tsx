@@ -1,15 +1,15 @@
 import { Link } from "expo-router";
 import { Image, ScrollView, View } from "react-native";
-import { FAB, Icon, Text } from 'react-native-paper';
-import { colors, styles } from '../style';
+import { Icon, Text } from 'react-native-paper';
+import { colors, styles } from '../../style';
 
 export default function Index() {
 return (
 /*view principal*/
     <View style={styles.view_principal}>
         {/*seta que volta para o menu*/}
-        <Link href="./ficha_animal_visualizacao_veterinario" style={styles.seta_voltar}>
-            <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+        <Link href="./ficha_animal_visualizacao_tutor" style={styles.seta_voltar}>
+            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
         {/*view para dar espaço na tela*/}
         <View style={styles.espaco_10}/>
@@ -18,7 +18,7 @@ return (
             <Icon source="note-text-outline" size={20} color={colors.verde} />
             <Text style={styles.titulo_vacinas_pagina}>Notas</Text>
         </View>
-{/*view das info das notas - card*/}
+        {/*view das info dos exames*/}
         <ScrollView style={[styles.view_secundaria_largura, { flex: 1 }]}>
             <View style={[styles.dados_card_exame, { width: "80%", marginBottom: 12 }]}>
                 <Text style={styles.titulo_card_exame}>Notas</Text>
@@ -33,7 +33,6 @@ return (
                 <Text style={styles.dados_exame}>Vetaglos duas vezes ao dia Dipirona caso tenha dor</Text>
             </View>
         </ScrollView>
-        <FAB icon="pencil" style={{position:"absolute",bottom:"5%",right:"5%"}}/>
     </View>
   );
 }

@@ -5,7 +5,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera'; // 1. Componente
 import { router } from 'expo-router';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore'; // 2. Banco de dados [1]
 import { getAuth } from 'firebase/auth'; // 3. Autenticação [1]
-import { colors } from '../style';
+import { colors } from '../../style';
 
 export default function ScannerTutor() {
   const [permission, requestPermission] = useCameraPermissions(); // 4. Hook de permissão

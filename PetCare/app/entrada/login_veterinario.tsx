@@ -2,17 +2,16 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, ImageBackground, Pressable,TextInput, View } from "react-native";
 import { Icon, Text } from "react-native-paper";
-import { colors, styles } from "../style";
+import { colors, styles } from "../../style";
 
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebaseconfig";
+import { auth } from "../firebaseconfig";
 
 export default function Index() {
   const [email, setemail] = useState("");
   const [senha, setSenha] = useState("");
-  const [nome, setnome] = useState("")
 
-    const login = async () => {
+  const login = async () => {
       if (!email || !senha) {
         Alert.alert("Atenção", "Por favor, preencha todos os campos!");
         return;
@@ -20,7 +19,7 @@ export default function Index() {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
 
-        router.push("/menu_tutor"); 
+        router.push("/veterinario/menu_veterinario");
       } catch (error) {
         console.error("Erro ao realizar login:", error);
         const err = error as any;
@@ -34,9 +33,8 @@ export default function Index() {
           Alert.alert("Erro", "Não foi possível conectar. Tente novamente.");
         }
       }
-    };
-  
-    const esqueceu = async () => {
+  };
+  const esqueceu = async () => {
     if (!email) {
       Alert.alert("Atenção", "Por favor, digite seu e-mail no campo acima primeiro!");
       return;
@@ -57,38 +55,31 @@ export default function Index() {
     }
   };
 
-return (
-/*view principal*/
- <ImageBackground
-    source={require("../assets/images/fundo.png")}
-    style={{ flex: 1,alignItems: "center"  }}
-    resizeMode="cover"
-  >
-{/*view da logo*/}
-    <View style={styles.view_25}>  
-      <Image source={require('../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
-     
-      <Link href="./login" style={styles.posicao_seta}>
-                 <Icon source="arrow-left" size={35} color={colors.cinza} />
+  return (
+    <ImageBackground
+      source={require("../../assets/images/fundo.png")}
+      style={{ flex: 1,alignItems: "center"  }}
+      resizeMode="cover"
+    >
+      <View style={styles.view_25}>  
+        <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
+        <Link href="./login" style={styles.posicao_seta}>
+          <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>
-    </View>
-
-<View style={styles.form_card}>
-        {/* cabeçalho */}
+      </View>
+      <View style={styles.form_card}>
         <View style={styles.form_cabecalho}>
           <View style={styles.form_titulo_linha}>
             <Icon source="paw" size={44} color={colors.bem_claro} />
             <View style={{ alignItems: "center" }}>
               <Text style={styles.form_titulo}>Login</Text>
-              <Text style={styles.form_titulo_destaque}>do Tutor</Text>
+              <Text style={styles.form_titulo_destaque}>do Veterinário</Text>
             </View>
           </View>
-          <Text style={styles.form_sub}>      Que bom te ver de novo! Entre para cuidar do seu pet.
-          </Text>
+          <Text style={styles.form_sub}>  Que bom te ver de novo! Entre para cuidar dos seus pacientes.</Text>
         </View>
-
-        {/* campos */}
         <View style={styles.form_campos}>
+
           <View style={styles.campo}>
             <View style={styles.campo_icone}>
               <Icon source="email" size={24} color={colors.cinza} />
@@ -115,6 +106,7 @@ return (
               value={senha}
               onChangeText={setSenha}
               secureTextEntry
+              autoCapitalize="none"
             />
           </View>
 
@@ -126,14 +118,6 @@ return (
           <Pressable onPress={esqueceu} hitSlop={8}>
             <Text style={styles.form_link}>Esqueceu sua senha?</Text>
           </Pressable>
-
-          <Link href={"/menu_veterinario"} asChild>
-        <Pressable style={styles.press}>
-          <Text>entrar sem autenticacao (remover depois)</Text>
-        </Pressable>
-      </Link>
-
-
         </View>
       </View>
 

@@ -2,7 +2,7 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, Pressable, ScrollView, View } from "react-native";
 import { Icon, Text, TextInput } from 'react-native-paper';
-import { colors, styles } from '../style';
+import { colors, styles } from '../../style';
 
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc,} from "firebase/firestore";
@@ -69,7 +69,7 @@ return (
     <View style={styles.view_principal}>
 {/*seta que volta para o menu*/}
         <Link href="./menu_veterinario" style={styles.seta_voltar}>
-            <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
 {/*view para dar espaço na tela - 10*/}
         <View style={styles.espaco_10}>

@@ -1,7 +1,7 @@
 import { Link, useLocalSearchParams } from "expo-router";
 import { Image, View } from "react-native";
 import { Text } from 'react-native-paper';
-import { styles } from '../style';
+import { styles } from '../../style';
 
 import QRCode from 'react-native-qrcode-svg';
 export default function Index() {
@@ -15,7 +15,7 @@ return (
     <View style={styles.view_principal}>
         {/*seta que volta para o menu*/}
         <Link href="./menu_veterinario" style={styles.seta_voltar}>
-            <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
 
         <View style={{width:"100%", height:"100%",alignItems:"center",justifyContent:"center"}}>

@@ -2,11 +2,9 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, ImageBackground, Pressable, View, TextInput  } from "react-native";
 import { Text, Icon } from 'react-native-paper';
-import { styles, colors} from '../style';
+import { styles, colors} from '../../style';
 
-
-/*todos os imports necessarios para fazer o cadatros pelo database do google ja com a criptografia em hash da senha*/
-import { auth, db } from './firebaseconfig';
+import { auth, db } from '../firebaseconfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -17,8 +15,7 @@ export default function Index() {
   const [crmv, setcrmv] = useState("");
   const [senha, setsenha] = useState("");
 
-/*essa ja eh a constante que cadastra e salva no banco os dados coletados na hora da criacao da conta do veterinario*/
-  const Cadastro = async () => {
+  const cadastro = async () => {
     if (!nome || !email || !telefone || !crmv || !senha) {
       Alert.alert("Atenção", "Por favor, preencha todos os campos!");
       return;
@@ -41,42 +38,31 @@ export default function Index() {
     }
   };
 
-
   return (
-/*view principal*/
-  <ImageBackground
-    source={require("../assets/images/fundo.png")}
-    style={{ flex: 1, alignItems: "center" } }
-    resizeMode="cover"
-  >
-{/*view da logo - 25*/}
-    <View style={styles.view_20}>  
-      <Image source={require('../assets/images/icone_pata.png')} style={styles.imagem_pata2}/>
-
-      {/*seta que volta para o login*/}
-      <Link href="./cadastro" style={styles.posicao_seta}>
-           <Icon source="arrow-left" size={35} color={colors.cinza} />
-      </Link>
+    <ImageBackground
+      source={require("../../assets/images/fundo.png")}
+      style={{ flex: 1, alignItems: "center" } }
+      resizeMode="cover"
+    >
+      <View style={styles.view_20}>  
+        <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata2}/>
+        <Link href="./cadastro" style={styles.posicao_seta}>
+          <Icon source="arrow-left" size={35} color={colors.cinza} />
+        </Link>
       </View>
 
-
-      
-    <View style={styles.form_card}>
-        {/* cabeçalho escuro */}
+      <View style={styles.form_card}>
         <View style={styles.form_cabecalho}>
           <View style={styles.form_titulo_linha}>
             <Icon source="paw" size={44} color={colors.bem_claro} />
             <View>
-              <Text style={styles.form_titulo}>Cadastro</Text>
-              <Text style={styles.form_titulo_destaque}>do Veterinário</Text>
+            <Text style={styles.form_titulo}>Cadastro</Text>
+            <Text style={styles.form_titulo_destaque}>do Veterinário</Text>
             </View>
           </View>
-          <Text style={styles.form_sub}>
-            Preencha seus dados para começar a cuidar do seu pet!
-          </Text>
+          <Text style={styles.form_sub}>Preencha seus dados para começar a cuidar do seu pet!</Text>
         </View>
 
-        {/* campos de escrita */}
         <View style={styles.form_campos}>
           <View style={styles.campo}>
             <View style={styles.campo_icone}>
@@ -145,11 +131,11 @@ export default function Index() {
               value={senha}
               onChangeText={setsenha}
               secureTextEntry
+              autoCapitalize="none"
             />
           </View>
 
-          {/* botão */}
-          <Pressable style={styles.form_botao} onPress={Cadastro}>
+          <Pressable style={styles.form_botao} onPress={cadastro}>
             <Icon source="account-plus" size={24} color={colors.branco} />
             <Text style={styles.form_botao_texto}>Criar conta</Text>
           </Pressable>

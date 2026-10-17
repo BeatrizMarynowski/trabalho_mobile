@@ -4,48 +4,45 @@ import { Text, Button } from 'react-native-paper';
 import { styles } from '../style';
 
 export default function Index() {
-return (
-/*view principal*/
-  <View style={styles.view_principal}>
-{/*view da logo*/}
-    <View style={styles.view_25}>
-     
-     <Image
-    source={require('../assets/images/icone_pata.png')}
-    style={styles.imagem_pata}
-    resizeMode="contain"
-  />
+  return (
+    <View style={styles.view_principal}>
 
-    </View>
-{/*view do meio*/}
-   <View style={styles.view_metade}>
-  <Image
-    source={require('../assets/images/pets.png')}
-    style={styles.imagem_pets}
-    resizeMode="contain"
-  />
- 
-</View>
-      <Text style={styles.index_titulo}>
-          Seu pet merece o melhor!
-        </Text>
+      <View style={styles.view_25}>
+        <Image
+          source={require('../assets/images/icone_pata.png')}
+          style={styles.imagem_pata}
+          resizeMode="contain"
+        />
+      </View>
+
+    <View style={styles.view_metade}>
+        <Image
+          source={require('../assets/images/pets.png')}
+          style={styles.imagem_pets}
+          resizeMode="contain"
+        />
+      </View>
+
+      <Text style={styles.index_titulo}>Seu pet merece o melhor!</Text>
       <Text variant="bodyMedium" style={styles.texto_conecte}>Conecte-se ao cuidado que seu pet merece, onde você estiver</Text>
 
-{/*view dos botao*/}
-    <View style={[styles.view_25, { gap: '5%' }]}>
-  {/*botao de criar conta*/}
-      <Link href="./cadastro" asChild> 
-        <Pressable style={styles.pressable_c}>
-          <Text style={styles.fonteFredoka}>Criar conta</Text>
-        </Pressable>
-      </Link>
-  {/*botao de login*/}
-      <Link href="./login" asChild>
-         <Pressable style={styles.pressable_l}>
-          <Text style={styles.fonteFredoka}>Entrar</Text>
-        </Pressable>
-      </Link>
+      <View style={[styles.view_25, { gap: '5%' }]}>
+
+        {/*botao de criar conta*/}
+        <Link href="./entrada/cadastro" asChild> 
+          <Pressable style={styles.pressable_c}>
+            <Text style={styles.fonteFredoka}>Criar conta</Text>
+          </Pressable>
+        </Link>
+
+        {/*botao de login*/}
+        <Link href="./entrada/login" asChild>
+          <Pressable style={styles.pressable_l}>
+            <Text style={styles.fonteFredoka}>Entrar</Text>
+          </Pressable>
+        </Link>
+        
+      </View>
     </View>
-  </View>
   );
 }

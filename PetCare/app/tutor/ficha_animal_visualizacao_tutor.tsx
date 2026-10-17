@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocalSearchParams } from "expo-router"; // 1. Importa para pegar o petId da rota
 import { Image, Pressable, ScrollView, View, ActivityIndicator } from "react-native";
-import { FAB, Icon, Text } from 'react-native-paper';
-import { colors, styles } from '../style';
+import { Icon, Text } from 'react-native-paper';
+import { colors, styles } from '../../style';
 
 // 2. Importações do Firestore
 import { getFirestore, doc, getDoc } from "firebase/firestore"; 
 
 export default function Index() {
-  const { petId } = useLocalSearchParams<{ petId: string }>();
+  const { petId } = useLocalSearchParams<{ petId: string }>(); // Captura o ID do pet enviado pela lista
   const [pet, setPet] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +18,7 @@ export default function Index() {
       const db = getFirestore();
       try {
         const docRef = doc(db, "ficha_pet", petId);
-        const docSnap = await getDoc(docRef);
+        const docSnap = await getDoc(docRef); // 3. Busca o pet no Firestore pelo ID
 
         if (docSnap.exists()) {
           setPet(docSnap.data());
@@ -55,8 +55,8 @@ export default function Index() {
     /*view principal*/
     <View style={styles.view_principal}>
         {/*seta que volta para o menu*/}
-        <Link href="./menu_veterinario" style={styles.seta_voltar}>
-            <Image source={require('../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+        <Link href="./menu_tutor" style={styles.seta_voltar}>
+            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
         {/*view para dar espaço na tela - 10*/}
         <View style={styles.espaco_10}/>
@@ -66,7 +66,7 @@ export default function Index() {
         <View style={styles.view_ficha}>
             {/*view da imagem e nome do pet*/}
             <View style={styles.cabecalho}>
-                <Image source={require("../assets/images/rodolfo.png")} style={styles.foto_animal}/>
+                <Image source={require("../../assets/images/rodolfo.png")} style={styles.foto_animal}/>
                 <View>
                     {/* 4. Nome e Dono DINÂMICOS do banco */}
                     <Text style={styles.nomePet}>{pet.nomepet}</Text>
@@ -120,7 +120,7 @@ export default function Index() {
                         </View>
                     </View>
                 </View>
-                <Link href="./vacinas_veterinario" asChild>
+                <Link href="./vacinas_tutor" asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
                         <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
@@ -141,7 +141,7 @@ export default function Index() {
                     <Text style={styles.dados_exame}>dr. Carlos Silva</Text>
                     <Text style={styles.dados_exame}>22/02/2222</Text>
                 </View>
-                <Link href="./exames_veterinario" asChild>
+                <Link href="./exames_tutor" asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
                         <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
@@ -162,7 +162,7 @@ export default function Index() {
                     {/* Exibe as notas criadas na ficha */}
                     <Text style={styles.titulo_card_exame}>{pet.notas || "Sem observações."}</Text>
                 </View>
-                <Link href="./notas_veterinario" asChild>
+                <Link href="./notas_tutor" asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
                         <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
@@ -171,7 +171,6 @@ export default function Index() {
             </View>
         </View>
         </ScrollView>
-        <FAB icon="pencil" style={{position:"absolute",top:"6%",right:"4%"}}/>
         <View style={styles.espaco_5}/>
     </View>
   );
