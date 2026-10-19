@@ -52,6 +52,7 @@ export const styles = StyleSheet.create({
       left: "5%",
     
   },
+   
    posicao_seta:{
         position:"absolute",
         top:"50%",
@@ -848,7 +849,20 @@ link_login: {
 
   // FICHA DE CRIAÇÃO
 
- 
+cabecalho_titulo_linha: {
+  width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginBottom: 14,
+  marginLeft: 40
+},
+
+cabecalho_titulo_grupo: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+},
   cabecalho: {
     width: "100%",
     backgroundColor: colors.rosaEscuro,

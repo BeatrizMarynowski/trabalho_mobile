@@ -104,20 +104,11 @@ export default function Index() {
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
             <View style={styles.view_principal}>
 
-                {/* Seta que volta para o menu */}
-                <Link
-                    href="./menu_veterinario"
-                    style={styles.seta_voltar}
-                >
-                    <Image
-                        source={require("../../assets/images/seta_v.png")}
-                        style={styles.imagem_seta}
-                    />
-                </Link>
+    
+              
 
                 {/* Espaço superior */}
                 <View style={styles.espaco_topo_ficha} />
@@ -143,6 +134,11 @@ export default function Index() {
                                 <Text style={styles.cabecalho_titulo}>
                                     Nova ficha
                                 </Text>
+                                <Link href="./menu_veterinario" asChild>
+                                  <Pressable  style={{ marginLeft: "auto" }}>
+                                      <Icon source="close" size={35} color={colors.branco} />
+                                  </Pressable>
+                              </Link>
                             </View>
 
                             <View style={styles.cabecalho_campos}>
