@@ -17,7 +17,10 @@ export const colors = {
   amarelo: "#e0c357",
   amarelofundo: "#e0c35733",
 
-
+  rosa: "#E8B4C3",
+  rosaClaro: "#F8E8EC",
+  rosaEscuro: "#B96F89",
+  rosaFundo: "#F3DDE4",
 
   roxo_fundodatela: "#ae98cc",
   roxo_escuro: "#271033",    
@@ -213,21 +216,22 @@ export const styles = StyleSheet.create({
     height: 70,
     borderRadius: 36,
     borderWidth: 3,
-    borderColor: colors.verde,
+    borderColor: colors.bem_claro,
   },
 
 
-  nomePet: {
-    color: colors.branco,
-    fontWeight: "bold",
-    fontSize: 20,
-    marginBottom: 7,
-  
-  },
-  nomeDono: {
-    color: colors.branco,
-    opacity: 0.75,
-  },
+ nomePet: {
+  color: colors.cinza,
+  fontWeight: "bold",
+  fontSize: 18,
+  marginBottom: 4,
+},
+
+nomeDono: {
+  color: colors.cinza,
+  opacity: 0.75,
+  fontSize: 13,
+},
 
     
 
@@ -459,48 +463,67 @@ titulo_vacinas_pagina: {
     alignItems:'center',
     color: colors.claro
   },
-  botao_animal:{
-    width:340,
-    height:100,
-    alignItems:'center',
-    backgroundColor: colors.medio, 
-    borderRadius:30,
-    flexDirection:'row',
-    marginBottom:10
-  },
-  view_botao:{
-    width:"30%",
-    height:"100%",
-    backgroundColor: colors.medio,
-    borderTopLeftRadius:30,
-    borderBottomLeftRadius:30,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  view_animal:{
-    width:"70%",
-    height:"100%",
-    color: colors.medio,
-    borderTopRightRadius:30,
-    borderBottomRightRadius:30,
-    alignItems:'center',
-    justifyContent:'center'
-  },
+ 
+botao_animal: {
+  width: "100%",
+  minHeight: 112,
+  backgroundColor: "#FFFFFF",
+  borderRadius: 24,
+  flexDirection: "row",
+  alignItems: "center",
+  padding: 12,
+  marginBottom: 14,
+  elevation: 3,
+  shadowColor: "#4A5759",
+  shadowOffset: { width: 0, height: 3 },
+  shadowOpacity: 0.10,
+  shadowRadius: 6,
+},
+
+view_botao: {
+  width: 76,
+  height: 76,
+  borderRadius: 22,
+  backgroundColor: colors.bem_claro,
+  alignItems: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+},
+view_botao_sem_rosa: {
+  width: 76,
+  height: 76,
+  borderRadius: 22,
+  alignItems: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+},
+
+view_animal: {
+  flex: 1,
+  minHeight: 76,
+  paddingLeft: 14,
+  justifyContent: "center",
+  gap: 4,
+},
+
   titulo_ola: {
-  color: colors.preto,
-  fontSize: 15
+ color: colors.cinza,
+  fontSize: 16,
+  fontWeight: "bold",
+
 },
 
  caixa_ola: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginBottom: 15,
-    backgroundColor: colors.bem_claro,
-    borderRadius: 16,
-    alignSelf:  "center",
-    padding: 8,
-    marginTop: 20,
+     width: "100%",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+  paddingHorizontal: 16,
+  paddingVertical: 30,
+  backgroundColor: colors.fundodatela,
+  alignSelf: "center",
+  marginTop: 0,
+  marginBottom: 0,
 
  },
 
@@ -815,6 +838,184 @@ link_login: {
     borderBottomRightRadius:14
   },
   // FICHA CRIAÇÃO
+
+tela: {
+    flex: 1,
+    backgroundColor: colors.fundodatela,
+  },
+
+  topo: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingTop: 48,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    gap: 14,
+  },
+
+  voltar: {
+    padding: 4,
+  },
+
+  topoTexto: {
+    flex: 1,
+    gap: 4,
+  },
+
+  tituloPrincipal: {
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 25,
+    color: colors.cinza,
+  },
+
+  subtitulo: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 14,
+    color: colors.cinza,
+  },
+
+  scroll: {
+    flex: 1,
+  },
+
+  conteudo: {
+    paddingHorizontal: 18,
+    paddingTop: 4,
+    paddingBottom: 35,
+    gap: 18,
+  },
+
+  identificacao: {
+    backgroundColor: colors.medio,
+    padding: 16,
+    borderRadius: 24,
+    gap: 14,
+  },
+
+  identificacaoTitulo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: 2,
+  },
+
+  foto: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.fundodatela,
+    borderWidth: 3,
+    borderColor: colors.rosa,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  identificacaoTexto: {
+    flex: 1,
+    gap: 4,
+  },
+
+  textoIdentificacao: {
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 20,
+    color: "#FFFFFF",
+  },
+
+  ajuda: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 13,
+    color: "#FFFFFF",
+  },
+
+  secao: {
+    backgroundColor: "#F9FAF3",
+    borderRadius: 24,
+    padding: 16,
+    gap: 18,
+    elevation: 2,
+    shadowColor: colors.cinza,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+  },
+
+  secaoTitulo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+
+  iconeSecao: {
+    width: 42,
+    height: 42,
+    borderRadius: 16,
+    backgroundColor: colors.medio,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  a_titulo: {
+    flex: 1,
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 20,
+    color: colors.cinza,
+  },
+
+  listaCampos: {
+    gap: 14,
+  },
+
+  a_campo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: colors.rosaClaro,
+    borderRadius: 18,
+    padding: 8,
+  },
+
+  campoConteudo: {
+    flex: 1,
+  },
+
+  input: {
+    backgroundColor: colors.rosaClaro,
+    fontFamily: "Nunito_400Regular",
+    fontSize: 15,
+    minHeight: 58,
+  },
+
+  multiline: {
+    minHeight: 95,
+    paddingTop: 12,
+  },
+
+  rodape: {
+    textAlign: "center",
+    fontFamily: "Nunito_400Regular",
+    color: colors.cinza,
+    fontSize: 13,
+    marginTop: 2,
+  },
+
+  botaoArea: {
+    alignItems: "center",
+    marginTop: 2,
+  },
+
+  botao: {
+    overflow: "hidden",
+    width: "100%",
+    textAlign: "center",
+    backgroundColor: colors.rosa,
+    color: colors.cinza,
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 18,
+    paddingVertical: 17,
+    borderRadius: 999,
+    elevation: 3,
+  },
+
 
 
 quadrinho_vizu_cabe: {
