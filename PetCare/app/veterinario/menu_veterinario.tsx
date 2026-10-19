@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import * as React from 'react';
-import { Image, Pressable, ScrollView, View } from 'react-native';
+import { Image, Pressable, ScrollView, ImageBackground, View } from 'react-native';
 import { BottomNavigation, FAB, Icon, List, Switch, Text } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
@@ -49,13 +49,18 @@ export default function App() {
   /*codigo que mostra a tela dos pets/criacao da rota da tela do navbar - vem do componente do react native*/
    const petsRoute = () => (
       /*view principal*/
-   
-  <View style={styles.view_principal}>
+
+  <ImageBackground
+    source={require("../../assets/images/fundo_rosa.png")}
+    style={{ flex: 1 }}
+    resizeMode="cover"
+  >
+    <View style={[styles.view_principal, { backgroundColor: "transparent" }]}>
   {/* Espaço no topo */}
   <View style={styles.espaco_5} />
       
       {/*nome da pessoa*/}
-     <View style={styles.caixa_ola}>
+     <View style={styles.caixa_ola_rosa}>
   <View style={{
     width: 42,
     height: 42,
@@ -203,7 +208,9 @@ export default function App() {
   </Pressable>
 </Link>
         </View>
+  </ImageBackground>
 );
+
   /*codigo que mostra a tela das configuracoes*/
   const configRoute = () => 
     /*view principal*/
@@ -231,33 +238,36 @@ export default function App() {
           </List.Section>
         </View>
     </ScrollView>;
+
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'pets', title: 'Pets', focusedIcon: 'paw' },
     { key: 'configuracoes', title: 'Ajustes', focusedIcon: 'cog' },
   ]);
-/*essa eh a parte que configura o bottomnavigation(isso foi pego como componente pronto do react paper)*/
+
+  /*essa eh a parte que configura o bottomnavigation(isso foi pego como componente pronto do react paper)*/
   const renderScene = BottomNavigation.SceneMap({
     pets: petsRoute,
     configuracoes: configRoute,
   });
-/*essa realmente seria a tela - vem do componente do react paper*/
-return (
+
+  /*essa realmente seria a tela - vem do componente do react paper*/
+  return (
     <View style={styles.container}>
       <BottomNavigation
-         navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-      shifting={false}
-      activeColor={colors.medio}
-      inactiveColor={colors.cinza}
-      barStyle={{
-        backgroundColor: "#FFFFFF",
-        borderTopWidth: 1,
-        borderTopColor: "#E4EBD6",
-            height: "10%",
-      }}
-          />
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+        shifting={false}
+        activeColor={colors.medio}
+        inactiveColor={colors.cinza}
+        barStyle={{
+          backgroundColor: "#FFFFFF",
+          borderTopWidth: 1,
+          borderTopColor: "#E4EBD6",
+          height: "10%",
+        }}
+      />
     </View>
   );
 };

@@ -526,6 +526,21 @@ view_animal: {
   marginBottom: 0,
 
  },
+  caixa_ola_rosa: {
+  width: "100%",
+   
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+  paddingHorizontal: 12,
+  paddingVertical: 30,
+  backgroundColor: "transparent",
+  alignSelf: "center",
+  marginTop: 0,
+  marginBottom: 0,
+
+ },
+
 
  //index
    pressable_c: {
