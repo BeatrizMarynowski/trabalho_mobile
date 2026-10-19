@@ -1,11 +1,23 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Alert, Image, Pressable, ImageBackground, ScrollView, View } from "react-native";
-import { Icon, Text, TextInput } from 'react-native-paper';
-import { colors, styles } from '../../style';
+import {
+    Alert,
+    Image,
+    KeyboardAvoidingView,
+    Platform,
+    Pressable,
+    ScrollView,
+    View
+} from "react-native";
+import { Icon, Text, TextInput } from "react-native-paper";
+import { colors, styles } from "../../style";
 
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, addDoc,} from "firebase/firestore";
+import {
+    getFirestore,
+    collection,
+    addDoc
+} from "firebase/firestore";
 
 export default function Index() {
     const [nomepet, setnomepet] = useState("");
@@ -23,238 +35,488 @@ export default function Index() {
     const [email, setemail] = useState("");
     const [notas, setnotas] = useState("");
     const [exames, setexames] = useState("");
+
     const novopet = async () => {
-    if (!nomepet || !nometutor || !especie || !raca || !idade || !peso || !sexo || !castrado || !cpf || !endereco || !telefone || !email) {
-      Alert.alert("Atenção", "Por favor, preencha todos os campos!");
-      return;
-    }
-    const auth = getAuth();
-    const db = getFirestore();
-    const user = auth.currentUser;
-    try {
+        if (
+            !nomepet ||
+            !nometutor ||
+            !especie ||
+            !raca ||
+            !idade ||
+            !peso ||
+            !sexo ||
+            !castrado ||
+            !cpf ||
+            !endereco ||
+            !telefone ||
+            !email
+        ) {
+            Alert.alert(
+                "Atenção",
+                "Por favor, preencha todos os campos!"
+            );
+            return;
+        }
 
-      const docRef = await addDoc(collection(db, "ficha_pet"), {
-        nomepet,
-        nometutor,
-        especie,
-        raca,
-        idade,
-        peso,
-        sexo,
-        castrado,
-        cpf,
-        endereco,
-        telefone,
-        email,
-        notas,
-        exames,
-        vetId: user?.uid
-      });
-    router.push({
-    pathname: "./compartilhar_ficha_veterinario",
-      params: { 
-        petId: docRef.id, 
-        petNome: nomepet 
-      }
-    });
-    
-    } catch (error) {
-      console.error("Erro ao salvar veterinário:", error);
-      Alert.alert("Erro", "Não foi possível criar a conta. Tente novamente.");
-    }
-  };
+        const auth = getAuth();
+        const db = getFirestore();
+        const user = auth.currentUser;
 
+        try {
+            const docRef = await addDoc(
+                collection(db, "ficha_pet"),
+                {
+                    nomepet,
+                    nometutor,
+                    especie,
+                    raca,
+                    idade,
+                    peso,
+                    sexo,
+                    castrado,
+                    cpf,
+                    endereco,
+                    telefone,
+                    email,
+                    notas,
+                    exames,
+                    vetId: user?.uid
+                }
+            );
 
-return (
-/*view principal*/
-    <View style={styles.view_principal}>
-{/*seta que volta para o menu*/}
-        <Link href="./menu_veterinario" style={styles.seta_voltar}>
-            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
-        </Link>
-{/*view para dar espaço na tela - 10*/}
-        <View style={styles.espaco_10}>
-        </View>
-{/*view da ficha*/}
-        <ScrollView style={styles.view_secundaria_largura}>
-        {/*view da ficha*/}
-        <View style={styles. view_ficha}>
-            {/*view da imagem e nome do pet*/}
-            <View style={styles.cabecalho}>
-                  <View>
-                    <TextInput 
-                    label="Nome do Pet"
-                    value={nomepet}
-                    onChangeText={texto => setnomepet(texto)}
-                    mode="outlined"
-                    activeUnderlineColor={colors.verde}
-                    underlineColor={colors.roxo_medio}
-                    theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                    style={styles.quadrinho_vizu_cabe}/>
-                    <TextInput 
-                    label="Nome do Tutor"
-                    value={nometutor}
-                    onChangeText={texto => setnometutor(texto)}
-                    mode="outlined"
-                    activeUnderlineColor={colors.verde}
-                    underlineColor={colors.roxo_claro}
-                    theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                    style={styles.quadrinho_vizu_cabe}/>
+            router.push({
+                pathname: "./compartilhar_ficha_veterinario",
+                params: {
+                    petId: docRef.id,
+                    petNome: nomepet
+                }
+            });
+        } catch (error) {
+            console.error("Erro ao salvar ficha:", error);
 
-                </View>
-            </View>
-            {/*view do pet e do dono*/}
-            <View style={styles.view_das_info}>
-                <View style={styles.dados_animal_e_dono}>
-                    <View style={styles.dados_div_animal_dono_criacao}>
-                         <View style={styles.titulo_animal_dono}>
-                          <Icon source="paw" size={16} color={colors.verde} />
-                            <Text style={[styles.titulo_verde_pequeno, { marginTop: 4 }]}>Animal</Text>
-                             </View>
-                        <TextInput 
-                        label="Espécie"
-                        value={especie}
-                        onChangeText={texto => setespecie(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}
-                        />
-                        <TextInput 
-                        label="Raça"
-                        value={raca}
-                        onChangeText={texto => setraca(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                        <TextInput 
-                        label="Idade"
-                        value={idade}
-                        onChangeText={texto => setidade(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                        <TextInput 
-                        label="Peso"
-                        value={peso}
-                        onChangeText={texto => setpeso(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                        <TextInput 
-                        label="Sexo"
-                        value={sexo}
-                        onChangeText={texto => setsexo(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                        <TextInput 
-                        label="Castrado"
-                        value={castrado}
-                        onChangeText={texto => setcastrado(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
+            Alert.alert(
+                "Erro",
+                "Não foi possível criar a ficha. Tente novamente"
+            );
+        }
+    };
+
+    return (
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
+            <View style={styles.view_principal}>
+
+                {/* Seta que volta para o menu */}
+                <Link
+                    href="./menu_veterinario"
+                    style={styles.seta_voltar}
+                >
+                    <Image
+                        source={require("../../assets/images/seta_v.png")}
+                        style={styles.imagem_seta}
+                    />
+                </Link>
+
+                {/* Espaço superior */}
+                <View style={styles.espaco_topo_ficha} />
+
+                {/* Ficha */}
+                <ScrollView
+                    style={styles.view_secundaria_largura}
+                    contentContainerStyle={{ paddingBottom: 30 }}
+                    keyboardShouldPersistTaps="handled"
+                    showsVerticalScrollIndicator={false}
+                >
+                    <View style={styles.view_ficha_criacao}>
+
+                        {/* Cabeçalho */}
+                        <View style={styles.cabecalho}>
+
+                            <View style={styles.cabecalho_titulo_linha}>
+                                <Icon
+                                    source="clipboard-text-outline"
+                                    size={26}
+                                    color={colors.branco}
+                                />
+                                <Text style={styles.cabecalho_titulo}>
+                                    Nova ficha
+                                </Text>
+                            </View>
+
+                            <View style={styles.cabecalho_campos}>
+
+                                <Text style={styles.cabecalho_legenda}>
+                                    Preencha os dados do pet e do tutor
+                                </Text>
+
+                          
+<TextInput
+    placeholder="Nome do pet"
+    placeholderTextColor={colors.rosaEscuro}
+    value={nomepet}
+    onChangeText={setnomepet}
+    mode="outlined"
+    outlineColor={colors.rosa}
+    activeOutlineColor={colors.rosaEscuro}
+    textColor={colors.cinza}
+    outlineStyle={{ borderRadius: 20 }}
+    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+    left={<TextInput.Icon icon="paw" color={colors.rosaEscuro} />}
+    style={styles.campo_cabecalho}
+/>
+
+<TextInput
+    placeholder="Nome do tutor"
+    placeholderTextColor={colors.rosaEscuro}
+    value={nometutor}
+    onChangeText={setnometutor}
+    mode="outlined"
+    outlineColor={colors.rosa}
+    activeOutlineColor={colors.rosaEscuro}
+    textColor={colors.cinza}
+    outlineStyle={{ borderRadius: 20 }}
+    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+    left={<TextInput.Icon icon="account-outline" color={colors.rosaEscuro} />}
+    style={styles.campo_cabecalho}
+/>
+                            </View>
                         </View>
-                        <View style={styles.dados_div_animal_dono_criacao}>
-                          <View style={styles.titulo_animal_dono}>
-                          <Icon source="account" size={16} color={colors.verde} />
-                         <Text style={[styles.titulo_verde_pequeno, { marginTop: 4 }]}>Dono</Text>
-                     </View>
-                        <TextInput 
-                        label="CPF"
-                        value={cpf}
-                        onChangeText={texto => setcpf(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                        <TextInput 
-                        label="Endereço"
-                        value={endereco}
-                        onChangeText={texto => setendereco(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                        <TextInput 
-                        label="Telefone"
-                        value={telefone}
-                        onChangeText={texto => settelefone(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                        <TextInput 
-                        label="E-mail"
-                        value={email}
-                        onChangeText={texto => setemail(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                    </View>
-                </View>
-            </View>
-            {/*linha divisoria*/}
-            <View style={styles.linha} />   
-            <View style={styles.linha} />
-            {/*view das notas*/} 
-            <View style={styles.view_das_info}>
-                {/*nome bonitin*/}
-                <View style={styles.Titulo_div}>
-                    <Icon source="note-text-outline" size={18} color={colors.verde} />
-                    <Text style={styles.titulo_conf}>Notas</Text>
-                </View>
-                {/*card das notas*/}
-                <View style={styles.dados_card_exame}>
-                    <Text style={styles.dados_exame}>Dr. Carlos Silva</Text>
-                    <TextInput 
-                        label="Notas"
-                        value={notas}
-                        onChangeText={texto => setnotas(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                </View>
 
-                <View style={styles.dados_card_exame}>
-                    <Text style={styles.dados_exame}>Dr. Carlos Silva</Text>
-                    <TextInput 
-                        label="Exames"
-                        value={exames}
-                        onChangeText={texto => setexames(texto)}
-                        mode="outlined"
-                        activeUnderlineColor={colors.verde}
-                        underlineColor={colors.roxo_claro}
-                        theme={{ colors: { onSurfaceVariant: colors.branco } }}
-                        style={styles.quadrinho_vizu}/>
-                </View>
+                        {/* Dados do animal e do tutor */}
+                        <View style={styles.container_secoes_ficha}>
+
+                            {/* Dados do animal */}
+                            <View style={styles.card_ficha_novo}>
+
+                                <View style={styles.titulo_secao_ficha}>
+                                    <Icon
+                                        source="paw"
+                                        size={22}
+                                        color={colors.rosaEscuro}
+                                    />
+
+                                    <Text style={styles.texto_titulo_secao_ficha}>
+                                        Dados do animal
+                                    </Text>
+                                </View>
+
+                                <TextInput
+                                    label="Espécie"
+                                    value={especie}
+                                    onChangeText={setespecie}
+                                    mode="outlined"
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    left={<TextInput.Icon icon="paw" color={colors.rosaEscuro} />}
+                                />
+
+                                <TextInput
+                                    label="Raça"
+                                    value={raca}
+                                    onChangeText={setraca}
+                                    mode="outlined"
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    left={<TextInput.Icon icon="dog" color={colors.rosaEscuro} />}
+                                />
+
+                                {/* Idade e peso lado a lado */}
+                                <View style={styles.linha_campos}>
+
+                                    <TextInput
+                                        label="Idade"
+                                        value={idade}
+                                        onChangeText={setidade}
+                                        mode="outlined"
+                                        keyboardType="numeric"
+                                        style={styles.campo_ficha_metade}
+                                        outlineColor={colors.rosa}
+                                        activeOutlineColor={colors.rosaEscuro}
+                                        textColor={colors.cinza}
+                                        outlineStyle={{ borderRadius: 22 }}
+                                        contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                        left={<TextInput.Icon icon="calendar" color={colors.rosaEscuro} />}
+                                    />
+
+                                    <TextInput
+                                        label="Peso (kg)"
+                                        value={peso}
+                                        onChangeText={setpeso}
+                                        mode="outlined"
+                                        keyboardType="decimal-pad"
+                                        style={styles.campo_ficha_metade}
+                                        outlineColor={colors.rosa}
+                                        activeOutlineColor={colors.rosaEscuro}
+                                        textColor={colors.cinza}
+                                        outlineStyle={{ borderRadius: 22 }}
+                                        contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                        left={<TextInput.Icon icon="weight" color={colors.rosaEscuro} />}
+                                    />
+
+                                </View>
+
+                                {/* Sexo */}
+                                <View style={styles.seletor_container}>
+                                    <Text style={styles.seletor_label}>Sexo do animal</Text>
+
+                                    <View style={styles.seletor_opcoes}>
+                                        {[
+                                            { valor: "Fêmea", icone: "gender-female" },
+                                            { valor: "Macho", icone: "gender-male" }
+                                        ].map((opcao) => (
+                                            <Pressable
+                                                key={opcao.valor}
+                                                onPress={() => setsexo(opcao.valor)}
+                                                style={[
+                                                    styles.seletor_opcao,
+                                                    sexo === opcao.valor && styles.seletor_opcao_ativa
+                                                ]}
+                                            >
+                                                <View style={styles.seletor_conteudo}>
+                                                    <Icon
+                                                        source={opcao.icone}
+                                                        size={18}
+                                                        color={sexo === opcao.valor ? colors.branco : colors.rosaEscuro}
+                                                    />
+                                                    <Text
+                                                        style={[
+                                                            styles.seletor_texto,
+                                                            sexo === opcao.valor && styles.seletor_texto_ativo
+                                                        ]}
+                                                    >
+                                                        {opcao.valor}
+                                                    </Text>
+                                                </View>
+                                            </Pressable>
+                                        ))}
+                                    </View>
+                                </View>
+
+                                {/* Castrado */}
+                                <View style={styles.seletor_container}>
+                                    <Text style={styles.seletor_label}>O animal é castrado?</Text>
+
+                                    <View style={styles.seletor_opcoes}>
+                                        {[
+                                            { valor: "Sim", icone: "check" },
+                                            { valor: "Não", icone: "close" }
+                                        ].map((opcao) => (
+                                            <Pressable
+                                                key={opcao.valor}
+                                                onPress={() => setcastrado(opcao.valor)}
+                                                style={[
+                                                    styles.seletor_opcao,
+                                                    castrado === opcao.valor && styles.seletor_opcao_ativa
+                                                ]}
+                                            >
+                                                <View style={styles.seletor_conteudo}>
+                                                    <Icon
+                                                        source={opcao.icone}
+                                                        size={18}
+                                                        color={castrado === opcao.valor ? colors.branco : colors.rosaEscuro}
+                                                    />
+                                                    <Text
+                                                        style={[
+                                                            styles.seletor_texto,
+                                                            castrado === opcao.valor && styles.seletor_texto_ativo
+                                                        ]}
+                                                    >
+                                                        {opcao.valor}
+                                                    </Text>
+                                                </View>
+                                            </Pressable>
+                                        ))}
+                                    </View>
+                                </View>
+
+                            </View>
+
+                            {/* Dados do tutor */}
+                            <View style={styles.card_ficha_novo}>
+
+                                <View style={styles.titulo_secao_ficha}>
+                                    <Icon
+                                        source="account-outline"
+                                        size={22}
+                                        color={colors.rosaEscuro}
+                                    />
+
+                                    <Text style={styles.texto_titulo_secao_ficha}>
+                                        Dados do tutor
+                                    </Text>
+                                </View>
+
+                                <TextInput
+                                    label="CPF"
+                                    value={cpf}
+                                    onChangeText={setcpf}
+                                    mode="outlined"
+                                    keyboardType="numeric"
+                                    maxLength={14}
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    left={<TextInput.Icon icon="card-account-details-outline" color={colors.rosaEscuro} />}
+                                />
+
+                                <TextInput
+                                    label="Endereço"
+                                    value={endereco}
+                                    onChangeText={setendereco}
+                                    mode="outlined"
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    left={<TextInput.Icon icon="map-marker-outline" color={colors.rosaEscuro} />}
+                                />
+
+                                <TextInput
+                                    label="Telefone"
+                                    value={telefone}
+                                    onChangeText={settelefone}
+                                    mode="outlined"
+                                    keyboardType="phone-pad"
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    left={<TextInput.Icon icon="phone-outline" color={colors.rosaEscuro} />}
+                                />
+
+                                <TextInput
+                                    label="E-mail"
+                                    value={email}
+                                    onChangeText={setemail}
+                                    mode="outlined"
+                                    keyboardType="email-address"
+                                    autoCapitalize="none"
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    left={<TextInput.Icon icon="email-outline" color={colors.rosaEscuro} />}
+                                />
+
+                            </View>
+
+                        </View>
+
+                        {/* Divisor */}
+                        <View style={styles.linha_2} />
+
+                        {/* Notas e exames */}
+                        <View style={styles.container_secoes_ficha}>
+
+                            {/* Anotações clínicas */}
+                            <View style={styles.card_ficha_novo}>
+
+                                <View style={styles.titulo_secao_ficha}>
+                                    <Icon
+                                        source="note-text-outline"
+                                        size={22}
+                                        color={colors.rosaEscuro}
+                                    />
+
+                                    <Text style={styles.texto_titulo_secao_ficha}>
+                                        Anotações clínicas
+                                    </Text>
+                                </View>
+
+                                <TextInput
+                                    label="Observações sobre o pet"
+                                    value={notas}
+                                    onChangeText={setnotas}
+                                    mode="outlined"
+                                    multiline
+                                    numberOfLines={4}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    style={styles.campo_ficha_multilinha_m}
+                                />
+
+                            </View>
+
+                            {/* Exames */}
+                            <View style={styles.card_ficha_novo}>
+
+                                <View style={styles.titulo_secao_ficha}>
+                                    <Icon
+                                        source="file-document-outline"
+                                        size={22}
+                                        color={colors.rosaEscuro}
+                                    />
+
+                                    <Text style={styles.texto_titulo_secao_ficha}>
+                                        Exames
+                                    </Text>
+                                </View>
+
+                                <TextInput
+                                    label="Resultados ou observações dos exames"
+                                    value={exames}
+                                    onChangeText={setexames}
+                                    mode="outlined"
+                                    multiline
+                                    numberOfLines={4}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    style={styles.campo_ficha_multilinha_m}
+                                />
+
+                            </View>
+
+                        </View>
+
+                        {/* Botão criar ficha */}
+                        <Pressable
+                            style={({ pressed }) => [
+                                styles.botao_principal,
+                                pressed && { opacity: 0.85, transform: [{ scale: 0.98 }] }
+                            ]}
+                            onPress={novopet}
+                        >
+                            <View style={styles.botao_principal_conteudo}>
+                                <Icon
+                                    source="check-circle-outline"
+                                    size={22}
+                                    color={colors.branco}
+                                />
+                                <Text style={styles.texto_botao_principal}>
+                                    Criar ficha
+                                </Text>
+                            </View>
+                        </Pressable>
+
+                    </View>
+                </ScrollView>
+
             </View>
-                <Pressable style={styles.botao_principal} onPress={novopet}>
-                    <Text style={styles.texto_botao_principal}>Criar ficha</Text>
-                </Pressable>
-        </View>
-        </ScrollView>
-        {/*view para dar espaço na tela - 5*/}
-        <View style={styles.espaco_5}/>
-    </View>
-  );
+        </KeyboardAvoidingView>
+    );
 }

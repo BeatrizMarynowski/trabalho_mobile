@@ -202,15 +202,7 @@ export const styles = StyleSheet.create({
     borderColor: colors.verde,
   },
   
-  cabecalho: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.medio,
-    padding: 17,
-    gap: 14,
-  },
-  
+ 
   foto_animal: {
     width: 70,
     height: 70,
@@ -854,10 +846,248 @@ link_login: {
   },
   // FICHA CRIAÇÃO
 
-tela: {
-    flex: 1,
-    backgroundColor: colors.fundodatela,
+  // FICHA DE CRIAÇÃO
+
+ 
+  cabecalho: {
+    width: "100%",
+    backgroundColor: colors.rosaEscuro,
+    padding: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
+
+  cabecalho_campos: {
+    width: "100%",
+    gap: 12,
+  },
+
+  cabecalho_legenda: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 12,
+    fontWeight: "bold",
+    letterSpacing: 1,
+    color: colors.branco,
+    marginBottom: 4,
+  },
+
+  campo_cabecalho: {
+    backgroundColor: colors.rosaClaro,
+    borderRadius: 20,
+  },
+
+  container_secoes_ficha: {
+    width: "100%",
+    flexDirection: "column",
+    paddingHorizontal: 14,
+    paddingTop: 18,
+    gap: 18,
+  },
+
+  card_ficha_novo: {
+    width: "100%",
+    backgroundColor: "#FFF9FA",
+    borderRadius: 28,
+    padding: 18,
+    borderWidth: 1,
+    borderColor: colors.rosa,
+    elevation: 2,
+    shadowColor: colors.rosaEscuro,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.10,
+    shadowRadius: 5,
+  },
+
+  titulo_secao_ficha: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 18,
+    gap: 10,
+  },
+
+
+
+  campo_ficha_rosa: {
+    width: "100%",
+    backgroundColor: colors.rosaClaro,
+    marginBottom: 14,
+    borderRadius: 22,
+    fontSize: 16,
+  },
+
+  campo_ficha_multilinha: {
+    width: "100%",
+    minHeight: 120,
+    backgroundColor: colors.rosaClaro,
+    marginBottom: 4,
+    borderRadius: 22,
+    fontSize: 15,
+  },
+  campo_ficha_multilinha_m: {
+    width: "100%",
+    minHeight: 120,
+    backgroundColor: colors.rosaClaro,
+    marginBottom: 4,
+    borderRadius: 22,
+    fontSize: 12,
+  },
+
+  botao_principal: {
+    backgroundColor: colors.rosaEscuro,
+    marginHorizontal: 16,
+    marginTop: 8,
+    marginBottom: 22,
+    paddingVertical: 15,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 2,
+  },
+
+  texto_botao_principal: {
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 18,
+    color: colors.branco,
+  },
+
+  linha_2: {
+    width: "90%",
+    height: 1,
+    backgroundColor: colors.rosa,
+    alignSelf: "center",
+    marginTop: 12,
+  },
+
+  // Seletores de opções
+
+  seletor_container: {
+    width: "100%",
+    marginBottom: 16,
+    gap: 10,
+  },
+
+  seletor_label: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 14,
+    fontWeight: "bold",
+    color: colors.rosaEscuro,
+  },
+
+  seletor_opcoes: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: 8,
+  },
+
+  seletor_opcao: {
+    flex: 1,
+    minHeight: 48,
+    backgroundColor: colors.rosaClaro,
+    borderWidth: 1,
+    borderColor: colors.rosa,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+  },
+
+  seletor_especie: {
+    width: "48%",
+    minHeight: 48,
+    backgroundColor: colors.rosaClaro,
+    borderWidth: 1,
+    borderColor: colors.rosa,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+
+
+  seletor_texto: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 15,
+    fontWeight: "bold",
+    color: colors.cinza,
+  },
+
+  seletor_texto_ativo: {
+    color: colors.branco,
+  },
+
+  // Espaço fixo no topo (no lugar do espaco_10 em %)
+espaco_topo_ficha: {
+  width: "100%",
+  height: 60,
+},
+ 
+cabecalho_titulo_linha: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+  marginBottom: 14,
+},
+ 
+cabecalho_titulo: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 24,
+  color: colors.branco,
+},
+ 
+// Idade + Peso lado a lado
+linha_campos: {
+  flexDirection: "row",
+  gap: 10,
+},
+ 
+campo_ficha_metade: {
+  flex: 1,
+  backgroundColor: colors.rosaClaro,
+  marginBottom: 14,
+  borderRadius: 22,
+  fontSize: 16,
+},
+ 
+// Ícone + texto dentro das opções do seletor
+seletor_conteudo: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 6,
+},
+ 
+// Ícone + texto dentro do botão "Criar ficha"
+botao_principal_conteudo: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+},
+  view_ficha_criacao: {
+    width: "90%",
+    backgroundColor: colors.rosaFundo,
+    borderRadius: 30,
+    overflow: "hidden",
+    alignSelf: "center",
+  },
+
+  texto_titulo_secao_ficha: {
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 20,
+    color: colors.rosaEscuro,
+  },
+
+  seletor_opcao_ativa: {
+    backgroundColor: colors.rosaEscuro,
+    borderColor: colors.rosaEscuro,
+    elevation: 2,
+    shadowColor: colors.rosaEscuro,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+
+
 
   topo: {
     flexDirection: "row",
@@ -1063,21 +1293,7 @@ quadrinho_vizu: {
 },
 
 // botão criar ficha
-botao_principal: {
-  width: "40%",
-  alignSelf: "center",
-  backgroundColor: colors.verde,
-  borderRadius: 999,
-  paddingVertical: 8,
-  alignItems: "center",
-  marginTop: 16,
-  marginBottom: 25,
-},
-texto_botao_principal: {
-  color: colors.cinza,
-  fontWeight: "bold",
-  fontSize: 15,
-},
+
 
   icone_mais: {
   width: 28,
@@ -1111,6 +1327,13 @@ cabecalho_criacao: {
   padding: 17,
   gap: 14,
 },
+ cabecalho_label: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 14,
+    fontWeight: "bold",
+    color: colors.branco,
+    marginBottom: -6,
+  },
 
 dados_div_animal_dono_criacao: {
   flex: 1,
