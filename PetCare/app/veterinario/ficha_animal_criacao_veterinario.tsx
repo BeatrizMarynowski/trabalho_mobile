@@ -1,14 +1,6 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import {
-    Alert,
-    Image,
-    KeyboardAvoidingView,
-    Platform,
-    Pressable,
-    ScrollView,
-    View
-} from "react-native";
+import { Alert, Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, View} from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
 import { colors, styles } from "../../style";
 
