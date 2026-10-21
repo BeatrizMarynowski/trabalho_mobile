@@ -104,9 +104,9 @@ return (
                 </Text>
               </View>
             ) : (
-              notas.map((notas) => (
-                  <View style={styles.botao_animal}>
-                      <Text style={styles.nomePet}>{notas.notas}</Text>
+              notas.map((nota) => (
+                  <View key={nota.id} style={styles.botao_animal}>
+                      <Text style={styles.nomePet}>{nota.notas}</Text>
                         </View>
                         ))
                       )}

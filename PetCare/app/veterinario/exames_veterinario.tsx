@@ -104,9 +104,9 @@ return (
                 </Text>
               </View>
             ) : (
-              exames.map((exames) => (
-                  <View style={styles.botao_animal}>
-                      <Text style={styles.nomePet}>{exames.exames}</Text>
+              exames.map((exame) => (
+                  <View key={exame.id} style={styles.botao_animal}>
+                      <Text style={styles.nomePet}>{exame.exames}</Text>
                         </View>
                         ))
                       )}

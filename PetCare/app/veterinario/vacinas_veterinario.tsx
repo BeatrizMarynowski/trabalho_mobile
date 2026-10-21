@@ -47,7 +47,6 @@ export default function Index() {
 return (
 /*view principal*/
     <View style={styles.view_principal}>
-        {/*seta que volta para o menu*/}
         <Link
                   key={petId}
                   href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
@@ -75,7 +74,7 @@ return (
           >
             {loading ? (
               <Text style={{ color: colors.cinza, textAlign: "center" }}>
-                Carregando vaconas...
+                Carregando vacinas...
               </Text>
             ) : vacinas.length === 0 ? (
               <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
@@ -104,9 +103,9 @@ return (
                 </Text>
               </View>
             ) : (
-              vacinas.map((vacinas) => (
-                  <View style={styles.botao_animal}>
-                      <Text style={styles.nomePet}>{vacinas.vacinas}</Text>
+              vacinas.map((vacina) => (
+                  <View key={vacina.id} style={styles.botao_animal}>
+                      <Text style={styles.nomePet}>{vacina.vacinas}</Text>
                         </View>
                         ))
                       )}
