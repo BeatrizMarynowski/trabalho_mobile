@@ -214,27 +214,63 @@ export default function App() {
   /*codigo que mostra a tela das configuracoes*/
   const configRoute = () => 
     /*view principal*/
-      <ScrollView style={{ flex: 1, width: "100%", backgroundColor: colors.fundodatela }}>
+       <ScrollView style={{ flex: 1, width: "100%", backgroundColor: colors.rosaClaro }}>
         <View style={styles.espaco_10}/>  
         <View style={{ padding: 20 }}>
-          <Text variant="titleLarge" style={{fontWeight: 'bold'}}>Configurações</Text>
-          <List.Section>
+          
+           <Text variant="titleLarge" style={styles.tituloPrincipal}>Configurações</Text>
+
+           <List.Section style={[styles.secao, { gap: 0, marginTop: 16 }]}>
             {/*componente do react native paper*/}
-            <List.Item title="Editar Perfil" description="Nome, telefone e foto" left={(props) => <List.Icon {...props} icon="account" />}/>
+           
+  
+          <List.Item
+            title="Editar Perfil"
+            description="Nome, telefone e foto"
+            titleStyle={styles.botao_perfil_titulo}
+            descriptionStyle={styles.botao_perfil_sub}
+            left={(props) => <List.Icon {...props} icon="account" color={colors.medio} />}/>
             {/*linha divisoria*/}
-            <View style={styles.linha}/>
+             <View style={[styles.linha, { opacity: 0.3 }]}/>
             {/*componente do react native paper*/}
-            <List.Item title="Alterar Senha" left={props => <List.Icon {...props} icon="lock-reset" />}/>
+            <List.Item
+              title="Alterar Senha"
+              titleStyle={styles.botao_perfil_titulo}
+              left={props => <List.Icon {...props} icon="lock-reset" color={colors.medio} />}
+            />
             {/*linha divisoria*/}
-            <View style={styles.linha}/>
+            <View style={[styles.linha, { opacity: 0.3 }]}/>
             {/*dois componentes do react native paper, o list item e o switch*/}
-            <List.Item title="Notificações e Lembretes" description="Receber alertas sobre vacinas pendentes" left={props => <List.Icon {...props} icon="bell-outline" />} right={() => ( <Switch value={isSwitchOn} onValueChange={onToggleSwitch} /> )}/>
+            <List.Item
+            title="Notificações e Lembretes"
+            titleNumberOfLines={2}
+            description="Receber alertas sobre vacinas pendentes"
+            descriptionNumberOfLines={2}
+            titleStyle={styles.botao_perfil_titulo}
+            descriptionStyle={styles.botao_perfil_sub}
+            style={{ paddingRight: 0 }}
+            left={props => <List.Icon {...props} icon="bell-outline" color={colors.medio} />}
+            right={() => (
+              <Switch
+                value={isSwitchOn}
+                onValueChange={onToggleSwitch}
+                color={colors.medio}
+                style={{ transform: [{ translateX: 1 }, { translateY: 12 }, { scale: 0.9 }] }}
+              />
+            )}
+          />
+         
+        
             {/*linha divisoria*/}
-            <View style={styles.linha}/>
+            <View style={[styles.linha, { opacity: 0.3 }]}/>
             {/*componente do react native paper*/}
             <Link href="/">
-              <List.Item title="sair da conta" left={props => <List.Icon {...props} icon="exit-to-app" />}/>
-            </Link>
+            <List.Item
+              title="Sair da conta"
+              titleStyle={[styles.botao_perfil_titulo, { color: colors.alerta }]}
+              left={props => <List.Icon {...props} icon="exit-to-app" color={colors.alerta} />}
+            />
+          </Link>
           </List.Section>
         </View>
     </ScrollView>;

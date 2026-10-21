@@ -855,7 +855,8 @@ cabecalho_titulo_linha: {
   alignItems: "center",
   justifyContent: "space-between",
   marginBottom: 14,
-  marginLeft: 40
+  gap: 10,
+
 },
 
 cabecalho_titulo_grupo: {
@@ -1037,12 +1038,7 @@ espaco_topo_ficha: {
   height: 60,
 },
  
-cabecalho_titulo_linha: {
-  flexDirection: "row",
-  alignItems: "center",
-  gap: 10,
-  marginBottom: 14,
-},
+
  
 cabecalho_titulo: {
   fontFamily: "Fredoka_600SemiBold",
