@@ -1,23 +1,11 @@
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import {
-    Alert,
-    Image,
-    KeyboardAvoidingView,
-    Platform,
-    Pressable,
-    ScrollView,
-    View
-} from "react-native";
+import { Alert, Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, View} from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
 import { colors, styles } from "../../style";
 
 import { getAuth } from "firebase/auth";
-import {
-    getFirestore,
-    collection,
-    addDoc
-} from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 export default function Index() {
     const [nomepet, setnomepet] = useState("");
@@ -28,28 +16,16 @@ export default function Index() {
     const [peso, setpeso] = useState("");
     const [sexo, setsexo] = useState("");
     const [castrado, setcastrado] = useState("");
-
     const [cpf, setcpf] = useState("");
     const [endereco, setendereco] = useState("");
     const [telefone, settelefone] = useState("");
     const [email, setemail] = useState("");
     const [notas, setnotas] = useState("");
     const [exames, setexames] = useState("");
+    const [vacinas, setvacinas] = useState("");
 
     const novopet = async () => {
-        if (
-            !nomepet ||
-            !nometutor ||
-            !especie ||
-            !raca ||
-            !idade ||
-            !peso ||
-            !sexo ||
-            !castrado ||
-            !cpf ||
-            !endereco ||
-            !telefone ||
-            !email
+        if ( !nomepet || !nometutor || !especie || !raca || !idade || !peso || !sexo || !castrado || !cpf || !endereco || !telefone || !email
         ) {
             Alert.alert(
                 "Atenção",
@@ -63,43 +39,70 @@ export default function Index() {
         const user = auth.currentUser;
 
         try {
-            const docRef = await addDoc(
-                collection(db, "ficha_pet"),
-                {
-                    nomepet,
-                    nometutor,
-                    especie,
-                    raca,
-                    idade,
-                    peso,
-                    sexo,
-                    castrado,
-                    cpf,
-                    endereco,
-                    telefone,
-                    email,
-                    notas,
-                    exames,
-                    vetId: user?.uid
-                }
-            );
-
-            router.push({
-                pathname: "./compartilhar_ficha_veterinario",
-                params: {
-                    petId: docRef.id,
-                    petNome: nomepet
-                }
-            });
-        } catch (error) {
-            console.error("Erro ao salvar ficha:", error);
-
-            Alert.alert(
-                "Erro",
-                "Não foi possível criar a ficha. Tente novamente"
-            );
+    const petDocRef = await addDoc(
+        collection(db, "ficha_pet"),
+        {
+            nomepet,
+            nometutor,
+            especie,
+            raca,
+            idade,
+            peso,
+            sexo,
+            castrado,
+            cpf,
+            endereco,
+            telefone,
+            email,
+            notas,
+            exames,
+            vacinas,
+            vetId: user?.uid
         }
-    };
+    );
+
+    const vacinaDocRef = await addDoc(
+        collection(db, "vacinas"),
+        {
+            vacinas,
+            petId: petDocRef.id,
+            vetId: user?.uid
+        }
+    );
+
+    const notasDocRef = await addDoc(
+        collection(db, "notas"),
+        {
+            notas,
+            petId: petDocRef.id,
+            vetId: user?.uid
+        }
+    );
+
+    const examesDocRef = await addDoc(
+        collection(db, "exames"),
+        {
+            exames,
+            petId: petDocRef.id,
+            vetId: user?.uid
+        }
+    );
+
+    router.push({
+        pathname: "./compartilhar_ficha_veterinario",
+        params: {
+            petId: petDocRef.id,
+            petNome: nomepet
+        }
+    });
+} catch (error) {
+    console.error("Erro ao salvar ficha:", error);
+
+    Alert.alert(
+        "Erro",
+        "Não foi possível criar a ficha. Tente novamente"
+    );
+}}
 
     return (
         <KeyboardAvoidingView
@@ -474,6 +477,37 @@ export default function Index() {
                                     label="Resultados ou observações dos exames"
                                     value={exames}
                                     onChangeText={setexames}
+                                    mode="outlined"
+                                    multiline
+                                    numberOfLines={4}
+                                    outlineColor={colors.rosa}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                    textColor={colors.cinza}
+                                    outlineStyle={{ borderRadius: 22 }}
+                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
+                                    style={styles.campo_ficha_multilinha_m}
+                                />
+
+                            </View>
+
+                             <View style={styles.card_ficha_novo}>
+
+                                <View style={styles.titulo_secao_ficha}>
+                                    <Icon
+                                        source="file-document-outline"
+                                        size={22}
+                                        color={colors.rosaEscuro}
+                                    />
+
+                                    <Text style={styles.texto_titulo_secao_ficha}>
+                                        vacinas
+                                    </Text>
+                                </View>
+
+                                <TextInput
+                                    label="Resultados ou observações das vacinas"
+                                    value={vacinas}
+                                    onChangeText={setvacinas}
                                     mode="outlined"
                                     multiline
                                     numberOfLines={4}

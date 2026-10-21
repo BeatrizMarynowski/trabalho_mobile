@@ -1,14 +1,58 @@
-import { Link } from "expo-router";
-import { Image, ScrollView, View } from "react-native";
+import { Link, router, useLocalSearchParams } from "expo-router";
+import * as React from "react";
+import { Alert, Image, ScrollView, View, Pressable } from "react-native";
 import { FAB, Icon, Text } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
+import { getFirestore, collection, onSnapshot, query, where } from "firebase/firestore"; 
+import { getAuth } from "firebase/auth";
+
+
 export default function Index() {
+    const { petId } = useLocalSearchParams<{ petId: string }>();
+    const [notas, setnotas] = React.useState<any[]>([]);
+    const [loading, setLoading] = React.useState(true);
+    
+      React.useEffect(() => {
+        const db = getFirestore();
+        const auth = getAuth();
+        const usuarioLogado = auth.currentUser;
+        
+    
+        if (!usuarioLogado) {
+          setLoading(false);
+          return;
+        }
+    
+        const q = query(
+          collection(db, "notas"),
+          where("vetId", "==", usuarioLogado.uid),
+          where("petId", "==", petId)
+        );
+    
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const listanotas = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setnotas(listanotas);
+          setLoading(false);
+        }, (error) => {
+          console.error("Erro ao carregar os seus pets:", error);
+          setLoading(false);
+        });
+    
+        return () => unsubscribe();
+      }, [petId]);
 return (
 /*view principal*/
     <View style={styles.view_principal}>
         {/*seta que volta para o menu*/}
-        <Link href="./ficha_animal_visualizacao_veterinario" style={styles.seta_voltar}>
+        <Link
+                  key={petId}
+                  href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
+                  style={styles.seta_voltar}
+                >
             <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
         {/*view para dar espaço na tela*/}
@@ -16,24 +60,59 @@ return (
         {/*titulo da tela - NOTAS*/}
         <View style={styles.Titulo_vacina}>
             <Icon source="note-text-outline" size={20} color={colors.verde} />
-            <Text style={styles.titulo_vacinas_pagina}>Notas</Text>
+            <Text style={styles.titulo_vacinas_pagina}>notas</Text>
         </View>
 {/*view das info das notas - card*/}
-        <ScrollView style={[styles.view_secundaria_largura, { flex: 1 }]}>
-            <View style={[styles.dados_card_exame, { width: "80%", marginBottom: 12 }]}>
-                <Text style={styles.titulo_card_exame}>Notas</Text>
-                <Text style={styles.dados_exame}>Rodolfo apresentou um machucado na pata esquerda, com acumulo de secreções.</Text>
-            </View>
-            <View style={[styles.dados_card_exame, { width: "80%", marginBottom: 12 }]}>
-                <Text style={styles.titulo_card_exame}>Recomendações</Text>
-                <Text style={styles.dados_exame}>Aplicar pomada 2 vezes ao dia,em caso de dor dar o remédio e evitar que pule de lugares altos</Text>
-            </View>
-            <View style={[styles.dados_card_exame, { width: "80%", marginBottom: 12 }]}>
-                <Text style={styles.titulo_card_exame}>Medicações</Text>
-                <Text style={styles.dados_exame}>Vetaglos duas vezes ao dia Dipirona caso tenha dor</Text>
-            </View>
-        </ScrollView>
+
+<ScrollView
+            style={{ width: "100%" }}
+            contentContainerStyle={{
+              paddingHorizontal: "5%",
+              paddingTop: 5,
+              paddingBottom: 100,
+            }}
+            showsVerticalScrollIndicator={false}
+          >
+            {loading ? (
+              <Text style={{ color: colors.cinza, textAlign: "center" }}>
+                Carregando vaconas...
+              </Text>
+            ) : notas.length === 0 ? (
+              <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
+                <Icon source="paw" size={55} color={colors.claro} />
+        
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "bold",
+                    color: colors.cinza,
+                    marginTop: 12,
+                  }}
+                >
+                  Nenhuma notas registrada
+                </Text>
+        
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: colors.cinza,
+                    textAlign: "center",
+                    marginTop: 6,
+                  }}
+                >
+                  nenhuma nota adiconada.
+                </Text>
+              </View>
+            ) : (
+              notas.map((nota) => (
+                  <View key={nota.id} style={styles.botao_animal}>
+                      <Text style={styles.nomePet}>{nota.notas}</Text>
+                        </View>
+                        ))
+                      )}
+              </ScrollView>
         <FAB icon="pencil" style={{position:"absolute",bottom:"5%",right:"5%"}}/>
+        <FAB icon="plus" style={{position:"absolute",bottom:"15%",right:"5%"}}/>
     </View>
   );
 }

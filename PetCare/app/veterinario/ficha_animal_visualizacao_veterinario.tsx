@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocalSearchParams } from "expo-router"; // 1. Importa para pegar o petId da rota
+import { Link, useLocalSearchParams, router } from "expo-router"; // 1. Importa para pegar o petId da rota
 import { Image, Pressable, ScrollView, View, ActivityIndicator } from "react-native";
 import { FAB, Icon, Text } from 'react-native-paper';
 import { colors, styles } from '../../style';
@@ -54,7 +54,8 @@ export default function Index() {
   return (
     /*view principal*/
     <View style={styles.view_principal}>
-        {/*seta que volta para o menu*/}
+        {/**/}
+        
         <Link href="./menu_veterinario" style={styles.seta_voltar}>
             <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
@@ -120,7 +121,7 @@ export default function Index() {
                         </View>
                     </View>
                 </View>
-                <Link href="./vacinas_veterinario" asChild>
+                <Link href={`./vacinas_veterinario?petId=${petId}`} asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
                         <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
@@ -141,7 +142,7 @@ export default function Index() {
                     <Text style={styles.dados_exame}>dr. Carlos Silva</Text>
                     <Text style={styles.dados_exame}>22/02/2222</Text>
                 </View>
-                <Link href="./exames_veterinario" asChild>
+                <Link href={`./exames_veterinario?petId=${petId}`} asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
                         <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
@@ -162,7 +163,8 @@ export default function Index() {
                     {/* Exibe as notas criadas na ficha */}
                     <Text style={styles.titulo_card_exame}>{pet.notas || "Sem observações."}</Text>
                 </View>
-                <Link href="./notas_veterinario" asChild>
+                {/**/}
+                    <Link href={`./notas_veterinario?petId=${petId}`} asChild>
                     <Pressable style={styles.botaodetalhes}>
                         <Text style={styles.texto_botao_detalhes}>detalhes</Text>
                         <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />

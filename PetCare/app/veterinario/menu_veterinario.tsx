@@ -162,7 +162,7 @@ export default function App() {
 
           <Pressable style={styles.botao_animal}>
             <View style={styles.view_botao_sem_rosa}>
-              <Image source={require("../../assets/images/rodolfo.png")} style={styles.foto_animal}/>
+              <Image source={require("../../assets/images/cachorro_gato_abracados.png")} style={styles.foto_animal}/>
             </View>
             <View style={styles.view_animal}>
               <Text style={styles.nomePet}>{pet.nomepet}</Text>
