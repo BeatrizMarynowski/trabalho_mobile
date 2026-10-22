@@ -152,7 +152,7 @@ export default function Index() {
 
                           
 <TextInput
-    placeholder="Nome do pet"
+    placeholder="*Nome do pet"
     placeholderTextColor={colors.rosaEscuro}
     value={nomepet}
     onChangeText={setnomepet}
@@ -167,7 +167,7 @@ export default function Index() {
 />
 
 <TextInput
-    placeholder="Nome do tutor"
+    placeholder="*Nome do tutor"
     placeholderTextColor={colors.rosaEscuro}
     value={nometutor}
     onChangeText={setnometutor}
@@ -202,7 +202,7 @@ export default function Index() {
                                 </View>
 
                                 <TextInput
-                                    label="Espécie"
+                                    label="*Espécie"
                                     value={especie}
                                     onChangeText={setespecie}
                                     mode="outlined"
@@ -216,7 +216,7 @@ export default function Index() {
                                 />
 
                                 <TextInput
-                                    label="Raça"
+                                    label="*Raça"
                                     value={raca}
                                     onChangeText={setraca}
                                     mode="outlined"
@@ -233,7 +233,7 @@ export default function Index() {
                                 <View style={styles.linha_campos}>
 
                                     <TextInput
-                                        label="Idade"
+                                        label="*Idade"
                                         value={idade}
                                         onChangeText={setidade}
                                         mode="outlined"
@@ -248,7 +248,7 @@ export default function Index() {
                                     />
 
                                     <TextInput
-                                        label="Peso (kg)"
+                                        label="*Peso (kg)"
                                         value={peso}
                                         onChangeText={setpeso}
                                         mode="outlined"
@@ -266,7 +266,7 @@ export default function Index() {
 
                                 {/* Sexo */}
                                 <View style={styles.seletor_container}>
-                                    <Text style={styles.seletor_label}>Sexo do animal</Text>
+                                    <Text style={styles.seletor_label}>*Sexo do animal</Text>
 
                                     <View style={styles.seletor_opcoes}>
                                         {[
@@ -303,7 +303,7 @@ export default function Index() {
 
                                 {/* Castrado */}
                                 <View style={styles.seletor_container}>
-                                    <Text style={styles.seletor_label}>O animal é castrado?</Text>
+                                    <Text style={styles.seletor_label}>*O animal é castrado?</Text>
 
                                     <View style={styles.seletor_opcoes}>
                                         {[
@@ -356,7 +356,7 @@ export default function Index() {
                                 </View>
 
                                 <TextInput
-                                    label="CPF"
+                                    label="*CPF"
                                     value={cpf}
                                     onChangeText={setcpf}
                                     mode="outlined"
@@ -372,7 +372,7 @@ export default function Index() {
                                 />
 
                                 <TextInput
-                                    label="Endereço"
+                                    label="*Endereço"
                                     value={endereco}
                                     onChangeText={setendereco}
                                     mode="outlined"
@@ -386,7 +386,7 @@ export default function Index() {
                                 />
 
                                 <TextInput
-                                    label="Telefone"
+                                    label="*Telefone"
                                     value={telefone}
                                     onChangeText={settelefone}
                                     mode="outlined"
@@ -401,7 +401,7 @@ export default function Index() {
                                 />
 
                                 <TextInput
-                                    label="E-mail"
+                                    label="*E-mail"
                                     value={email}
                                     onChangeText={setemail}
                                     mode="outlined"
@@ -490,36 +490,7 @@ export default function Index() {
 
                             </View>
 
-                             <View style={styles.card_ficha_novo}>
-
-                                <View style={styles.titulo_secao_ficha}>
-                                    <Icon
-                                        source="file-document-outline"
-                                        size={22}
-                                        color={colors.rosaEscuro}
-                                    />
-
-                                    <Text style={styles.texto_titulo_secao_ficha}>
-                                        vacinas
-                                    </Text>
-                                </View>
-
-                                <TextInput
-                                    label="Resultados ou observações das vacinas"
-                                    value={vacinas}
-                                    onChangeText={setvacinas}
-                                    mode="outlined"
-                                    multiline
-                                    numberOfLines={4}
-                                    outlineColor={colors.rosa}
-                                    activeOutlineColor={colors.rosaEscuro}
-                                    textColor={colors.cinza}
-                                    outlineStyle={{ borderRadius: 22 }}
-                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
-                                    style={styles.campo_ficha_multilinha_m}
-                                />
-
-                            </View>
+                            
 
                         </View>
 

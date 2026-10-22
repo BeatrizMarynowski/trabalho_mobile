@@ -255,7 +255,7 @@ export default function App() {
                 value={isSwitchOn}
                 onValueChange={onToggleSwitch}
                 color={colors.medio}
-                style={{ transform: [{ translateX: 1 }, { translateY: 12 }, { scale: 0.9 }] }}
+                style={{ transform: [{ translateX: 1 }, { translateY: 15 }, { scale: 0.9 }] }}
               />
             )}
           />
