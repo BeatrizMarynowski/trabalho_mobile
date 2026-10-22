@@ -22,7 +22,6 @@ export default function Index() {
     const [email, setemail] = useState("");
     const [notas, setnotas] = useState("");
     const [exames, setexames] = useState("");
-    const [vacinas, setvacinas] = useState("");
 
     const novopet = async () => {
         if ( !nomepet || !nometutor || !especie || !raca || !idade || !peso || !sexo || !castrado || !cpf || !endereco || !telefone || !email
@@ -56,16 +55,6 @@ export default function Index() {
             email,
             notas,
             exames,
-            vacinas,
-            vetId: user?.uid
-        }
-    );
-
-    const vacinaDocRef = await addDoc(
-        collection(db, "vacinas"),
-        {
-            vacinas,
-            petId: petDocRef.id,
             vetId: user?.uid
         }
     );

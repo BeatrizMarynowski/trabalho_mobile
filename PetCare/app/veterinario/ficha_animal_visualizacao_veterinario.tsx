@@ -155,9 +155,6 @@ export default function Index() {
                         <Icon source="needle" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Vacinas</Text>
                     </View>
-                    <View style={styles.caixa_texto_ficha}>
-                        <Text style={styles.botao_perfil_sub}>{pet.vacinas || "Nenhuma vacina registrada."}</Text>
-                    </View>
                     <Link href={`./vacinas_veterinario?petId=${petId}`} asChild>
                         <Pressable style={styles.botao_detalhes_rosa}>
                             <Text style={styles.texto_botao_detalhes_rosa}>detalhes</Text>
@@ -172,9 +169,6 @@ export default function Index() {
                         <Icon source="flask-outline" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Exames</Text>
                     </View>
-                    <View style={styles.caixa_texto_ficha}>
-                        <Text style={styles.botao_perfil_sub}>{pet.exames || "Nenhum exame registrado."}</Text>
-                    </View>
                     <Link href={`./exames_veterinario?petId=${petId}`} asChild>
                         <Pressable style={styles.botao_detalhes_rosa}>
                             <Text style={styles.texto_botao_detalhes_rosa}>detalhes</Text>
@@ -188,10 +182,6 @@ export default function Index() {
                     <View style={styles.titulo_secao_ficha}>
                         <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Notas</Text>
-                    </View>
-                    <View style={styles.caixa_texto_ficha}>
-                        {/* Exibe as notas criadas na ficha */}
-                        <Text style={styles.botao_perfil_sub}>{pet.notas || "Sem observações."}</Text>
                     </View>
                     <Link href={`./notas_veterinario?petId=${petId}`} asChild>
                         <Pressable style={styles.botao_detalhes_rosa}>
