@@ -51,7 +51,7 @@ export default function Index() {
       >
       <View style={styles.view_20}>  
         <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata2}/>
-        <Link href="./cadastro" style={styles.posicao_seta2}>
+        <Link href="./cadastro" style={styles.posicao_seta}>
           <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>
       </View>

@@ -50,11 +50,10 @@ const sombra = (color: string, height: number, opacity: number, radius: number) 
 });
 
 const imagemPataBase = {
-  height: "100%",
   resizeMode: "contain",
   alignSelf: "center",
   opacity: 0.8,
-} as const;
+} as const;    
 
 const seloBase = {
   flexDirection: "row",
@@ -77,8 +76,8 @@ const textoBrancoNegrito = {
 } as const;
 
 const botaoIndexBase = {
-  width: "80%",
-  height: "35%",
+  width: 260,          
+  height: 50,            
   borderRadius: 20,
   alignItems: "center",
   justifyContent: "center",
@@ -87,7 +86,7 @@ const botaoIndexBase = {
 } as const;
 
 const botaoPerfilBase = {
-  width: "100%",
+  width: 280,
   flexDirection: "row",
   alignItems: "center",
   gap: 14,
@@ -144,33 +143,28 @@ export const styles = StyleSheet.create({
     height: 25,
   },
   seta_voltar: {
-    position: "absolute",
-    top: "6%",
-    left: "5%",
-  },
-  posicao_seta: {
-    position: "absolute",
-    top: "50%",
-    left: "8%",
-    zIndex: 5,
-  },
-  posicao_seta2: {
-    position: "absolute",
-    top: "70%",
-    left: "8%",
-    zIndex: 5,
-  },
+  position: "absolute",
+  top: 48,          
+  left: 20,       
+},
+posicao_seta: {
+  position: "absolute",
+  top: 45,          
+  left: 22,        
+  zIndex: 5,
+},
+
 
   /* ---------- Espaçamentos ---------- */
 
   espaco_5: {
-    width: "100%",
-    height: "5%",
-  },
-  espaco_10: {
-    width: "100%",
-    height: "10%",
-  },
+  width: "100%",
+  height: 40,      
+},
+espaco_10: {
+  width: "100%",
+  height: 80,      
+},
   espaco_topo_ficha: {
     width: "100%",
     height: 60,
@@ -180,20 +174,21 @@ export const styles = StyleSheet.create({
 
   view_20: {
     width: "100%",
-    height: "20%",
+    height: 170,      
     alignItems: "center",
-    padding: "10%",
+    padding: 30,     
   },
   view_25: {
     width: "100%",
-    height: "25%",
+    height: 200,     
     alignItems: "center",
-    padding: "10%",
+    padding: 30,    
   },
   view_metade: {
     width: "100%",
-    height: "30%",
+    height: 240,  
     alignItems: "center",
+
   },
   index_titulo: {
     fontFamily: "Fredoka_600SemiBold",
@@ -217,45 +212,48 @@ export const styles = StyleSheet.create({
   pressable_c: {
     ...botaoIndexBase,
     backgroundColor: colors.bem_claro,
-    marginTop: 60,
+    marginTop: 70,
   },
   pressable_l: {
     ...botaoIndexBase,
     backgroundColor: colors.claro,
-    marginTop: 7,
+    marginTop: 12,
   },
 
   /* ---------- Imagens decorativas ---------- */
 
   imagem_pets: {
-    width: "80%",
-    height: "100%",
-    resizeMode: "contain",
-    alignSelf: "center",
-    opacity: 0.7,
-  },
-  imagem_pata: {
-    ...imagemPataBase,
-    width: "70%",
-  },
-  imagem_pata2: {
-    ...imagemPataBase,
-    width: "70%",
-    marginTop: 20,
-  },
-  imagem_pata_cadastro: {
-    ...imagemPataBase,
-    width: "80%",
-    marginTop: 40,
-  },
+  width: 300,      
+  height: 240,      
+  resizeMode: "contain",
+  alignSelf: "center",
+  opacity: 0.7,
+},
+imagem_pata: {
+  ...imagemPataBase,
+  width: 200,       
+  height: 140,      
+},
+imagem_pata2: {
+  ...imagemPataBase,
+  width: 200,
+  height: 90,       
+  marginTop: 20,
+},
+imagem_pata_cadastro: {
+  ...imagemPataBase,
+  width: 200,
+  height: 100,
+  marginTop: 10,    
+},
 
   /* ---------- Entrada: cadastro e login ---------- */
 
   cadastro_card: {
-    width: "85%",
-    height: "60%",
-    padding: "10%",
-    gap: "2%",
+    width: 330,
+    height: 490,
+    padding: 30,
+    gap: 8,
     alignItems: "center",
     backgroundColor: colors.cinza,
     borderRadius: 32,
@@ -317,11 +315,11 @@ export const styles = StyleSheet.create({
   /* ---------- Formulários (login, cadastro, esqueceu a senha) ---------- */
 
   form_card: {
-    width: "85%",
-    backgroundColor: colors.bem_claro,
-    borderRadius: 32,
-    overflow: "hidden",
-  },
+  width: 330,       
+  backgroundColor: colors.bem_claro,
+  borderRadius: 32,
+  overflow: "hidden",
+},
   form_cabecalho: {
     backgroundColor: colors.medio,
     paddingVertical: 18,
@@ -408,7 +406,7 @@ export const styles = StyleSheet.create({
   },
   form_botao_texto_email_rec: {
     fontFamily: "Fredoka_600SemiBold",
-    fontSize: 16.1,
+    fontSize: 16,
     color: colors.branco,
   },
 
@@ -485,12 +483,13 @@ export const styles = StyleSheet.create({
   /* ---------- Ficha do animal: visualização ---------- */
 
   view_ficha: {
-    width: "90%",
-    backgroundColor: colors.cinza,
-    borderRadius: 24,
-    overflow: "hidden",
-    alignSelf: "center",
-  },
+  width: 340,       
+  backgroundColor: colors.cinza,
+  borderRadius: 24,
+  overflow: "hidden",
+  alignSelf: "center",
+},
+
   view_das_info: {
     width: "100%",
     padding: 16,
@@ -633,13 +632,13 @@ export const styles = StyleSheet.create({
   /* ---------- QR Code (compartilhar ficha) ---------- */
 
   compartilha: {
-    width: "90%",
-    height: "43%",
-    backgroundColor: colors.cinza,
-    borderRadius: 24,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  width: 340,       
+  height: 340,     
+  backgroundColor: colors.cinza,
+  borderRadius: 24,
+  justifyContent: "center",
+  alignItems: "center",
+},
   view_do_qr: {
     width: "100%",
     height: "100%",
@@ -649,13 +648,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   qr_tamanho: {
-    width: "70%",
-    height: "70%",
-    backgroundColor: colors.claro,
-    borderRadius: 36,
-    borderWidth: 3,
-    borderColor: colors.verde,
-  },
+  width: 220,       
+  height: 220,     
+  backgroundColor: colors.claro,
+  borderRadius: 36,
+  borderWidth: 3,
+  borderColor: colors.verde,
+},
 
   /* ---------- Vacinas, exames e notas (tutor e veterinário) ---------- */
 
@@ -675,17 +674,17 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
-  Titulo_vacina: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginBottom: 15,
-    width: "32%",
-    backgroundColor: colors.cinza,
-    borderRadius: 16,
-    alignSelf: "center",
-    padding: 8,
-  },
+ Titulo_vacina: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+  marginBottom: 15,
+  width: 120,       // era "32%"
+  backgroundColor: colors.cinza,
+  borderRadius: 16,
+  alignSelf: "center",
+  padding: 8,
+},
   vacinasLista: {
     flexDirection: "row",
     gap: 10,
@@ -771,12 +770,12 @@ export const styles = StyleSheet.create({
   /* ---------- Ficha do animal: criação (veterinário) ---------- */
 
   view_ficha_criacao: {
-    width: "90%",
-    backgroundColor: colors.rosaFundo,
-    borderRadius: 30,
-    overflow: "hidden",
-    alignSelf: "center",
-  },
+  width: 340,       
+  backgroundColor: colors.rosaFundo,
+  borderRadius: 30,
+  overflow: "hidden",
+  alignSelf: "center",
+},
   cabecalho: {
     width: "100%",
     backgroundColor: colors.rosaEscuro,
@@ -840,11 +839,11 @@ export const styles = StyleSheet.create({
     color: colors.rosaEscuro,
   },
   linha_2: {
-    width: "90%",
-    height: 1,
-    backgroundColor: colors.rosa,
-    alignSelf: "center",
-    marginTop: 12,
+  width: 300,      
+  height: 1,
+  backgroundColor: colors.rosa,
+  alignSelf: "center",
+  marginTop: 12,
   },
   linha_campos: {
     flexDirection: "row",
