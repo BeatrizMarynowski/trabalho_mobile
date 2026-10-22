@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocalSearchParams, router } from "expo-router"; // 1. Importa para pegar o petId da rota
-import { Image, Pressable, ScrollView, View, ActivityIndicator } from "react-native";
-import { FAB, Icon, Text } from 'react-native-paper';
+import React, { useState, useEffect } from "react";
+import { Link, useLocalSearchParams, router } from "expo-router";
+import { Image, Pressable, ScrollView, View, ActivityIndicator, Alert } from "react-native";
+import { FAB, Icon, Text, PaperProvider, Portal } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
 // 2. Importações do Firestore
-import { getFirestore, doc, getDoc } from "firebase/firestore"; 
+import { getFirestore, doc, getDoc, deleteDoc } from "firebase/firestore"; 
 
 export default function Index() {
   const { petId } = useLocalSearchParams<{ petId: string }>();
   const [pet, setPet] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [state, setState] = React.useState({ open: false });
+
+  const onStateChange = ({ open }: { open: boolean }) => setState({ open });
+  const { open } = state;
 
   useEffect(() => {
     const carregarFichaDoPet = async () => {
@@ -51,8 +55,41 @@ export default function Index() {
     );
   }
 
+  const deletar = async () => {
+    Alert.alert(
+    "Excluir Ficha", // Título da caixinha
+    "Tem certeza de que deseja excluir este pet? Esta ação não pode ser desfeita.", // Mensagem
+    [
+      {
+        text: "Cancelar",
+        style: "cancel"
+      },
+      {
+        text: "Excluir",
+        style: "destructive",
+        onPress: async () => {
+  try {
+    const db = getFirestore();
+    
+    const docRef = doc(db, "ficha_pet", petId);
+    
+    await deleteDoc(docRef);
+    router.replace("./menu_veterinario"); 
+    
+  } catch (error) {
+    console.error("Erro ao deletar o documento: ", error);
+  }
+}
+}
+
+    ],
+    { cancelable: true }
+  );
+}
+
   return (
     /*view principal*/
+    <PaperProvider>
     <View style={styles.view_principal}>
 
         {/*view para dar espaço na tela - 10*/}
@@ -193,9 +230,32 @@ export default function Index() {
 
             </View>
         </View>
+
+
+      <Portal>
+        <FAB.Group
+        open={open}
+        visible={true}
+        icon={open ? 'close' : 'plus'}
+        backdropColor="transparent"
+        style={{position: 'absolute',bottom: 16,right: 16}}
+        actions={[
+            { icon: 'pencil', label: 'Editar', onPress: () => router.push({pathname: "./ficha_animal_editar_veterinario",params: {petId: petId}})},
+            { icon: 'trash-can', label: 'Deletar', onPress: (deletar),},
+        ]}
+        onStateChange={onStateChange}
+        onPress={() => {
+            if (open) {
+            }
+        }}
+        />
+      </Portal>
+
         </ScrollView>
-        <FAB icon="pencil" style={{position:"absolute",top:"6%",right:"4%", backgroundColor: colors.bem_claro}}/>
+
+        
         <View style={styles.espaco_5}/>
     </View>
+    </PaperProvider>
   );
 }

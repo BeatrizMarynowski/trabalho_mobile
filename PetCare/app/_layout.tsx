@@ -31,6 +31,7 @@ export default function RootLayout() {
           <Stack.Screen name="veterinario/menu_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/ficha_animal_visualizacao_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/ficha_animal_criacao_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/ficha_animal_editar_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/compartilhar_ficha_veterinario" options={{headerShown: false}} />
 
           <Stack.Screen name="veterinario/vacinas_veterinario" options={{headerShown: false}} />

@@ -212,7 +212,7 @@ espaco_10: {
   pressable_c: {
     ...botaoIndexBase,
     backgroundColor: colors.bem_claro,
-    marginTop: 70,
+    marginTop: 80,
   },
   pressable_l: {
     ...botaoIndexBase,
