@@ -37,6 +37,10 @@ export default function RootLayout() {
           <Stack.Screen name="veterinario/vacinas_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/exames_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/notas_veterinario" options={{headerShown: false}} />
+
+          <Stack.Screen name="veterinario/exames_detalhes_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/notas_detalhes_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/vacinas_detalhes_veterinario" options={{headerShown: false}} />
       </Stack>
   );
 }

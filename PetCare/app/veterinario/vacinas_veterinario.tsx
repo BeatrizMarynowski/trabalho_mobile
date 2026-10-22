@@ -1,10 +1,10 @@
-import { Link, router, useLocalSearchParams } from "expo-router";
 import * as React from "react";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import { Alert, Image, ScrollView, View, Pressable } from "react-native";
-import { FAB, Icon, Text } from 'react-native-paper';
+import { FAB, Icon, PaperProvider, Text, Portal } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
-import { getFirestore, collection, onSnapshot, query, where } from "firebase/firestore"; 
+import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
 
 
@@ -12,6 +12,11 @@ export default function Index() {
     const { petId } = useLocalSearchParams<{ petId: string }>();
     const [vacinas, setvacinas] = React.useState<any[]>([]);
     const [loading, setLoading] = React.useState(true);
+
+    const [state, setState] = React.useState({ open: false });
+    const onStateChange = ({ open }: { open: boolean }) => setState({ open });
+    const { open } = state;
+
     
       React.useEffect(() => {
         const db = getFirestore();
@@ -44,9 +49,42 @@ export default function Index() {
     
         return () => unsubscribe();
       }, [petId]);
+
+      const deletar = async () => {
+          Alert.alert(
+          "Excluir Ficha", // Título da caixinha
+          "Tem certeza de que deseja excluir este pet? Esta ação não pode ser desfeita.", // Mensagem
+          [
+            {
+              text: "Cancelar",
+              style: "cancel"
+            },
+            {
+              text: "Excluir",
+              style: "destructive",
+              onPress: async () => {
+        try {
+          const db = getFirestore();
+          
+          const docRef = doc(db, "ficha_pet", petId);
+          
+          await deleteDoc(docRef);
+          router.replace("./menu_veterinario"); 
+          
+        } catch (error) {
+          console.error("Erro ao deletar o documento: ", error);
+        }
+      }
+      }
+      
+          ],
+          { cancelable: true }
+        );
+      }
 return (
 /*view principal*/
-    <View style={styles.view_principal}>
+    <PaperProvider>
+      <View style={styles.view_principal}>
         <Link
                   key={petId}
                   href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
@@ -110,8 +148,25 @@ return (
                         ))
                       )}
               </ScrollView>
-        <FAB icon="pencil" style={{position:"absolute",bottom:"5%",right:"5%"}}/>
-        <FAB icon="plus" style={{position:"absolute",bottom:"15%",right:"5%"}}/>
+        <Portal>
+        <FAB.Group
+        open={open}
+        visible={true}
+        icon={open ? 'close' : 'plus'}
+        backdropColor="transparent"
+        style={{position: 'absolute',bottom: 16,right: 16}}
+        actions={[
+            { icon: 'pencil', label: 'Editar', onPress: () => router.push({pathname: "./ficha_animal_editar_veterinario",params: {petId: petId}})},
+            { icon: 'trash-can', label: 'Deletar', onPress: (deletar),},
+        ]}
+        onStateChange={onStateChange}
+        onPress={() => {
+            if (open) {
+            }
+        }}
+        />
+      </Portal>
     </View>
+    </PaperProvider>
   );
 }

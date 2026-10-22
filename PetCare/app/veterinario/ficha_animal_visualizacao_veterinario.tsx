@@ -4,15 +4,14 @@ import { Image, Pressable, ScrollView, View, ActivityIndicator, Alert } from "re
 import { FAB, Icon, Text, PaperProvider, Portal } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
-// 2. Importações do Firestore
 import { getFirestore, doc, getDoc, deleteDoc } from "firebase/firestore"; 
 
 export default function Index() {
   const { petId } = useLocalSearchParams<{ petId: string }>();
   const [pet, setPet] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [state, setState] = React.useState({ open: false });
 
+  const [state, setState] = React.useState({ open: false });
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
   const { open } = state;
 
@@ -242,6 +241,7 @@ export default function Index() {
         actions={[
             { icon: 'pencil', label: 'Editar', onPress: () => router.push({pathname: "./ficha_animal_editar_veterinario",params: {petId: petId}})},
             { icon: 'trash-can', label: 'Deletar', onPress: (deletar),},
+            { icon: 'share', label:'compartilhar', onPress: () => router.push({pathname: "./compartilhar_ficha_veterinario",params: {petId: petId}})}
         ]}
         onStateChange={onStateChange}
         onPress={() => {
