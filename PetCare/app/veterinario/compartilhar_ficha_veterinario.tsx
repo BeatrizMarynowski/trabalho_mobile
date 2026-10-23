@@ -1,7 +1,7 @@
 import { Link, useLocalSearchParams } from "expo-router";
-import { Image, View } from "react-native";
-import { Text } from 'react-native-paper';
-import { styles } from '../../style';
+import { Image, View,ImageBackground,  } from "react-native";
+import { Text, Icon } from 'react-native-paper';
+import { colors, styles } from "../../style";
 
 import QRCode from 'react-native-qrcode-svg';
 export default function Index() {
@@ -12,27 +12,29 @@ const nomeDoPet = petNome;
 
 return (
 /*view principal*/
-    <View style={styles.view_principal}>
-        {/*seta que volta para o menu*/}
-        <Link href="./menu_veterinario" style={styles.seta_voltar}>
-            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+    <ImageBackground
+            source={require("../../assets/images/fundo.png")}
+            style={{ flex: 1 }}
+            resizeMode="cover"
+          >
+      
+        <Link href="./menu_veterinario" style={styles.posicao_seta}>
+          <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>
 
         <View style={{width:"100%", height:"100%",alignItems:"center",justifyContent:"center"}}>
             <View style={styles.compartilha}>
                 {/*view do qrcode*/}
                 <View style={styles.view_do_qr}>
-                    <Text style={styles.nomePet}>{nomeDoPet}</Text>
-                    <View style={styles.qr_tamanho}>
-                        <QRCode 
-                          value={idDoPet}
-                          size={150}
-                          backgroundColor="transparent"
-                        />
-                    </View>
+                <Text style={styles.qr_titulo}>Ficha digital do pet</Text>
+                <Text style={styles.qr_sub}>Escaneie para ver vacinas, exames e histórico</Text>
+                <View style={styles.qr_tamanho}>
+                    <QRCode value={idDoPet} size={220} backgroundColor="transparent" />
+                </View>
+                <Text style={styles.nomePet}>{nomeDoPet}</Text>
                 </View>
             </View>
         </View>
-    </View>
+     </ImageBackground>
   );
 }

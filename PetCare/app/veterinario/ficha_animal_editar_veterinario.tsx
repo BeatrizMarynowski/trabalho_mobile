@@ -1,6 +1,6 @@
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
-import { Alert, Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, View} from "react-native";
+import { Alert, Image, KeyboardAvoidingView, Platform,ImageBackground, Pressable, ScrollView, View} from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
 import { colors, styles } from "../../style";
 
@@ -98,7 +98,7 @@ export default function Index() {
         }
     });
 } catch (error) {
-    console.error("Erro ao salvar ficha:", error);
+    console.error("Erro ao  alterações:", error);
 
     Alert.alert(
         "Erro",
@@ -110,7 +110,11 @@ export default function Index() {
         <KeyboardAvoidingView
             style={{ flex: 1 }}
         >
-            <View style={styles.view_principal}>
+            <ImageBackground
+                   source={require("../../assets/images/fundo.png")}
+                   style={{ flex: 1 }}
+                   resizeMode="cover"
+                 >
 
     
               
@@ -435,7 +439,7 @@ export default function Index() {
                                     color={colors.branco}
                                 />
                                 <Text style={styles.texto_botao_principal}>
-                                    Salvar ficha
+                                    Salvar alterações
                                 </Text>
                             </View>
                         </Pressable>
@@ -443,7 +447,7 @@ export default function Index() {
                     </View>
                 </ScrollView>
 
-            </View>
+                 </ImageBackground>
         </KeyboardAvoidingView>
     );
 }

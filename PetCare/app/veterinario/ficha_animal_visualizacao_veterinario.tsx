@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocalSearchParams, router } from "expo-router";
-import { Image, Pressable, ScrollView, View, ActivityIndicator, Alert } from "react-native";
+import { Image, Pressable, ScrollView,ImageBackground, View, ActivityIndicator, Alert } from "react-native";
 import { FAB, Icon, Text, PaperProvider, Portal } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
@@ -57,7 +57,7 @@ export default function Index() {
   const deletar = async () => {
     Alert.alert(
     "Excluir Ficha", // Título da caixinha
-    "Tem certeza de que deseja excluir este pet? Esta ação não pode ser desfeita.", // Mensagem
+    "Tem certeza de que deseja excluir este pet? Essa ação é permanente e não poderá ser desfeita.", // Mensagem
     [
       {
         text: "Cancelar",
@@ -89,7 +89,12 @@ export default function Index() {
   return (
     /*view principal*/
     <PaperProvider>
-    <View style={styles.view_principal}>
+
+    <ImageBackground
+        source={require("../../assets/images/fundo.png")}
+        style={{ flex: 1 }}
+        resizeMode="cover"
+      >
 
         {/*view para dar espaço na tela - 10*/}
         <View style={styles.espaco_10}/>
@@ -232,30 +237,53 @@ export default function Index() {
 
 
       <Portal>
-        <FAB.Group
-        open={open}
-        visible={true}
-        icon={open ? 'close' : 'plus'}
-        backdropColor="transparent"
-        style={{position: 'absolute',bottom: 16,right: 16}}
-        actions={[
-            { icon: 'pencil', label: 'Editar', onPress: () => router.push({pathname: "./ficha_animal_editar_veterinario",params: {petId: petId}})},
-            { icon: 'trash-can', label: 'Deletar', onPress: (deletar),},
-            { icon: 'share', label:'compartilhar', onPress: () => router.push({pathname: "./compartilhar_ficha_veterinario",params: {petId: petId}})}
-        ]}
-        onStateChange={onStateChange}
-        onPress={() => {
-            if (open) {
-            }
-        }}
-        />
-      </Portal>
+  <FAB.Group
+    open={open}
+    visible={true}
+    icon={open ? 'close' : 'plus'}
+    fabStyle={{ backgroundColor: colors.rosaEscuro }}
+    backdropColor="transparent"
+    style={{ position: 'absolute', bottom: 15, right: 15 }}
+    actions={[
+         {
+        icon: 'trash-can',
+        label: 'Deletar',
+        color: colors.branco,
+        style: { backgroundColor: colors.alerta },
+        labelTextColor: colors.cinza,
+        onPress: deletar
+      },
+      {
+        icon: 'pencil',
+        label: 'Editar',
+        color: colors.rosaEscuro,
+        style: { backgroundColor: colors.rosaClaro },
+        labelTextColor: colors.cinza,
+        onPress: () => router.push({ pathname: "./ficha_animal_editar_veterinario", params: { petId: petId } })
+      },
+     
+      {
+        icon: 'share',
+        label: 'Compartilhar',
+        color: colors.rosaEscuro,
+        style: { backgroundColor: colors.rosaClaro },
+        labelTextColor: colors.cinza,
+        onPress: () => router.push({ pathname: "./compartilhar_ficha_veterinario", params: { petId: petId } })
+      }
+    ]}
+    onStateChange={onStateChange}
+    onPress={() => {
+      if (open) {
+      }
+    }}
+  />
+</Portal>
 
         </ScrollView>
 
         
         <View style={styles.espaco_5}/>
-    </View>
+     </ImageBackground>
     </PaperProvider>
   );
 }

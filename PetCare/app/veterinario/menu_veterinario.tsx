@@ -214,7 +214,7 @@ export default function App() {
   /*codigo que mostra a tela das configuracoes*/
   const configRoute = () => 
     /*view principal*/
-       <ScrollView style={{ flex: 1, width: "100%", backgroundColor: colors.rosaClaro }}>
+       <ScrollView style={{ flex: 1, width: "100%", backgroundColor: colors.bem_claro}}>
         <View style={styles.espaco_10}/>  
         <View style={{ padding: 20 }}>
           
