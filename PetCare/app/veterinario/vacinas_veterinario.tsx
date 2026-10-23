@@ -50,37 +50,6 @@ export default function Index() {
         return () => unsubscribe();
       }, [petId]);
 
-      const deletar = async () => {
-          Alert.alert(
-          "Excluir Ficha", // Título da caixinha
-          "Tem certeza de que deseja excluir este pet? Esta ação não pode ser desfeita.", // Mensagem
-          [
-            {
-              text: "Cancelar",
-              style: "cancel"
-            },
-            {
-              text: "Excluir",
-              style: "destructive",
-              onPress: async () => {
-        try {
-          const db = getFirestore();
-          
-          const docRef = doc(db, "ficha_pet", petId);
-          
-          await deleteDoc(docRef);
-          router.replace("./menu_veterinario"); 
-          
-        } catch (error) {
-          console.error("Erro ao deletar o documento: ", error);
-        }
-      }
-      }
-      
-          ],
-          { cancelable: true }
-        );
-      }
 return (
 /*view principal*/
     <PaperProvider>
@@ -115,6 +84,11 @@ return (
                 Carregando vacinas...
               </Text>
             ) : vacinas.length === 0 ? (
+              <Link 
+              key={petId}
+              href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
+              asChild>
+              <Pressable>
               <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
                 <Icon source="paw" size={55} color={colors.claro} />
         
@@ -140,32 +114,49 @@ return (
                   nenhuma vacina adiconada.
                 </Text>
               </View>
+              </Pressable>
+              </Link>
             ) : (
               vacinas.map((vacina) => (
+              <Link 
+                key={`${vacina.petId}_${vacina.vacinasId}`}
+                href={`./vacinas_detalhes_veterinario?vacinasId=${vacina.vacinasId}&petId=${vacina.petId}`}
+                asChild
+              >
+              <Pressable>
                   <View key={vacina.id} style={styles.botao_animal}>
-                      <Text style={styles.nomePet}>{vacina.vacinas}</Text>
+                      <Text style={styles.nomePet}>{vacina.nome}</Text>
                         </View>
+                        </Pressable>
+              </Link>
                         ))
                       )}
               </ScrollView>
         <Portal>
-        <FAB.Group
-        open={open}
-        visible={true}
-        icon={open ? 'close' : 'plus'}
-        backdropColor="transparent"
-        style={{position: 'absolute',bottom: 16,right: 16}}
-        actions={[
-            { icon: 'pencil', label: 'Editar', onPress: () => router.push({pathname: "./ficha_animal_editar_veterinario",params: {petId: petId}})},
-            { icon: 'trash-can', label: 'Deletar', onPress: (deletar),},
-        ]}
-        onStateChange={onStateChange}
-        onPress={() => {
-            if (open) {
-            }
-        }}
-        />
-      </Portal>
+          <FAB.Group
+            open={open}
+            visible={true}
+            icon={open ? 'close' : 'menu'}
+            fabStyle={{ backgroundColor: colors.rosaEscuro }}
+            backdropColor="transparent"
+            style={{ position: 'absolute', bottom: 15, right: 15 }}
+            actions={[
+              {
+                icon: 'plus',
+                label: 'adicionar',
+                color: colors.branco,
+                style: { backgroundColor: colors.roxo_fundodatela },
+                labelTextColor: colors.cinza,
+                onPress: () => router.push({ pathname: "./vacinas_criar_veterinario", params: { petId: petId } })
+              }
+            ]}
+            onStateChange={onStateChange}
+            onPress={() => {
+              if (open) {
+              }
+            }}
+          />
+        </Portal>
     </View>
     </PaperProvider>
   );

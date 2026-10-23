@@ -240,7 +240,7 @@ export default function Index() {
   <FAB.Group
     open={open}
     visible={true}
-    icon={open ? 'close' : 'plus'}
+    icon={open ? 'close' : 'menu'}
     fabStyle={{ backgroundColor: colors.rosaEscuro }}
     backdropColor="transparent"
     style={{ position: 'absolute', bottom: 15, right: 15 }}

@@ -5,7 +5,7 @@ import { Icon, Text, TextInput } from "react-native-paper";
 import { colors, styles } from "../../style";
 
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
 
 export default function Index() {
     const [nomepet, setnomepet] = useState("");
@@ -20,8 +20,8 @@ export default function Index() {
     const [endereco, setendereco] = useState("");
     const [telefone, settelefone] = useState("");
     const [email, setemail] = useState("");
-    const [notas, setnotas] = useState("");
-    const [exames, setexames] = useState("");
+    const [nota, setnota] = useState("");
+    const [exame, setexame] = useState("");
 
     const novopet = async () => {
         if ( !nomepet || !nometutor || !especie || !raca || !idade || !peso || !sexo || !castrado || !cpf || !endereco || !telefone || !email
@@ -53,25 +53,29 @@ export default function Index() {
             endereco,
             telefone,
             email,
-            notas,
-            exames,
+            nota,
+            exame,
             vetId: user?.uid
         }
     );
-
-    const notasDocRef = await addDoc(
+    
+    const notasDocRef = doc(collection(db, "notas"));
+    const setnotasDocRef = await addDoc(
         collection(db, "notas"),
         {
-            notas,
+            nota,
+            notaId: notasDocRef,
             petId: petDocRef.id,
             vetId: user?.uid
         }
     );
 
-    const examesDocRef = await addDoc(
+    const examesDocRef = doc(collection(db, "exames"));
+    const setexamesDocRef = await addDoc(
         collection(db, "exames"),
         {
-            exames,
+            exame,
+            exameId: examesDocRef,
             petId: petDocRef.id,
             vetId: user?.uid
         }
@@ -436,8 +440,8 @@ export default function Index() {
 
                                 <TextInput
                                     label="Observações sobre o pet"
-                                    value={notas}
-                                    onChangeText={setnotas}
+                                    value={nota}
+                                    onChangeText={setnota}
                                     mode="outlined"
                                     multiline
                                     numberOfLines={4}
@@ -468,8 +472,8 @@ export default function Index() {
 
                                 <TextInput
                                     label="Resultados ou observações dos exames"
-                                    value={exames}
-                                    onChangeText={setexames}
+                                    value={exame}
+                                    onChangeText={setexame}
                                     mode="outlined"
                                     multiline
                                     numberOfLines={4}

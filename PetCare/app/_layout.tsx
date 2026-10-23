@@ -29,18 +29,23 @@ export default function RootLayout() {
           <Stack.Screen name="tutor/notas_tutor" options={{headerShown: false}} />
         {/*veterinario*/}
           <Stack.Screen name="veterinario/menu_veterinario" options={{headerShown: false}} />
+          
           <Stack.Screen name="veterinario/ficha_animal_visualizacao_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/ficha_animal_criacao_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/ficha_animal_editar_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/compartilhar_ficha_veterinario" options={{headerShown: false}} />
 
           <Stack.Screen name="veterinario/vacinas_veterinario" options={{headerShown: false}} />
-          <Stack.Screen name="veterinario/exames_veterinario" options={{headerShown: false}} />
-          <Stack.Screen name="veterinario/notas_veterinario" options={{headerShown: false}} />
-
-          <Stack.Screen name="veterinario/exames_detalhes_veterinario" options={{headerShown: false}} />
-          <Stack.Screen name="veterinario/notas_detalhes_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/vacinas_detalhes_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/vacinas_criar_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/vacinas_editar_veterinario" options={{headerShown: false}} />
+
+          <Stack.Screen name="veterinario/exames_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/exames_detalhes_veterinario" options={{headerShown: false}} />
+
+
+          <Stack.Screen name="veterinario/notas_veterinario" options={{headerShown: false}} />
+          <Stack.Screen name="veterinario/notas_detalhes_veterinario" options={{headerShown: false}} />
       </Stack>
   );
 }
