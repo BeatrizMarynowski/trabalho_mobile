@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, router, useLocalSearchParams } from "expo-router";
-import { Alert, Image, ScrollView, View, Pressable } from "react-native";
+import { Alert, Image, ImageBackground, ScrollView, View, Pressable, TouchableOpacity } from "react-native";
 import { FAB, Icon, PaperProvider, Text, Portal } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
@@ -53,21 +53,36 @@ export default function Index() {
 return (
 /*view principal*/
     <PaperProvider>
-      <View style={styles.view_principal}>
-        <Link
-                  key={petId}
-                  href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
-                  style={styles.seta_voltar}
-                >
-            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+      <ImageBackground
+            source={require("../../assets/images/fundo.png")}
+            style={{ flex: 1 }}
+            resizeMode="cover"
+          >
+
+             <Link key={petId}
+                  href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`} style={styles.posicao_seta}>
+          <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>
+
         {/*view para dar espaço na tela*/}
         <View style={styles.espaco_10}/>
         {/*titulo da tela - NOTAS*/}
-        <View style={styles.Titulo_vacina}>
-            <Icon source="note-text-outline" size={20} color={colors.verde} />
-            <Text style={styles.titulo_vacinas_pagina}>Vacinas</Text>
-        </View>
+        <TouchableOpacity activeOpacity={0.85} style={styles.card_resumo}>
+  <View style={styles.card_resumo_icone}>
+    <Icon source="needle" size={24} color={colors.branco} />
+  </View>
+
+  <View style={styles.card_resumo_textos}>
+    <Text style={styles.card_resumo_titulo}>Vacinas</Text>
+    <Text style={styles.card_resumo_descricao}>
+      Acompanhe as vacinas dos animais sob seus cuidados.
+    </Text>
+  </View>
+
+
+</TouchableOpacity>
+  
+
 {/*view das info das notas - card*/}
 
 <ScrollView
@@ -137,16 +152,17 @@ return (
             open={open}
             visible={true}
             icon={open ? 'close' : 'menu'}
+              color={colors.branco}
             fabStyle={{ backgroundColor: colors.rosaEscuro }}
             backdropColor="transparent"
             style={{ position: 'absolute', bottom: 15, right: 15 }}
             actions={[
               {
                 icon: 'plus',
-                label: 'adicionar',
-                color: colors.branco,
-                style: { backgroundColor: colors.roxo_fundodatela },
-                labelTextColor: colors.cinza,
+                label: 'Adicionar',
+                 color: colors.rosaEscuro,
+                        style: { backgroundColor: colors.rosaClaro },
+                        labelTextColor: colors.cinza,
                 onPress: () => router.push({ pathname: "./vacinas_criar_veterinario", params: { petId: petId } })
               }
             ]}
@@ -157,7 +173,7 @@ return (
             }}
           />
         </Portal>
-    </View>
+    </ImageBackground>
     </PaperProvider>
   );
 }

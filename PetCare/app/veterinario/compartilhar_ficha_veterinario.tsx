@@ -1,5 +1,5 @@
 import { Link, useLocalSearchParams } from "expo-router";
-import { Image, View,ImageBackground,  } from "react-native";
+import { ImageBackground, View } from "react-native";
 import { Text, Icon } from 'react-native-paper';
 import { colors, styles } from "../../style";
 

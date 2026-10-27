@@ -589,7 +589,45 @@ imagem_pata_cadastro: {
   },
  
   // caixa com o texto de vacinas / exames / notas
-
+  card_resumo: {
+  width: "93%",
+  alignSelf:"center",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 14,
+  backgroundColor: colors.rosaCard,
+  borderRadius: 24,
+  padding: 16,
+  marginBottom: 12,
+  borderWidth: 1,
+  borderColor: colors.rosa,
+  elevation: 3,
+  ...sombra(colors.rosaEscuro, 3, 0.15, 6),
+},
+card_resumo_icone: {
+  width: 52,
+  height: 52,
+  borderRadius: 18,
+  backgroundColor: colors.rosaEscuro,
+  alignItems: "center",
+  justifyContent: "center",
+},
+card_resumo_textos: {
+  flex: 1,
+  gap: 2,
+},
+card_resumo_titulo: {
+  fontFamily: "Fredoka_600SemiBold",
+  fontSize: 22,
+  color: colors.rosaEscuro,
+},
+card_resumo_descricao: {
+  fontFamily: "Nunito_400Regular",
+  fontSize: 13,
+  color: colors.cinza,
+  opacity: 0.8,
+  marginRight:50
+},
   card_vacina_lista_fundo: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.45)",
@@ -614,16 +652,15 @@ imagem_pata_cadastro: {
  
   // botão "detalhes" rosa
   botao_detalhes_rosa: {
-    alignSelf: "flex-end",
-    flexDirection: "row",
-    gap: 2,
-    backgroundColor: colors.rosaEscuro,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    marginTop: 12,
-  },
+  flexDirection: "row",
+  alignItems: "center",
+  backgroundColor: colors.rosaEscuro,
+  borderRadius: 100,
+  paddingHorizontal: 12,
+  paddingVertical: 5,
+},
   texto_botao_detalhes_rosa: {
+    
     color: colors.branco,
     fontWeight: "bold",
     fontSize: 12,
@@ -849,11 +886,13 @@ qr_sub: {
     ...sombra(colors.rosaEscuro, 2, 0.1, 5),
   },
   titulo_secao_ficha: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 18,
-    gap: 10,
-  },
+  flexDirection: "row",
+  alignItems: "center",
+  marginBottom: 8,
+  gap: 10,
+},
+
+
   texto_titulo_secao_ficha: {
     fontFamily: "Fredoka_600SemiBold",
     fontSize: 20,
@@ -956,7 +995,8 @@ qr_sub: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-  },
+    
+    },
   texto_botao_principal: {
     fontFamily: "Fredoka_600SemiBold",
     fontSize: 18,

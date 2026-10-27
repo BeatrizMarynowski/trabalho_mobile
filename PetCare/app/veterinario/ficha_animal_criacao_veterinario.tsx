@@ -70,17 +70,6 @@ export default function Index() {
         }
     );
 
-    const examesDocRef = doc(collection(db, "exames"));
-    const setexamesDocRef = await addDoc(
-        collection(db, "exames"),
-        {
-            exame,
-            exameId: examesDocRef,
-            petId: petDocRef.id,
-            vetId: user?.uid
-        }
-    );
-
     router.push({
         pathname: "./compartilhar_ficha_veterinario",
         params: {
@@ -245,7 +234,7 @@ export default function Index() {
                                     />
 
                                     <TextInput
-                                        label="*Peso (kg)"
+                                        label="*Peso"
                                         value={peso}
                                         onChangeText={setpeso}
                                         mode="outlined"
@@ -421,75 +410,7 @@ export default function Index() {
                         <View style={styles.linha_2} />
 
                         {/* Notas e exames */}
-                        <View style={styles.container_secoes_ficha}>
-
-                            {/* Anotações clínicas */}
-                            <View style={styles.card_ficha_novo}>
-
-                                <View style={styles.titulo_secao_ficha}>
-                                    <Icon
-                                        source="note-text-outline"
-                                        size={22}
-                                        color={colors.rosaEscuro}
-                                    />
-
-                                    <Text style={styles.texto_titulo_secao_ficha}>
-                                        Anotações clínicas
-                                    </Text>
-                                </View>
-
-                                <TextInput
-                                    label="Observações sobre o pet"
-                                    value={nota}
-                                    onChangeText={setnota}
-                                    mode="outlined"
-                                    multiline
-                                    numberOfLines={4}
-                                    outlineColor={colors.rosa}
-                                    activeOutlineColor={colors.rosaEscuro}
-                                    textColor={colors.cinza}
-                                    outlineStyle={{ borderRadius: 22 }}
-                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
-                                    style={styles.campo_ficha_multilinha_m}
-                                />
-
-                            </View>
-
-                            {/* Exames */}
-                            <View style={styles.card_ficha_novo}>
-
-                                <View style={styles.titulo_secao_ficha}>
-                                    <Icon
-                                        source="file-document-outline"
-                                        size={22}
-                                        color={colors.rosaEscuro}
-                                    />
-
-                                    <Text style={styles.texto_titulo_secao_ficha}>
-                                        Exames
-                                    </Text>
-                                </View>
-
-                                <TextInput
-                                    label="Resultados ou observações dos exames"
-                                    value={exame}
-                                    onChangeText={setexame}
-                                    mode="outlined"
-                                    multiline
-                                    numberOfLines={4}
-                                    outlineColor={colors.rosa}
-                                    activeOutlineColor={colors.rosaEscuro}
-                                    textColor={colors.cinza}
-                                    outlineStyle={{ borderRadius: 22 }}
-                                    contentStyle={{ fontFamily: "Nunito_400Regular" }}
-                                    style={styles.campo_ficha_multilinha_m}
-                                />
-
-                            </View>
-
-                            
-
-                        </View>
+        
 
                         {/* Botão criar ficha */}
                         <Pressable
@@ -513,8 +434,7 @@ export default function Index() {
 
                     </View>
                 </ScrollView>
-
-        
+                
             </ImageBackground>
         </KeyboardAvoidingView>
     );

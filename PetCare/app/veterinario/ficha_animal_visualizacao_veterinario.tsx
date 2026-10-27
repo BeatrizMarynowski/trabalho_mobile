@@ -190,35 +190,10 @@ export default function Index() {
 
                 <View style={styles.linha_2}/>
 
-                {/*view das vacinas*/}
-                <View style={styles.card_ficha_novo}>
-                    <View style={styles.titulo_secao_ficha}>
-                        <Icon source="needle" size={22} color={colors.rosaEscuro} />
-                        <Text style={styles.texto_titulo_secao_ficha}>Vacinas</Text>
-                    </View>
-                    <Link href={`./vacinas_veterinario?petId=${petId}`} asChild>
-                        <Pressable style={styles.botao_detalhes_rosa}>
-                            <Text style={styles.texto_botao_detalhes_rosa}>detalhes</Text>
-                            <Icon source="chevron-right" size={14} color={colors.branco} />
-                        </Pressable>
-                    </Link>
-                </View>
 
-                {/*view dos exames*/} 
-                <View style={styles.card_ficha_novo}>
-                    <View style={styles.titulo_secao_ficha}>
-                        <Icon source="flask-outline" size={22} color={colors.rosaEscuro} />
-                        <Text style={styles.texto_titulo_secao_ficha}>Exames</Text>
-                    </View>
-                    <Link href={`./exames_veterinario?petId=${petId}`} asChild>
-                        <Pressable style={styles.botao_detalhes_rosa}>
-                            <Text style={styles.texto_botao_detalhes_rosa}>detalhes</Text>
-                            <Icon source="chevron-right" size={14} color={colors.branco} />
-                        </Pressable>
-                    </Link>
-                </View>
-
-                {/*view das notas dinâmicas*/} 
+       
+                   
+                {/*view das notas dinâmicas*/}
                 <View style={styles.card_ficha_novo}>
                     <View style={styles.titulo_secao_ficha}>
                         <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
@@ -226,14 +201,41 @@ export default function Index() {
                     </View>
                     <Link href={`./notas_veterinario?petId=${petId}`} asChild>
                         <Pressable style={styles.botao_detalhes_rosa}>
-                            <Text style={styles.texto_botao_detalhes_rosa}>detalhes</Text>
+                            <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
                             <Icon source="chevron-right" size={14} color={colors.branco} />
                         </Pressable>
                     </Link>
                 </View>
 
-            </View>
-        </View>
+                <View style={styles.card_ficha_novo}>
+                    <View style={styles.titulo_secao_ficha}>
+                        <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
+                        <Text style={styles.texto_titulo_secao_ficha}>Vacinas</Text>
+                    </View>
+                    <Link href={`./vacinas_veterinario?petId=${petId}`} asChild>
+                        <Pressable style={styles.botao_detalhes_rosa}>
+                            <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
+                            <Icon source="chevron-right" size={14} color={colors.branco} />
+                        </Pressable>
+                    </Link>
+                </View>
+
+                <View style={styles.card_ficha_novo}>
+                    <View style={styles.titulo_secao_ficha}>
+                        <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
+                        <Text style={styles.texto_titulo_secao_ficha}>Exames</Text>
+                    </View>
+                    <Link href={`./exames_veterinario?petId=${petId}`} asChild>
+                        <Pressable style={styles.botao_detalhes_rosa}>
+                            <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
+                            <Icon source="chevron-right" size={14} color={colors.branco} />
+                        </Pressable>
+                    </Link>
+                </View>
+                </View>
+
+                </View>
+        
 
 
       <Portal>
@@ -241,6 +243,7 @@ export default function Index() {
     open={open}
     visible={true}
     icon={open ? 'close' : 'menu'}
+      color={colors.branco}
     fabStyle={{ backgroundColor: colors.rosaEscuro }}
     backdropColor="transparent"
     style={{ position: 'absolute', bottom: 15, right: 15 }}
