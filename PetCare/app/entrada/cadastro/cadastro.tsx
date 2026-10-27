@@ -1,18 +1,18 @@
 import { Link } from "expo-router";
 import { Image, Pressable, View, ImageBackground } from "react-native";
 import { Text, Icon } from 'react-native-paper';
-import { colors, styles } from '../../style';
+import { colors, styles } from '../../../style';
 
 export default function Index() {
   return (
     <ImageBackground
-      source={require('../../assets/images/fundo.png')}
+      source={require('../../../assets/images/fundo.png')}
       style={{ flex: 1 }}
       resizeMode="cover"
     >
       <View style={[styles.view_principal, { backgroundColor: "transparent" }]}>
         <View style={styles.view_20}>  
-          <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata_cadastro}/>
+          <Image source={require('../../../assets/images/icone_pata.png')} style={styles.imagem_pata_cadastro}/>
           <Link href="/" style={styles.posicao_seta}>
             <Icon source="arrow-left" size={35} color={colors.cinza} />
           </Link>
@@ -46,7 +46,7 @@ export default function Index() {
                 <Icon source="chevron-right" size={30} color={colors.cinza} />
               </Pressable>
             </Link>
-            <Link href="./login" style={styles.link_login}>
+            <Link href="../login/login" style={styles.link_login}>
               <Text style={{color:"white"}}>Já tem conta? Fazer login</Text>
             </Link>
         </View>

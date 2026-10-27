@@ -1,7 +1,7 @@
 import { Link, useLocalSearchParams } from "expo-router";
 import { ImageBackground, View } from "react-native";
 import { Text, Icon } from 'react-native-paper';
-import { colors, styles } from "../../style";
+import { colors, styles } from "../../../style";
 
 import QRCode from 'react-native-qrcode-svg';
 export default function Index() {
@@ -13,12 +13,12 @@ const nomeDoPet = petNome;
 return (
 /*view principal*/
     <ImageBackground
-            source={require("../../assets/images/fundo.png")}
+            source={require("../../../assets/images/fundo.png")}
             style={{ flex: 1 }}
             resizeMode="cover"
           >
       
-        <Link href="./menu_veterinario" style={styles.posicao_seta}>
+        <Link href="../menu_veterinario" style={styles.posicao_seta}>
           <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>
 

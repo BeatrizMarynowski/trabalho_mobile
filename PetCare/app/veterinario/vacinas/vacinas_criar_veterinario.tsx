@@ -1,86 +1,63 @@
 import { Link, router, useLocalSearchParams } from "expo-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Alert, Image, KeyboardAvoidingView,ImageBackground, Platform, Pressable, ScrollView, View} from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
-import { colors, styles } from "../../style";
+import { colors, styles } from "../../../style";
 
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
 
 export default function Index() {
-    const { vacinasId } = useLocalSearchParams<{ vacinasId: string }>();
+    const { petId } = useLocalSearchParams<{ petId: string }>();
     const [vacinas, setvacinas] = useState("");
     const [nome, setnome] = useState("");
-    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-           const carregarDadosvacinas = async () => {
-               if (!vacinasId) return;
-               const db = getFirestore();
-               try {
-                   const docRef = doc(db, "vacinas", vacinasId);
-                   const docSnap = await getDoc(docRef);
-   
-                   if (docSnap.exists()) {
-                       const dados = docSnap.data();
-                       setnome(dados.nome || "");
-                       setvacinas(dados.vacinas || "");
-                   } else {
-                       Alert.alert("Erro", "Ficha não encontrada.");
-                   }
-               } catch (error) {
-                   console.error("Erro ao carregar dados para edição:", error);
-               } finally {
-                   setLoading(false);
-               }
-           };
-   
-           carregarDadosvacinas();
-       }, [vacinasId]);
-   
-       const editarvacina = async () => {
-           if ( !nome || !vacinas
-           ) {
-               Alert.alert(
-                   "Atenção",
-                   "Por favor, preencha todos os campos!"
-               );
-               return;
-           }
-   
-           const auth = getAuth();
-           const db = getFirestore();
-           const user = auth.currentUser;
-           const docRef = doc(db, "vacinas", vacinasId);
-   
-           try {
-               await updateDoc(docRef, {
-               nome,
-               vacinas,
-           }
-       );
-   
-       router.push({
-           pathname: "./vacinas_detalhes_veterinario",
-           params: {
-               vacinasId: vacinasId
-           }
-       });
-   } catch (error) {
-       console.error("Erro ao  alterações:", error);
-   
-       Alert.alert(
-           "Erro",
-           "Não foi possível criar a ficha. Tente novamente"
-       );
-   }}
+    const novavacina = async () => {
+        if ( !vacinas || !nome
+        ) {
+            Alert.alert(
+                "Atenção",
+                "Por favor, preencha todos os campos!"
+            );
+            return;
+        }
 
-        return (
+        const auth = getAuth();
+        const db = getFirestore();
+        const user = auth.currentUser;
+
+        try {
+    const vacinasDocRef = doc(collection(db, "vacinas"));
+
+    await setDoc(vacinasDocRef, {
+        vacinas,
+        nome,
+        vacinasId: vacinasDocRef.id,
+        petId: petId,
+        vetId: user?.uid
+    });
+
+    router.push({
+        pathname: "./vacinas_veterinario",
+        params: {
+            petId: petId,
+        }
+    });
+} catch (error) {
+    console.error("Erro ao salvar ficha:", error);
+
+    Alert.alert(
+        "Erro",
+        "Não foi possível criar a ficha. Tente novamente"
+    );
+}}
+
+    return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
         >
             <ImageBackground
-                    source={require("../../assets/images/fundo.png")}
+                    source={require("../../../assets/images/fundo.png")}
                     style={{ flex: 1 }}
                     resizeMode="cover"
                   >
@@ -164,7 +141,7 @@ export default function Index() {
                                 styles.botao_principal,
                                 pressed && { opacity: 0.85, transform: [{ scale: 0.98 }] }
                             ]}
-                            onPress={editarvacina}
+                            onPress={novavacina}
                         >
                             <View style={styles.botao_principal_conteudo}>
                                 <Icon
@@ -173,7 +150,7 @@ export default function Index() {
                                     color={colors.branco}
                                 />
                                 <Text style={styles.texto_botao_principal}>
-                                    atualizar vacina
+                                    cadastrar vacina
                                 </Text>
                             </View>
                         </Pressable>

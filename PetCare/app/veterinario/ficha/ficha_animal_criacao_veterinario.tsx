@@ -2,7 +2,7 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, KeyboardAvoidingView,ImageBackground, Platform, Pressable, ScrollView, View} from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
-import { colors, styles } from "../../style";
+import { colors, styles } from "../../../style";
 
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
@@ -20,8 +20,6 @@ export default function Index() {
     const [endereco, setendereco] = useState("");
     const [telefone, settelefone] = useState("");
     const [email, setemail] = useState("");
-    const [nota, setnota] = useState("");
-    const [exame, setexame] = useState("");
 
     const novopet = async () => {
         if ( !nomepet || !nometutor || !especie || !raca || !idade || !peso || !sexo || !castrado || !cpf || !endereco || !telefone || !email
@@ -53,8 +51,6 @@ export default function Index() {
             endereco,
             telefone,
             email,
-            nota,
-            exame,
             vetId: user?.uid
         }
     );
@@ -63,7 +59,6 @@ export default function Index() {
     const setnotasDocRef = await addDoc(
         collection(db, "notas"),
         {
-            nota,
             notaId: notasDocRef,
             petId: petDocRef.id,
             vetId: user?.uid
@@ -71,7 +66,7 @@ export default function Index() {
     );
 
     router.push({
-        pathname: "./compartilhar_ficha_veterinario",
+        pathname: "./ficha_animal_compartilhar_veterinario",
         params: {
             petId: petDocRef.id,
             petNome: nomepet
@@ -91,7 +86,7 @@ export default function Index() {
             style={{ flex: 1 }}
         >
             <ImageBackground
-                    source={require("../../assets/images/fundo.png")}
+                    source={require("../../../assets/images/fundo.png")}
                     style={{ flex: 1 }}
                     resizeMode="cover"
                   >
@@ -123,7 +118,7 @@ export default function Index() {
                                 <Text style={styles.cabecalho_titulo}>
                                     Nova ficha
                                 </Text>
-                                <Link href="./menu_veterinario" asChild>
+                                <Link href="../menu_veterinario" asChild>
                                   <Pressable  style={{ marginLeft: "auto" }}>
                                       <Icon source="close" size={35} color={colors.branco} />
                                   </Pressable>

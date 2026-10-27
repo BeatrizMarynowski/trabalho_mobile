@@ -2,7 +2,7 @@ import { Link, router, useLocalSearchParams } from "expo-router";
 import * as React from "react";
 import { Alert, Image, ScrollView, View, Pressable } from "react-native";
 import { FAB, Icon, Text } from 'react-native-paper';
-import { colors, styles } from '../../style';
+import { colors, styles } from '../../../style';
 
 import { getFirestore, collection, onSnapshot, query, where } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
@@ -10,7 +10,7 @@ import { getAuth } from "firebase/auth";
 
 export default function Index() {
     const { petId } = useLocalSearchParams<{ petId: string }>();
-    const [exames, setexames] = React.useState<any[]>([]);
+    const [notas, setnotas] = React.useState<any[]>([]);
     const [loading, setLoading] = React.useState(true);
     
       React.useEffect(() => {
@@ -25,17 +25,17 @@ export default function Index() {
         }
     
         const q = query(
-          collection(db, "exames"),
+          collection(db, "notas"),
           where("vetId", "==", usuarioLogado.uid),
           where("petId", "==", petId)
         );
     
         const unsubscribe = onSnapshot(q, (snapshot) => {
-          const listaexames = snapshot.docs.map(doc => ({
+          const listanotas = snapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
           }));
-          setexames(listaexames);
+          setnotas(listanotas);
           setLoading(false);
         }, (error) => {
           console.error("Erro ao carregar os seus pets:", error);
@@ -53,14 +53,14 @@ return (
                   href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
                   style={styles.seta_voltar}
                 >
-            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+            <Image source={require('../../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
         {/*view para dar espaço na tela*/}
         <View style={styles.espaco_10}/>
         {/*titulo da tela - NOTAS*/}
         <View style={styles.Titulo_vacina}>
             <Icon source="note-text-outline" size={20} color={colors.verde} />
-            <Text style={styles.titulo_vacinas_pagina}>exames</Text>
+            <Text style={styles.titulo_vacinas_pagina}>notas</Text>
         </View>
 {/*view das info das notas - card*/}
 
@@ -77,7 +77,7 @@ return (
               <Text style={{ color: colors.cinza, textAlign: "center" }}>
                 Carregando vaconas...
               </Text>
-            ) : exames.length === 0 ? (
+            ) : notas.length === 0 ? (
               <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
                 <Icon source="paw" size={55} color={colors.claro} />
         
@@ -89,7 +89,7 @@ return (
                     marginTop: 12,
                   }}
                 >
-                  Nenhuma exames registrada
+                  Nenhuma notas registrada
                 </Text>
         
                 <Text
@@ -100,13 +100,13 @@ return (
                     marginTop: 6,
                   }}
                 >
-                  nenhuma exames adiconada.
+                  nenhuma nota adiconada.
                 </Text>
               </View>
             ) : (
-              exames.map((exame) => (
-                  <View key={exame.id} style={styles.botao_animal}>
-                      <Text style={styles.nomePet}>{exame.exames}</Text>
+              notas.map((nota) => (
+                  <View key={nota.id} style={styles.botao_animal}>
+                      <Text style={styles.nomePet}>{nota.notas}</Text>
                         </View>
                         ))
                       )}

@@ -154,7 +154,7 @@ export default function App() {
       pets.map((pet) => (
         <Link
           key={pet.id}
-          href={`./ficha_animal_visualizacao_veterinario?petId=${pet.id}`}
+          href={`./ficha/ficha_animal_visualizacao_veterinario?petId=${pet.id}`}
           asChild
         >
 
@@ -184,7 +184,7 @@ export default function App() {
 
 
       {/*botao para a criacao de uma nova ficha*/}
-      <Link href="./ficha_animal_criacao_veterinario" asChild>
+      <Link href="./ficha/ficha_animal_criacao_veterinario" asChild>
   <Pressable style={{
     width: "96%",
     backgroundColor: colors.medio,

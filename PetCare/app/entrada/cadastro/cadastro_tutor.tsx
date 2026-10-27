@@ -2,9 +2,9 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, ImageBackground, Pressable, View, TextInput, ScrollView  } from "react-native";
 import { Text, Icon } from 'react-native-paper';
-import { styles, colors} from '../../style';
+import { styles, colors} from '../../../style';
 
-import { auth, db } from '../firebaseconfig';
+import { auth, db } from '../../firebaseconfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -31,7 +31,7 @@ export default function Index() {
         telefone,
         cpf,
       });
-      router.push("./login"); 
+      router.push("../login/login"); 
     } catch (error) {
       console.error("Erro ao salvar tutor:", error);
       Alert.alert("Erro", "Não foi possível criar a conta. Tente novamente.");
@@ -40,7 +40,7 @@ export default function Index() {
 
   return (
        <ImageBackground
-            source={require("../../assets/images/fundo.png")}
+            source={require("../../../assets/images/fundo.png")}
             style={{ flex: 1 } }
             resizeMode="cover"
           >
@@ -50,7 +50,7 @@ export default function Index() {
         
       >
       <View style={styles.view_20}>  
-        <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata2}/>
+        <Image source={require('../../../assets/images/icone_pata.png')} style={styles.imagem_pata2}/>
         <Link href="./cadastro" style={styles.posicao_seta}>
           <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>

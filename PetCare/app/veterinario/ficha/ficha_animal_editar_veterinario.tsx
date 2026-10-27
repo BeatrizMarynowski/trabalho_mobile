@@ -2,7 +2,7 @@ import { Link, router, useLocalSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
 import { Alert, Image, KeyboardAvoidingView, Platform,ImageBackground, Pressable, ScrollView, View} from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
-import { colors, styles } from "../../style";
+import { colors, styles } from "../../../style";
 
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, updateDoc, doc, getDoc } from "firebase/firestore";
@@ -111,7 +111,7 @@ export default function Index() {
             style={{ flex: 1 }}
         >
             <ImageBackground
-                   source={require("../../assets/images/fundo.png")}
+                   source={require("../../../assets/images/fundo.png")}
                    style={{ flex: 1 }}
                    resizeMode="cover"
                  >

@@ -2,10 +2,10 @@ import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, ImageBackground, Pressable,ScrollView,TextInput, View } from "react-native";
 import { Icon, Text } from "react-native-paper";
-import { colors, styles } from "../../style";
+import { colors, styles } from "../../../style";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseconfig";
+import { auth } from "../../firebaseconfig";
 
 export default function Index() {
   const [email, setemail] = useState("");
@@ -37,14 +37,14 @@ export default function Index() {
 
   return (
     <ImageBackground
-      source={require("../../assets/images/fundo.png")}
+      source={require("../../../assets/images/fundo.png")}
       style={{ flex: 1,alignItems: "center"  }}
       resizeMode="cover"
     >
 
       
       <View style={styles.view_25}>  
-        <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
+        <Image source={require('../../../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
         <Link href="./login" style={styles.posicao_seta}>
           <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>

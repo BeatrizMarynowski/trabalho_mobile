@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { Alert, Image, ImageBackground, ScrollView, View, Pressable, TouchableOpacity } from "react-native";
 import { FAB, Icon, PaperProvider, Text, Portal } from 'react-native-paper';
-import { colors, styles } from '../../style';
+import { colors, styles } from '../../../style';
 
 import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
@@ -54,7 +54,7 @@ return (
 /*view principal*/
     <PaperProvider>
       <ImageBackground
-            source={require("../../assets/images/fundo.png")}
+            source={require("../../../assets/images/fundo.png")}
             style={{ flex: 1 }}
             resizeMode="cover"
           >
@@ -101,7 +101,7 @@ return (
             ) : vacinas.length === 0 ? (
               <Link 
               key={petId}
-              href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
+              href={`../ficha/ficha_animal_visualizacao_veterinario?petId=${petId}`}
               asChild>
               <Pressable>
               <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>

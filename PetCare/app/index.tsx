@@ -29,14 +29,14 @@ export default function Index() {
       <View style={[styles.view_25, { gap: '5%' }]}>
 
         {/*botao de criar conta*/}
-        <Link href="./entrada/cadastro" asChild> 
+        <Link href="./entrada/cadastro/cadastro" asChild> 
           <Pressable style={styles.pressable_c}>
             <Text style={styles.fonteFredoka}>Criar conta</Text>
           </Pressable>
         </Link>
 
         {/*botao de login*/}
-        <Link href="./entrada/login" asChild>
+        <Link href="./entrada/login/login" asChild>
           <Pressable style={styles.pressable_l}>
             <Text style={styles.fonteFredoka}>Entrar</Text>
           </Pressable>

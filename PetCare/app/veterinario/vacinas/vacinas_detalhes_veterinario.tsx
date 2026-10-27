@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { Alert, Image, ScrollView, View, Pressable, ActivityIndicator } from "react-native";
 import { FAB, Icon, PaperProvider, Text, Portal } from 'react-native-paper';
-import { colors, styles } from '../../style';
+import { colors, styles } from '../../../style';
 
 import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc, getDoc } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
@@ -94,7 +94,7 @@ return (
                   href={`./vacinas_veterinario?petId=${petId}`}
                   style={styles.seta_voltar}
                 >
-            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+            <Image source={require('../../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
         </Link>
         {/*view para dar espaço na tela*/}
         <View style={styles.espaco_10}/>

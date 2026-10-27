@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocalSearchParams, router } from "expo-router";
 import { Image, Pressable, ScrollView,ImageBackground, View, ActivityIndicator, Alert } from "react-native";
 import { FAB, Icon, Text, PaperProvider, Portal } from 'react-native-paper';
-import { colors, styles } from '../../style';
+import { colors, styles } from '../../../style';
 
 import { getFirestore, doc, getDoc, deleteDoc } from "firebase/firestore"; 
 
@@ -56,7 +56,7 @@ export default function Index() {
 
   const deletar = async () => {
     Alert.alert(
-    "Excluir Ficha", // Título da caixinha
+    "Excluir Ficha",
     "Tem certeza de que deseja excluir este pet? Essa ação é permanente e não poderá ser desfeita.", // Mensagem
     [
       {
@@ -73,7 +73,7 @@ export default function Index() {
     const docRef = doc(db, "ficha_pet", petId);
     
     await deleteDoc(docRef);
-    router.replace("./menu_veterinario"); 
+    router.replace("../menu_veterinario"); 
     
   } catch (error) {
     console.error("Erro ao deletar o documento: ", error);
@@ -91,7 +91,7 @@ export default function Index() {
     <PaperProvider>
 
     <ImageBackground
-        source={require("../../assets/images/fundo.png")}
+        source={require("../../../assets/images/fundo.png")}
         style={{ flex: 1 }}
         resizeMode="cover"
       >
@@ -105,7 +105,7 @@ export default function Index() {
             <View style={styles.cabecalho}>
 
                 <View style={styles.cabecalho_titulo_linha}>
-                    <Link href="./menu_veterinario" asChild>
+                    <Link href="../menu_veterinario" asChild>
                         <Pressable hitSlop={12}>
                             <Icon source="close" size={30} color={colors.branco} />
                         </Pressable>
@@ -115,7 +115,6 @@ export default function Index() {
 
                 {/*view da imagem e nome do pet*/}
                 <View style={styles.cabecalho_titulo_linha}>
-                    <Image source={require("../../assets/images/rodolfo.png")} style={styles.foto_animal}/>
                     <View>
                         {/* 4. Nome e Dono DINÂMICOS do banco */}
                         <Text style={styles.cabecalho_titulo}>{pet.nomepet}</Text>
@@ -199,7 +198,7 @@ export default function Index() {
                         <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Notas</Text>
                     </View>
-                    <Link href={`./notas_veterinario?petId=${petId}`} asChild>
+                    <Link href={`../notas/notas_veterinario?petId=${petId}`} asChild>
                         <Pressable style={styles.botao_detalhes_rosa}>
                             <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
                             <Icon source="chevron-right" size={14} color={colors.branco} />
@@ -212,7 +211,7 @@ export default function Index() {
                         <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Vacinas</Text>
                     </View>
-                    <Link href={`./vacinas_veterinario?petId=${petId}`} asChild>
+                    <Link href={`../vacinas/vacinas_veterinario?petId=${petId}`} asChild>
                         <Pressable style={styles.botao_detalhes_rosa}>
                             <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
                             <Icon source="chevron-right" size={14} color={colors.branco} />
@@ -225,7 +224,7 @@ export default function Index() {
                         <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Exames</Text>
                     </View>
-                    <Link href={`./exames_veterinario?petId=${petId}`} asChild>
+                    <Link href={`../exames/exames_veterinario?petId=${petId}`} asChild>
                         <Pressable style={styles.botao_detalhes_rosa}>
                             <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
                             <Icon source="chevron-right" size={14} color={colors.branco} />
@@ -271,7 +270,7 @@ export default function Index() {
         color: colors.rosaEscuro,
         style: { backgroundColor: colors.rosaClaro },
         labelTextColor: colors.cinza,
-        onPress: () => router.push({ pathname: "./compartilhar_ficha_veterinario", params: { petId: petId } })
+        onPress: () => router.push({ pathname: "./ficha_animal_compartilhar_veterinario", params: { petId: petId } })
       }
     ]}
     onStateChange={onStateChange}
