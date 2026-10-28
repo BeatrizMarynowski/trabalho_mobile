@@ -173,7 +173,7 @@ export default function Index() {
                                     color={colors.branco}
                                 />
                                 <Text style={styles.texto_botao_principal}>
-                                    atualizar vacina
+                                    Atualizar vacina
                                 </Text>
                             </View>
                         </Pressable>
