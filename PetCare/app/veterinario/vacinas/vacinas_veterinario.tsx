@@ -95,83 +95,99 @@ return (
             showsVerticalScrollIndicator={false}
           >
             {loading ? (
-              <Text style={{ color: colors.cinza, textAlign: "center" }}>
-                Carregando vacinas...
-              </Text>
-            ) : vacinas.length === 0 ? (
-              <Link 
-              key={petId}
-              href={`../ficha/ficha_animal_visualizacao_veterinario?petId=${petId}`}
-              asChild>
-              <Pressable>
-              <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
+    <Text style={{ color: colors.cinza, textAlign: "center" }}>
+        Carregando vacinas...
+    </Text>
+) : vacinas.length === 0 ? (
+    <Link
+        href={`../ficha/ficha_animal_visualizacao_veterinario?petId=${petId}`}
+        asChild
+    >
+        <Pressable>
+            <View style={styles.vacinas_vazio}>
                 <Icon source="paw" size={55} color={colors.claro} />
-        
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "bold",
-                    color: colors.cinza,
-                    marginTop: 12,
-                  }}
-                >
-                  Nenhuma vacinas registrada
+
+                <Text style={styles.vacinas_vazio_titulo}>
+                    Nenhuma vacina registrada
                 </Text>
-        
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: colors.cinza,
-                    textAlign: "center",
-                    marginTop: 6,
-                  }}
-                >
-                  nenhuma vacina adiconada.
+
+                <Text style={styles.vacinas_vazio_descricao}>
+                    Nenhuma vacina adicionada.
                 </Text>
-              </View>
-              </Pressable>
-              </Link>
-            ) : (
-              vacinas.map((vacina) => (
-              <Link 
-                key={`${vacina.petId}_${vacina.vacinasId}`}
-                href={`./vacinas_detalhes_veterinario?vacinasId=${vacina.vacinasId}&petId=${vacina.petId}`}
-                asChild
-              >
-              <Pressable>
-                  <View key={vacina.id} style={styles.botao_animal}>
-                      <Text style={styles.nomePet}>{vacina.nome}</Text>
-                        </View>
-                        </Pressable>
-              </Link>
-                        ))
-                      )}
-              </ScrollView>
+            </View>
+        </Pressable>
+    </Link>
+) : (
+   vacinas.map((vacina) => (
+    <View key={vacina.id} style={styles.card_vacina}>
+        <View style={styles.card_vacina_icone}>
+            <Icon
+                source="needle"
+                size={26}
+                color={colors.branco}
+            />
+        </View>
+
+        <View style={styles.card_vacina_textos}>
+            <Text style={styles.card_vacina_titulo}>
+                {vacina.vacina || vacina.nome || "Vacina"}
+            </Text>
+
+            <Text style={styles.card_vacina_descricao}>
+                Aplicação: {vacina.dataAplicacao || "Não informada"}
+            </Text>
+
+            {vacina.proximaDose ? (
+                <Text style={styles.card_vacina_data}>
+                    Próxima dose: {vacina.proximaDose}
+                </Text>              
+            ) : null}
+            
+                {vacina.observacoes ? (
+          <Text style={styles.card_vacina_data}>
+              Observação: {vacina.observacoes}
+          </Text>
+      ) : null}
+        </View>
+        <View style={styles.card_vacina_acoes}>
+    <TouchableOpacity>
+        <Icon
+            source="trash-can-outline"
+            size={22}
+            color={colors.rosaEscuro}
+        />
+    </TouchableOpacity>
+
+    <TouchableOpacity>
+        <Icon
+            source="pencil-outline"
+            size={22}
+            color={colors.rosaEscuro}
+        />
+    </TouchableOpacity>
+</View>
+    </View>
+    
+    ))
+)}
+</ScrollView>
         <Portal>
-          <FAB.Group
-            open={open}
-            visible={true}
-            icon={open ? 'close' : 'menu'}
-              color={colors.branco}
-            fabStyle={{ backgroundColor: colors.rosaEscuro }}
-            backdropColor="transparent"
-            style={{ position: 'absolute', bottom: 15, right: 15 }}
-            actions={[
-              {
-                icon: 'plus',
-                label: 'Adicionar',
-                 color: colors.rosaEscuro,
-                        style: { backgroundColor: colors.rosaClaro },
-                        labelTextColor: colors.cinza,
-                onPress: () => router.push({ pathname: "./vacinas_criar_veterinario", params: { petId: petId } })
-              }
-            ]}
-            onStateChange={onStateChange}
-            onPress={() => {
-              if (open) {
-              }
-            }}
-          />
+          <FAB
+          icon="plus"
+          color={colors.branco}
+          style={{
+              position: "absolute",
+              bottom: 30,
+              right: 15,
+              backgroundColor: colors.rosaEscuro,
+          }}
+          onPress={() =>
+              router.push({
+                  pathname: "./vacinas_criar_veterinario",
+                  params: { petId: petId },
+              })
+          }
+/>
         </Portal>
     </ImageBackground>
     </PaperProvider>

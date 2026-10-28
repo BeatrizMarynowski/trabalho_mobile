@@ -591,7 +591,7 @@ imagem_pata_cadastro: {
   // caixa com o texto de vacinas / exames / notas
   card_resumo: {
   width: "93%",
-  alignSelf:"center",
+  alignSelf: "center",
   flexDirection: "row",
   alignItems: "center",
   gap: 14,
@@ -715,7 +715,79 @@ qr_sub: {
 },
 
   /* ---------- Vacinas, exames e notas (tutor e veterinário) ---------- */
+  vacinas_vazio: {
+    alignItems: "center",
+    marginTop: 35,
+    padding: 20,
+},
 
+vacinas_vazio_titulo: {
+    fontSize: 18,
+    fontFamily: "Fredoka_600SemiBold",
+    color: colors.cinza,
+    marginTop: 12,
+},
+
+vacinas_vazio_descricao: {
+    fontSize: 14,
+    fontFamily: "Nunito_400Regular",
+    color: colors.cinza,
+    textAlign: "center",
+    marginTop: 6,
+},
+
+card_vacina: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    backgroundColor: colors.rosaCard,
+    borderRadius: 24,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: colors.rosa,
+    elevation: 3,
+},
+
+card_vacina_icone: {
+    width: 52,
+    height: 52,
+    borderRadius: 18,
+    backgroundColor: colors.rosaEscuro,
+    alignItems: "center",
+    justifyContent: "center",
+},
+
+card_vacina_textos: {
+    flex: 1,
+    gap: 5,
+},
+
+card_vacina_titulo: {
+    fontFamily: "Fredoka_600SemiBold",
+    fontSize: 19,
+    color: colors.rosaEscuro,
+},
+
+card_vacina_descricao: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 13,
+    color: colors.cinza,
+},
+
+card_vacina_data: {
+    fontFamily: "Nunito_400Regular",
+    fontSize: 12,
+    color: colors.cinza,
+},
+card_vacina_acoes: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 20,
+    marginLeft: 4,
+},
   Titulo_div: {
     flexDirection: "row",
     alignItems: "center",

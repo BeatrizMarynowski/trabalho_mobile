@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocalSearchParams, router } from "expo-router";
-import { Image, Pressable, ScrollView,ImageBackground, View, ActivityIndicator, Alert } from "react-native";
+import { Image, Pressable, ScrollView,ImageBackground,TouchableOpacity, View, ActivityIndicator, Alert } from "react-native";
 import { FAB, Icon, Text, PaperProvider, Portal } from 'react-native-paper';
 import { colors, styles } from '../../../style';
 
@@ -121,6 +121,7 @@ export default function Index() {
                         <Text style={styles.cabecalho_legenda}>Dono: {pet.nometutor}</Text>
                     </View>
                 </View>
+                
 
             </View>
 
