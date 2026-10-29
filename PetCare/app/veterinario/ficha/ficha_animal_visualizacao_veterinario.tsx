@@ -105,12 +105,13 @@ export default function Index() {
             <View style={styles.cabecalho}>
 
                 <View style={styles.cabecalho_titulo_linha}>
+                    <Icon source="clipboard-text-outline" size={26} color={colors.branco} />
+                    <Text style={styles.cabecalho_titulo}>Ficha do pet</Text>
                     <Link href="../menu_veterinario" asChild>
-                        <Pressable hitSlop={12}>
+                        <Pressable style={{ marginLeft: "auto" }} >
                             <Icon source="close" size={30} color={colors.branco} />
                         </Pressable>
                     </Link>
-                    <Text style={styles.cabecalho_titulo}>Ficha do pet</Text>
                 </View>
 
                 {/*view da imagem e nome do pet*/}

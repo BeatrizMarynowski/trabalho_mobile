@@ -31,7 +31,7 @@ return (
                 <View style={styles.qr_tamanho}>
                     <QRCode value={idDoPet} size={220} backgroundColor="transparent" />
                 </View>
-                <Text style={styles.nomePet}>{nomeDoPet}</Text>
+       
                 </View>
             </View>
         </View>

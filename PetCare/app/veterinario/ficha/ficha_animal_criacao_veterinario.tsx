@@ -361,6 +361,7 @@ export default function Index() {
                                     outlineColor={colors.rosa}
                                     activeOutlineColor={colors.rosaEscuro}
                                     textColor={colors.cinza}
+                                     multiline
                                     outlineStyle={{ borderRadius: 22 }}
                                     contentStyle={{ fontFamily: "Nunito_400Regular" }}
                                     left={<TextInput.Icon icon="map-marker-outline" color={colors.rosaEscuro} />}
@@ -386,6 +387,7 @@ export default function Index() {
                                     value={email}
                                     onChangeText={setemail}
                                     mode="outlined"
+                                     multiline
                                     keyboardType="email-address"
                                     autoCapitalize="none"
                                     style={styles.campo_ficha_rosa}

@@ -252,7 +252,7 @@ export default function Index() {
                                     />
 
                                     <TextInput
-                                        label="*Peso (kg)"
+                                        label="*Peso "
                                         value={peso}
                                         onChangeText={setpeso}
                                         mode="outlined"
@@ -379,7 +379,9 @@ export default function Index() {
                                     label="*Endereço"
                                     value={endereco}
                                     onChangeText={setendereco}
+                                     multiline
                                     mode="outlined"
+                                   
                                     style={styles.campo_ficha_rosa}
                                     outlineColor={colors.rosa}
                                     activeOutlineColor={colors.rosaEscuro}
@@ -408,7 +410,9 @@ export default function Index() {
                                     label="*E-mail"
                                     value={email}
                                     onChangeText={setemail}
+                                    multiline
                                     mode="outlined"
+                            
                                     keyboardType="email-address"
                                     autoCapitalize="none"
                                     style={styles.campo_ficha_rosa}

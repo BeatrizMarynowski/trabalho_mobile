@@ -670,7 +670,7 @@ card_resumo_descricao: {
 
   compartilha: {
   width: 340,
-  height: 390,
+  height: 430,
   backgroundColor: colors.rosaCard,     
   borderRadius: 32,
   borderWidth: 2,
@@ -701,7 +701,7 @@ qr_tamanho: {
 qr_titulo: {
   fontFamily: "Fredoka_600SemiBold",
   fontSize: 30,
-  marginTop:40,
+  marginTop:10,
   color: colors.rosaEscuro,
   textAlign: "center",
 },
