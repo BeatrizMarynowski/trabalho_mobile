@@ -37,7 +37,6 @@ export default function RootLayout() {
 
           {/*exames*/}
           <Stack.Screen name="veterinario/exames/exames_criar_veterinario" options={{headerShown: false}} />
-          <Stack.Screen name="veterinario/exames/exames_detalhes_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/exames/exames_editar_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/exames/exames_veterinario" options={{headerShown: false}} />
 
@@ -49,7 +48,6 @@ export default function RootLayout() {
 
           {/*notas*/}
           <Stack.Screen name="veterinario/notas/notas_criar_veterinario" options={{headerShown: false}} />
-          <Stack.Screen name="veterinario/notas/notas_detalhes_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/notas/notas_editar_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/notas/notas_veterinario" options={{headerShown: false}} />
           

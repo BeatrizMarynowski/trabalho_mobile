@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-    StyleSheet,
-    View,
-    Alert,
-    Pressable,
-    Linking,
-} from 'react-native';
-
+import { StyleSheet,View,Alert,Pressable,Linking} from 'react-native';
 import { Text, ActivityIndicator } from 'react-native-paper';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { router } from 'expo-router';
@@ -91,11 +84,8 @@ export default function ScannerTutor() {
                     Precisamos da sua câmera!
                 </Text>
 
-                <Text style={styles.subtitulo}>
-                    {podePedir
-                        ? 'Permita o acesso à câmera para escanear o QR Code do pet.'
-                        : 'O acesso à câmera foi bloqueado. Ative a permissão nas configurações do celular.'}
-                </Text>
+                <Text style={styles.subtitulo}>{podePedir ? 'Permita o acesso à câmera para escanear o QR Code do pet.':
+                'O acesso à câmera foi bloqueado. Ative a permissão nas configurações do celular.'}</Text>
 
                 <Pressable
                     style={styles.botao}

@@ -1,13 +1,14 @@
 import { Link } from "expo-router";
 import * as React from 'react';
-import { Image, Pressable, ScrollView, View, ActivityIndicator } from 'react-native';
-import { FAB, BottomNavigation, Icon, List, Switch, Text } from 'react-native-paper';
+import { Image, Pressable, ScrollView, ImageBackground, View } from 'react-native';
+import { BottomNavigation, FAB, Icon, List, Switch, Text } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
 import { getFirestore, collection, onSnapshot, query, where } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth";
 
 export default function App() {
+  /* codigo pro switch funcionar - vem do componente do react paper*/
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
@@ -18,6 +19,7 @@ export default function App() {
     const db = getFirestore();
     const auth = getAuth();
     const usuarioLogado = auth.currentUser;
+    
 
     if (!usuarioLogado) {
       setLoading(false);
@@ -37,78 +39,259 @@ export default function App() {
       setPets(listaPets);
       setLoading(false);
     }, (error) => {
-      console.error("Erro ao carregar os pets do tutor:", error);
+      console.error("Erro ao carregar os seus pets:", error);
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  const petsRoute = () => (
+  /*codigo que mostra a tela dos pets/criacao da rota da tela do navbar - vem do componente do react native*/
+   const petsRoute = () => (
       /*view principal*/
-      <View style={styles.view_principal}>
-        {/*view para dar espaco*/}
-        <View style={styles.espaco_5}/>
-        
-        {/*nome da pessoa*/}
-        <View style={styles.caixa_ola}>
-          <Icon source="account" size={20} color={colors.preto} />
-          <Text style={styles.titulo_ola}>Olá</Text>
-        </View>
-        
-        {/*rolagem dos animais*/}
-        <ScrollView style={{padding:10}}>
-          
-          {loading ? (
-            <ActivityIndicator size="large" color={colors.verde} style={{ marginTop: 20 }} />
-          ) : pets.length === 0 ? (
-            <Text style={{ textAlign: 'center', marginTop: 20 }}>Você ainda não escaneou nenhum pet.</Text>
-          ) : (
-            pets.map((pet) => (
-              <Link 
-                key={pet.id} 
-                href={`./ficha_animal_visualizacao_tutor?petId=${pet.id}`} 
-                asChild
-              >
-                <Pressable style={styles.botao_animal}>
-                    <View style={styles.view_botao}>
-                        <Image source={require("../../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-                    </View>
-                    <View style={styles.view_animal}>
-                        <Text style={styles.nomePet}>{pet.nomepet}</Text>
-                        <Text style={styles.nomeDono}>Dono: {pet.nometutor}</Text>
-                    </View>
+
+  <ImageBackground
+    source={require("../../assets/images/fundo_rosa.png")}
+    style={{ flex: 1 }}
+    resizeMode="cover"
+  >
+    <View style={[styles.view_principal, { backgroundColor: "transparent" }]}>
+  {/* Espaço no topo */}
+  <View style={styles.espaco_5} />
+      
+      {/*nome da pessoa*/}
+     <View style={styles.caixa_ola_rosa}>
+  <View style={{
+    width: 42,
+    height: 42,
+    borderRadius: 25,
+    backgroundColor: colors.branco,
+    alignItems: "center",
+    justifyContent: "center",
+  }}>
+    <Icon source="paw" size={22} color={colors.medio} />
+  </View>
+
+  <View style={{ flex: 1 }}>
+    <Text style={styles.titulo_ola}>
+      Olá, Tutor(a)! ♡
+    </Text>
+  </View>
+</View>
+<View style={{
+  width: "93%",
+  backgroundColor: colors.branco,
+  borderRadius: 12,
+  padding: 15,
+  marginBottom: 12,
+}}>
+
+  <Text style={{
+    fontSize: 25,
+    fontWeight: "bold",
+    color: colors.cinza,
+    marginTop: 3,
+  }}>
+    Meus pets 🐾
+  </Text>
+
+  <Text style={{
+    fontSize: 12,
+    color: colors.cinza,
+    marginTop: 3,
+  }}>
+    Acompanhe as fichas dos seus animais
+  </Text>
+</View>
+
+  <ScrollView
+    style={{ width: "100%" }}
+    contentContainerStyle={{
+      paddingHorizontal: "5%",
+      paddingTop: 5,
+      paddingBottom: 100,
+    }}
+    showsVerticalScrollIndicator={false}
+  >
+    {loading ? (
+      <Text style={{ color: colors.cinza, textAlign: "center" }}>
+        Carregando pacientes...
+      </Text>
+    ) : pets.length === 0 ? (
+      <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
+        <Icon source="paw" size={55} color={colors.claro} />
+
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "bold",
+            color: colors.cinza,
+            marginTop: 12,
+          }}
+        >
+          Nenhum paciente ainda
+        </Text>
+
+        <Text
+          style={{
+            fontSize: 14,
+            color: colors.cinza,
+            textAlign: "center",
+            marginTop: 6,
+          }}
+        >
+          Adicione uma ficha para começar a acompanhar seus pacientes.
+        </Text>
+      </View>
+    ) : (
+      pets.map((pet) => (
+        <Link
+          key={pet.id}
+          href={`./ficha_animal_visualizacao_tutor?petId=${pet.id}`}
+          asChild
+        >
+
+
+
+          <Pressable style={styles.botao_animal}>
+            <View style={styles.view_botao_sem_rosa}>
+              <Image source={require("../../assets/images/cachorro_gato_abracados.png")} style={styles.foto_animal}/>
+            </View>
+            <View style={styles.view_animal}>
+              <Text style={styles.nomePet}>{pet.nomepet}</Text>
+                   <Text style={{ color: colors.medio,fontSize: 12,marginTop: 5,fontWeight: "bold",  }}    >
+                Ver ficha  →
+              </Text>
+                </View>
+                 <Icon
+              source="chevron-right"
+              size={24}
+              color={colors.claro}
+            />
                 </Pressable>
               </Link>
+                ))
+              )}
+      </ScrollView>
 
-            ))
-          )}
-        </ScrollView>
-      <Link href="./scan_qr_tutor" asChild >
-        <FAB icon="plus" style={{position:"absolute",bottom:"3%",right:"3%"}}/>
-      </Link>
-      </View>
-  );
 
-  const configRoute = () => (
-      <ScrollView style={{ flex: 1, width: "100%", backgroundColor: colors.roxo_fundodatela }}>
-        <View style={styles.espaco_10}/>  
-        <View style={{ padding: 20 }}>
-          <Text variant="titleLarge" style={{fontWeight: 'bold'}}>Configurações</Text>
-          <List.Section>
-            <List.Item title="Editar Perfil" description="Nome, telefone e foto" left={(props) => <List.Icon {...props} icon="account" />}/>
-            <View style={styles.linha}/>
-            <List.Item title="Alterar Senha" left={props => <List.Icon {...props} icon="lock-reset" />}/>
-            <View style={styles.linha}/>
-            <List.Item title="Notificações e Lembretes" description="Receber alertas sobre vacinas pendentes" left={props => <List.Icon {...props} icon="bell-outline" />} right={() => ( <Switch value={isSwitchOn} onValueChange={onToggleSwitch} /> )}/>
-            <View style={styles.linha}/>
-            <Link href="/">
-              <List.Item title="Sair da conta" left={props => <List.Icon {...props} icon="exit-to-app" />}/>
-            </Link>
-          </List.Section>
+      {/*botao para a criacao de uma nova ficha*/}
+      <Link href="./scan_qr_tutor" asChild>
+  <Pressable style={{
+    width: "96%",
+    backgroundColor: colors.medio,
+    borderRadius: 10,
+    paddingVertical: 13,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 8,
+    marginBottom: 10,
+  }}>
+    <Icon source="plus-circle-outline" size={18} color={colors.branco} />
+
+    <Text style={{
+      color: colors.branco,
+      fontSize: 13,
+      fontWeight: "bold",
+    }}>
+      Escanear seu pet
+    </Text>
+  </Pressable>
+</Link>
         </View>
+  </ImageBackground>
+);
+
+  /*codigo que mostra a tela das configuracoes*/
+  
+const configRoute = () => (
+  <ImageBackground
+    source={require("../../assets/images/fundo.png")}
+    style={{ flex: 1 }}
+    resizeMode="cover"
+  >
+    <ScrollView style={{ flex: 1, width: "100%" }}>
+      <View style={styles.espaco_10} />
+
+      <View style={{ padding: 20 }}>
+        <Text variant="titleLarge" style={styles.tituloPrincipal}>
+          Configurações
+        </Text>
+
+        <List.Section style={[styles.secao, { gap: 0, marginTop: 16 }]}>
+          <List.Item
+            title="Editar Perfil"
+            description="Nome, telefone e foto"
+            titleStyle={styles.botao_perfil_titulo}
+            descriptionStyle={styles.botao_perfil_sub}
+            left={(props) => (
+              <List.Icon {...props} icon="account" color={colors.medio} />
+            )}
+          />
+
+          <View style={[styles.linha, { opacity: 0.3 }]} />
+
+          <List.Item
+            title="Alterar Senha"
+            titleStyle={styles.botao_perfil_titulo}
+            left={(props) => (
+              <List.Icon {...props} icon="lock-reset" color={colors.medio} />
+            )}
+          />
+
+          <View style={[styles.linha, { opacity: 0.3 }]} />
+
+          <List.Item
+            title="Notificações e Lembretes"
+            titleNumberOfLines={2}
+            description="Receber alertas sobre vacinas pendentes"
+            descriptionNumberOfLines={2}
+            titleStyle={styles.botao_perfil_titulo}
+            descriptionStyle={styles.botao_perfil_sub}
+            style={{ paddingRight: 0 }}
+            left={(props) => (
+              <List.Icon {...props} icon="bell-outline" color={colors.medio} />
+            )}
+            right={() => (
+              <Switch
+                value={isSwitchOn}
+                onValueChange={onToggleSwitch}
+                color={colors.medio}
+                style={{
+                  transform: [
+                    { translateX: 1 },
+                    { translateY: 15 },
+                    { scale: 0.9 },
+                  ],
+                }}
+              />
+            )}
+          />
+
+          <View style={[styles.linha, { opacity: 0.3 }]} />
+
+          <Link href="/" asChild>
+            <List.Item
+              title="Sair da conta"
+              titleStyle={[
+                styles.botao_perfil_titulo,
+                { color: colors.alerta },
+              ]}
+              left={(props) => (
+                <List.Icon
+                  {...props}
+                  icon="exit-to-app"
+                  color={colors.alerta}
+                />
+              )}
+            />
+          </Link>
+        </List.Section>
+      </View>
     </ScrollView>
-  );
+  </ImageBackground>
+);
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -116,18 +299,30 @@ export default function App() {
     { key: 'configuracoes', title: 'Ajustes', focusedIcon: 'cog' },
   ]);
 
+  /*essa eh a parte que configura o bottomnavigation(isso foi pego como componente pronto do react paper)*/
   const renderScene = BottomNavigation.SceneMap({
     pets: petsRoute,
     configuracoes: configRoute,
   });
 
+  /*essa realmente seria a tela - vem do componente do react paper*/
   return (
     <View style={styles.container}>
       <BottomNavigation
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
         renderScene={renderScene}
+        shifting={false}
+        activeColor={colors.medio}
+        inactiveColor={colors.cinza}
+        barStyle={{
+          backgroundColor: "#FFFFFF",
+          borderTopWidth: 1,
+          borderTopColor: "#E4EBD6",
+          height: "10%",
+        }}
       />
     </View>
   );
+  
 };

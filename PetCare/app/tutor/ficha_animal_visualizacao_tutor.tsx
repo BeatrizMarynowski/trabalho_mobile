@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocalSearchParams } from "expo-router"; // 1. Importa para pegar o petId da rota
-import { Image, Pressable, ScrollView, View, ActivityIndicator } from "react-native";
-import { Icon, Text } from 'react-native-paper';
+import React, { useState, useEffect } from "react";
+import { Link, useLocalSearchParams, router } from "expo-router";
+import { Image, Pressable, ScrollView,ImageBackground,TouchableOpacity, View, ActivityIndicator, Alert } from "react-native";
+import { FAB, Icon, Text, PaperProvider, Portal } from 'react-native-paper';
 import { colors, styles } from '../../style';
 
-// 2. Importações do Firestore
-import { getFirestore, doc, getDoc } from "firebase/firestore"; 
+import { getFirestore, doc, getDoc, deleteDoc } from "firebase/firestore"; 
 
 export default function Index() {
   const { petId } = useLocalSearchParams<{ petId: string }>();
@@ -37,8 +36,8 @@ export default function Index() {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.roxo_fundodatela }}>
-        <ActivityIndicator size="large" color={colors.verde} />
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.rosa }}>
+        <ActivityIndicator size="large" color={colors.rosaEscuro} />
       </View>
     );
   }
@@ -53,125 +52,158 @@ export default function Index() {
 
   return (
     /*view principal*/
-    <View style={styles.view_principal}>
-        {/*seta que volta para o menu*/}
-        <Link href="./menu_tutor" style={styles.seta_voltar}>
-            <Image source={require('../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
-        </Link>
+    <PaperProvider>
+
+    <ImageBackground
+        source={require("../../assets/images/fundo.png")}
+        style={{ flex: 1 }}
+        resizeMode="cover"
+      >
+
         {/*view para dar espaço na tela - 10*/}
         <View style={styles.espaco_10}/>
         
         {/*view da ficha*/}
         <ScrollView style={styles.view_secundaria_largura}>
-        <View style={styles.view_ficha}>
-            {/*view da imagem e nome do pet*/}
+        <View style={styles.view_ficha_criacao}>
             <View style={styles.cabecalho}>
-                <Image source={require("../../assets/images/rodolfo.png")} style={styles.foto_animal}/>
-                <View>
-                    {/* 4. Nome e Dono DINÂMICOS do banco */}
-                    <Text style={styles.nomePet}>{pet.nomepet}</Text>
-                    <Text style={styles.nomeDono}>Dono: {pet.nometutor}</Text> 
+
+                <View style={styles.cabecalho_titulo_linha}>
+                    <Icon source="clipboard-text-outline" size={26} color={colors.branco} />
+                    <Text style={styles.cabecalho_titulo}>Ficha do pet</Text>
+                    <Link href="./menu_tutor" asChild>
+                        <Pressable style={{ marginLeft: "auto" }} >
+                            <Icon source="close" size={30} color={colors.branco} />
+                        </Pressable>
+                    </Link>
                 </View>
+
+                {/*view da imagem e nome do pet*/}
+                <View style={styles.cabecalho_titulo_linha}>
+                    <View>
+                        <Text style={styles.cabecalho_titulo}>{pet.nomepet}</Text>
+                    </View>
+                </View>
+                
+
             </View>
-            
+
             {/*view do pet e do dono com os dados dinâmicos do Firestore */}
-            <View style={styles.view_das_info}>
-                <View style={styles.dados_animal_e_dono}>
-                    <View style={styles.dados_div_animal_dono}>
-                        <Text style={styles.titulo_verde_pequeno}>Animal</Text>
-                        <Text style={styles.dadosTexto}>Espécie: {pet.especie}</Text>
-                        <Text style={styles.dadosTexto}>Raça: {pet.raca}</Text>
-                        <Text style={styles.dadosTexto}>Idade: {pet.idade}</Text>
-                        <Text style={styles.dadosTexto}>Peso: {pet.peso}</Text>
-                        <Text style={styles.dadosTexto}>Sexo: {pet.sexo}</Text>
-                        <Text style={styles.dadosTexto}>Castrado: {pet.castrado}</Text>
+            <View style={[styles.container_secoes_ficha, styles.secoes_ficha_fim]}>
+
+                <View style={styles.card_ficha_novo}>
+
+                    <View style={styles.titulo_secao_ficha}>
+                        <Icon source="paw" size={22} color={colors.rosaEscuro} />
+                        <Text style={styles.texto_titulo_secao_ficha}>Animal</Text>
                     </View>
-                    <View style={styles.dados_div_animal_dono}>
-                        <Text style={styles.titulo_verde_pequeno}>Dono</Text>
-                        <Text style={styles.dadosTexto}>CPF: {pet.cpf}</Text>
-                        <Text style={styles.dadosTexto}>Endereço: {pet.endereco}</Text>
-                        <Text style={styles.dadosTexto}>Telefone: {pet.telefone}</Text>
-                        <Text style={styles.dadosTexto}>Email: {pet.email}</Text>
+
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>Espécie</Text>
+                        <Text style={styles.valor_dado}>{pet.especie}</Text>
                     </View>
-                </View>
-            </View>
-            
-            <View style={styles.linha}/>
-            
-            {/*view das vacinas*/}          
-            <View style={styles.view_das_info}>
-                <View style={styles.Titulo_div}>
-                    <Icon source="needle" size={18} color={colors.verde} />
-                    <Text style={styles.titulo_conf}>Vacinas</Text>
-                </View>
-                <View style={styles.vacinasLista}>
-                    <View style={styles.vacina_card}>
-                        <Text style={styles.vacina_nome}>Polivalente</Text>
-                        <View style={styles.statusSelo_verde}>
-                            <View style={styles.pontovac_verde} />
-                            <Text style={styles.statusTexto}>Em dia</Text>
-                        </View>
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>Raça</Text>
+                        <Text style={styles.valor_dado}>{pet.raca}</Text>
                     </View>
-                    <View style={styles.vacina_card}>
-                        <Text style={styles.vacina_nome}>Antirrábica</Text>
-                        <View style={styles.statusSelo_vemelho}>
-                            <View style={styles.pontovac_vermelho} />
-                            <Text style={styles.statusTexto}>Atrasada</Text>
-                        </View>
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>Idade</Text>
+                        <Text style={styles.valor_dado}>{pet.idade}</Text>
                     </View>
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>Peso</Text>
+                        <Text style={styles.valor_dado}>{pet.peso}</Text>
+                    </View>
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>Sexo</Text>
+                        <Text style={styles.valor_dado}>{pet.sexo}</Text>
+                    </View>
+                    <View style={[styles.linha_dado, styles.linha_dado_ultima]}>
+                        <Text style={styles.seletor_label}>Castrado</Text>
+                        <Text style={styles.valor_dado}>{pet.castrado}</Text>
+                    </View>
+
                 </View>
-                <Link href="./vacinas_tutor" asChild>
-                    <Pressable style={styles.botaodetalhes}>
-                        <Text style={styles.texto_botao_detalhes}>detalhes</Text>
-                        <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
-                    </Pressable>
-                </Link>
-            </View>
-            
-            <View style={styles.linha}/>
-            
-            {/*view dos exames*/} 
-            <View style={styles.view_das_info}>
-                <View style={styles.Titulo_div}> 
-                    <Icon source="flask-outline" size={18} color={colors.verde} /> 
-                    <Text style={styles.titulo_conf}>Exames</Text>
+
+                <View style={styles.card_ficha_novo}>
+
+                    <View style={styles.titulo_secao_ficha}>
+                        <Icon source="account-outline" size={22} color={colors.rosaEscuro} />
+                        <Text style={styles.texto_titulo_secao_ficha}>Dono</Text>
+                    </View>
+
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>CPF</Text>
+                        <Text style={styles.valor_dado}>{pet.cpf}</Text>
+                    </View>
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>Endereço</Text>
+                        <Text style={styles.valor_dado}>{pet.endereco}</Text>
+                    </View>
+                    <View style={styles.linha_dado}>
+                        <Text style={styles.seletor_label}>Telefone</Text>
+                        <Text style={styles.valor_dado}>{pet.telefone}</Text>
+                    </View>
+                    <View style={[styles.linha_dado, styles.linha_dado_ultima]}>
+                        <Text style={styles.seletor_label}>Email</Text>
+                        <Text style={styles.valor_dado}>{pet.email}</Text>
+                    </View>
+
                 </View>
-                <View style={styles.dados_card_exame}>
-                    <Text style={styles.titulo_card_exame}>Hemograma completo</Text>
-                    <Text style={styles.dados_exame}>dr. Carlos Silva</Text>
-                    <Text style={styles.dados_exame}>22/02/2222</Text>
+
+                <View style={styles.linha_2}/>
+
+
+       
+                   
+                {/*view das notas dinâmicas*/}
+                <View style={styles.card_ficha_novo}>
+                    <View style={styles.titulo_secao_ficha}>
+                        <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
+                        <Text style={styles.texto_titulo_secao_ficha}>Notas</Text>
+                    </View>
+                    <Link href={`./notas_tutor?petId=${petId}`} asChild>
+                        <Pressable style={styles.botao_detalhes_rosa}>
+                            <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
+                            <Icon source="chevron-right" size={14} color={colors.branco} />
+                        </Pressable>
+                    </Link>
                 </View>
-                <Link href="./exames_tutor" asChild>
-                    <Pressable style={styles.botaodetalhes}>
-                        <Text style={styles.texto_botao_detalhes}>detalhes</Text>
-                        <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
-                    </Pressable>
-                </Link>
-            </View>
-            
-            <View style={styles.linha}/>
-            
-            {/*view das notas dinâmicas*/} 
-            <View style={styles.view_das_info}>
-                <View style={styles.Titulo_div}>
-                    <Icon source="note-text-outline" size={18} color={colors.verde} />
-                    <Text style={styles.titulo_conf}>Notas</Text>
+
+                <View style={styles.card_ficha_novo}>
+                    <View style={styles.titulo_secao_ficha}>
+                        <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
+                        <Text style={styles.texto_titulo_secao_ficha}>Vacinas</Text>
+                    </View>
+                    <Link href={`./vacinas_tutor?petId=${petId}`} asChild>
+                        <Pressable style={styles.botao_detalhes_rosa}>
+                            <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
+                            <Icon source="chevron-right" size={14} color={colors.branco} />
+                        </Pressable>
+                    </Link>
                 </View>
-                <View style={styles.dados_card_exame}>
-                    <Text style={styles.dados_exame}>dr. Carlos Silva</Text>
-                    {/* Exibe as notas criadas na ficha */}
-                    <Text style={styles.titulo_card_exame}>{pet.notas || "Sem observações."}</Text>
+
+                <View style={styles.card_ficha_novo}>
+                    <View style={styles.titulo_secao_ficha}>
+                        <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
+                        <Text style={styles.texto_titulo_secao_ficha}>Exames</Text>
+                    </View>
+                    <Link href={`./exames_tutor?petId=${petId}`} asChild>
+                        <Pressable style={styles.botao_detalhes_rosa}>
+                            <Text style={styles.texto_botao_detalhes_rosa}>Detalhes</Text>
+                            <Icon source="chevron-right" size={14} color={colors.branco} />
+                        </Pressable>
+                    </Link>
                 </View>
-                <Link href="./notas_tutor" asChild>
-                    <Pressable style={styles.botaodetalhes}>
-                        <Text style={styles.texto_botao_detalhes}>detalhes</Text>
-                        <Icon source="chevron-right" size={14} color={colors.roxo_escuro} />
-                    </Pressable>
-                </Link>
-            </View>
-        </View>
+                </View>
+
+                </View>
+
         </ScrollView>
+
+        
         <View style={styles.espaco_5}/>
-    </View>
+     </ImageBackground>
+    </PaperProvider>
   );
 }
