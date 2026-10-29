@@ -73,10 +73,14 @@ export default function App() {
   </View>
 
   <View style={{ flex: 1 }}>
-    <Text style={styles.titulo_ola}>
-      Olá, Tutor(a)! ♡
-    </Text>
-  </View>
+      <Text style={styles.titulo_ola}>
+        Olá, Tutor(a)! ♡
+      </Text>
+  
+      <Text style={{ fontSize: 14, color: colors.medio, marginTop: 3 }}>
+        Vamos cuidar dos seus pets?
+      </Text>
+    </View>
 </View>
 <View style={{
   width: "93%",
@@ -115,7 +119,7 @@ export default function App() {
   >
     {loading ? (
       <Text style={{ color: colors.cinza, textAlign: "center" }}>
-        Carregando pacientes...
+        Carregando pets...
       </Text>
     ) : pets.length === 0 ? (
       <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
@@ -129,7 +133,7 @@ export default function App() {
             marginTop: 12,
           }}
         >
-          Nenhum paciente ainda
+          Nenhum pet ainda
         </Text>
 
         <Text
@@ -140,7 +144,7 @@ export default function App() {
             marginTop: 6,
           }}
         >
-          Adicione uma ficha para começar a acompanhar seus pacientes.
+          Adicione uma ficha para começar a acompanhar seus pets.
         </Text>
       </View>
     ) : (

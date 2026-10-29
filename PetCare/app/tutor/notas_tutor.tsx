@@ -34,7 +34,7 @@ export default function Index() {
           setNotas(listanotas);
           setLoading(false);
         }, (error) => {
-          console.error("Erro ao carregar os seus pets:", error);
+          console.error("Erro ao carregar suas notas:", error);
           setLoading(false);
         });
     
@@ -44,7 +44,7 @@ export default function Index() {
     const deletar = async (notasId: string) => {
               Alert.alert(
               "Excluir Ficha",
-              "Tem certeza de que deseja excluir este pet? Esta ação não pode ser desfeita.",
+              "Tem certeza de que deseja excluir essa nota? Esta ação não pode ser desfeita.",
               [{
                   text: "Cancelar",
                   style: "cancel"
@@ -75,7 +75,7 @@ return (
             <View style={styles.card_resumo}>
                 <View style={styles.card_resumo_textos}>
                     <Text style={styles.card_resumo_titulo}>Notas</Text>
-                    <Text style={styles.card_resumo_descricao}>Faça observações e recomendações sobre animais sob seus cuidados.</Text>
+                    <Text style={styles.card_resumo_descricao}>Veja as observações e recomendações do veterinário sobre o seu pet.</Text>
                 </View>
             </View>
 

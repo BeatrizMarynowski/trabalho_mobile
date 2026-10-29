@@ -35,7 +35,7 @@ export default function Index() {
             setvacinas(listavacinas);
             setLoading(false);
         }, (error) => {
-            console.error("Erro ao carregar os seus pets:", error);
+            console.error("Erro ao carregar as suas vacinas:", error);
             setLoading(false);
         });
     
@@ -45,7 +45,7 @@ export default function Index() {
     const deletar = async (vacinasId: string) => {
         Alert.alert(
         "Excluir Ficha",
-        "Tem certeza de que deseja excluir este pet? Esta ação não pode ser desfeita.",
+        "Tem certeza de que deseja excluir essa vacina? Esta ação não pode ser desfeita.",
         [{
             text: "Cancelar",
             style: "cancel"
@@ -76,7 +76,7 @@ return (
             <View style={styles.card_resumo}>
                 <View style={styles.card_resumo_textos}>
                     <Text style={styles.card_resumo_titulo}>Vacinas</Text>
-                    <Text style={styles.card_resumo_descricao}>Acompanhe as vacinas dos animais sob seus cuidados.</Text>
+                    <Text style={styles.card_resumo_descricao}>Acompanhe as vacinas do seu pet e fique de olho nas próximas doses.</Text>
                 </View>
             </View>
   
