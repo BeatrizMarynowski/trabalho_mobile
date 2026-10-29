@@ -97,7 +97,7 @@ export default function Index() {
             <Text style={styles.form_botao_texto}>Entrar</Text>
           </Pressable>
 
-          <Link href="./esqueceu" asChild>
+          <Link href="../esqueceu" asChild>
             <Pressable hitSlop={8}>
               <Text style={styles.form_link}>Esqueceu sua senha?</Text>
             </Pressable>
