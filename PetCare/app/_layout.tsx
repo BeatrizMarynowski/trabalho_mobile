@@ -55,7 +55,6 @@ export default function RootLayout() {
           
           {/*vacinas*/}
           <Stack.Screen name="veterinario/vacinas/vacinas_veterinario" options={{headerShown: false}} />
-          <Stack.Screen name="veterinario/vacinas/vacinas_detalhes_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/vacinas/vacinas_criar_veterinario" options={{headerShown: false}} />
           <Stack.Screen name="veterinario/vacinas/vacinas_editar_veterinario" options={{headerShown: false}} />
 

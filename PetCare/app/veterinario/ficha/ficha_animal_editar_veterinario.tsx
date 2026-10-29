@@ -33,18 +33,18 @@ export default function Index() {
 
                 if (docSnap.exists()) {
                     const dados = docSnap.data();
-                    setnomepet(dados.nomepet || "");
-                    setnometutor(dados.nometutor || "");
-                    setespecie(dados.especie || "");
-                    setraca(dados.raca || "");
-                    setidade(dados.idade ? String(dados.idade) : "");
-                    setpeso(dados.peso ? String(dados.peso) : "");
-                    setsexo(dados.sexo || "");
-                    setcastrado(dados.castrado || "");
-                    setcpf(dados.cpf || "");
-                    setendereco(dados.endereco || "");
-                    settelefone(dados.telefone || "");
-                    setemail(dados.email || "");
+                    setnomepet(dados.nomepet);
+                    setnometutor(dados.nometutor);
+                    setespecie(dados.especie);
+                    setraca(dados.raca);
+                    setidade(dados.idade);
+                    setpeso(dados.peso);
+                    setsexo(dados.sexo);
+                    setcastrado(dados.castrado);
+                    setcpf(dados.cpf);
+                    setendereco(dados.endereco);
+                    settelefone(dados.telefone);
+                    setemail(dados.email);
                 } else {
                     Alert.alert("Erro", "Ficha não encontrada.");
                 }

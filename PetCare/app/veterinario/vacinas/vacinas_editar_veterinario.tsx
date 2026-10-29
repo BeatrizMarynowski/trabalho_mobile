@@ -1,188 +1,170 @@
-import { Link, router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
-import { Alert, Image, KeyboardAvoidingView,ImageBackground, Platform, Pressable, ScrollView, View} from "react-native";
+import { Alert,ImageBackground, Pressable, ScrollView, View} from "react-native";
 import { Icon, Text, TextInput } from "react-native-paper";
 import { colors, styles } from "../../../style";
 
-import { getAuth } from "firebase/auth";
-import { getFirestore, collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 
 export default function Index() {
-    const { vacinasId } = useLocalSearchParams<{ vacinasId: string }>();
-    const [vacinas, setvacinas] = useState("");
-    const [nome, setnome] = useState("");
+    const { vacinasId, petId } = useLocalSearchParams<{ vacinasId: string, petId: string }>();
     const [loading, setLoading] = useState(true);
+    const [vacina, setvacina] = useState("");
+    const [aplicacao, setaplicacao] = useState("");
+    const [proximadose, setproximadose] = useState("");
+    const [observacoes, setobservacoes] = useState("");
 
     useEffect(() => {
-           const carregarDadosvacinas = async () => {
-               if (!vacinasId) return;
-               const db = getFirestore();
-               try {
-                   const docRef = doc(db, "vacinas", vacinasId);
-                   const docSnap = await getDoc(docRef);
-   
-                   if (docSnap.exists()) {
-                       const dados = docSnap.data();
-                       setnome(dados.nome || "");
-                       setvacinas(dados.vacinas || "");
-                   } else {
-                       Alert.alert("Erro", "Ficha não encontrada.");
-                   }
-               } catch (error) {
-                   console.error("Erro ao carregar dados para edição:", error);
-               } finally {
-                   setLoading(false);
-               }
-           };
-   
-           carregarDadosvacinas();
-       }, [vacinasId]);
-   
-       const editarvacina = async () => {
-           if ( !nome || !vacinas
-           ) {
-               Alert.alert(
-                   "Atenção",
-                   "Por favor, preencha todos os campos!"
-               );
-               return;
-           }
-   
-           const auth = getAuth();
-           const db = getFirestore();
-           const user = auth.currentUser;
-           const docRef = doc(db, "vacinas", vacinasId);
-   
-           try {
-               await updateDoc(docRef, {
-               nome,
-               vacinas,
-           }
-       );
-   
-       router.push({
-           pathname: "./vacinas_detalhes_veterinario",
-           params: {
-               vacinasId: vacinasId
-           }
-       });
-   } catch (error) {
-       console.error("Erro ao  alterações:", error);
-   
-       Alert.alert(
-           "Erro",
-           "Não foi possível criar a ficha. Tente novamente"
-       );
-   }}
+        const carregarvacinas = async () => {
+            if (!vacinasId) return;
+            const db = getFirestore();
+            try {
+               const docRef = doc(db, "vacinas", vacinasId);
+               const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const dados = docSnap.data();
+                    setvacina(dados.vacina);
+                    setaplicacao(dados.aplicacao);
+                    setproximadose(dados.proximadose);
+                    setobservacoes(dados.observacoes);
+                } else {
+                   Alert.alert("Erro", "Ficha não encontrada.");
+                }
+                } catch (error) {
+                    console.error("Erro ao carregar dados para edição:", error);
+                } finally {
+                    setLoading(false);
+                }
+        };
+        carregarvacinas();
+        }, [vacinasId]);
 
-        return (
-        <KeyboardAvoidingView
-            style={{ flex: 1 }}
-        >
-            <ImageBackground
-                    source={require("../../../assets/images/fundo.png")}
-                    style={{ flex: 1 }}
-                    resizeMode="cover"
-                  >
+    const editarvacina = async () => {
+        if ( !vacina || !aplicacao) {
+           Alert.alert(
+                "Atenção",
+               "Por favor, preencha todos os campos!"
+            );
+            return;
+        }
+        const db = getFirestore();
+        const docRef = doc(db, "vacinas", vacinasId);
+        try {
+            await updateDoc(docRef, {
+                vacina,
+                aplicacao,
+                proximadose,
+                observacoes,
+            });
 
-    
-              
+            router.push({
+                pathname: "./vacinas_veterinario",
+                params: {petId: petId}
+            });
 
-                {/* Espaço superior */}
+            } catch (error) {
+                console.error("Erro ao  alterações:", error);
+                
+                Alert.alert(
+                    "Erro",
+                    "Não foi possível criar a ficha. Tente novamente"
+                );
+            }
+    }
+
+       return (
+        <View style={{ flex: 1 }}>
+            <ImageBackground source={require("../../../assets/images/fundo.png")} style={{ flex: 1 }} resizeMode="cover">
                 <View style={styles.espaco_topo_ficha} />
-
-                {/* Ficha */}
-                <ScrollView
-                    style={styles.view_secundaria_largura}
-                    contentContainerStyle={{ paddingBottom: 30 }}
-                    keyboardShouldPersistTaps="handled"
-                    showsVerticalScrollIndicator={false}
-                >
+                <ScrollView style={styles.view_secundaria_largura}contentContainerStyle={{paddingBottom: 30}}>
                     <View style={styles.view_ficha_criacao}>
 
                         {/* Cabeçalho */}
                         <View style={styles.cabecalho}>
-
                             <View style={styles.cabecalho_titulo_linha}>
-                                <Icon
-                                    source="clipboard-text-outline"
-                                    size={26}
-                                    color={colors.branco}
-                                />
-                                <Text style={styles.cabecalho_titulo}>
-                                    Nova ficha
-                                </Text>
-                                <Link href="./menu_veterinario" asChild>
-                                  <Pressable  style={{ marginLeft: "auto" }}>
-                                      <Icon source="close" size={35} color={colors.branco} />
-                                  </Pressable>
-                              </Link>
+                                <Icon source="needle" size={28} color={colors.branco}/>
+                                <Text style={styles.cabecalho_titulo}>Editar vacina</Text>
+                                <Pressable onPress={() => router.back()} style={{ marginLeft: "auto" }}>
+                                    <Icon source="close"size={30}color={colors.branco}/>
+                                </Pressable>
                             </View>
 
-                            <View style={styles.cabecalho_campos}>
-
-                                <Text style={styles.cabecalho_legenda}>
-                                    Preencha os dados do pet e do tutor
-                                </Text>
-
-                          
-<TextInput
-    placeholder="*Nome do pet"
-    placeholderTextColor={colors.rosaEscuro}
-    value={vacinas}
-    onChangeText={setvacinas}
-    mode="outlined"
-    outlineColor={colors.rosa}
-    activeOutlineColor={colors.rosaEscuro}
-    textColor={colors.cinza}
-    outlineStyle={{ borderRadius: 20 }}
-    contentStyle={{ fontFamily: "Nunito_400Regular" }}
-    left={<TextInput.Icon icon="paw" color={colors.rosaEscuro} />}
-    style={styles.campo_cabecalho}
-/>
-
-<TextInput
-    placeholder="*Nome do tutor"
-    placeholderTextColor={colors.rosaEscuro}
-    value={nome}
-    onChangeText={setnome}
-    mode="outlined"
-    outlineColor={colors.rosa}
-    activeOutlineColor={colors.rosaEscuro}
-    textColor={colors.cinza}
-    outlineStyle={{ borderRadius: 20 }}
-    contentStyle={{ fontFamily: "Nunito_400Regular" }}
-    left={<TextInput.Icon icon="account-outline" color={colors.rosaEscuro} />}
-    style={styles.campo_cabecalho}
-/>
-                            </View>
+                            <Text style={styles.cabecalho_legenda}>Edite uma vacina da ficha do pet</Text>
                         </View>
 
-                        {/* Botão criar ficha */}
-                        <Pressable
-                            style={({ pressed }) => [
-                                styles.botao_principal,
-                                pressed && { opacity: 0.85, transform: [{ scale: 0.98 }] }
-                            ]}
-                            onPress={editarvacina}
-                        >
-                            <View style={styles.botao_principal_conteudo}>
-                                <Icon
-                                    source="check-circle-outline"
-                                    size={22}
-                                    color={colors.branco}
-                                />
-                                <Text style={styles.texto_botao_principal}>
-                                    Atualizar vacina
-                                </Text>
-                            </View>
-                        </Pressable>
+                        {/* Conteúdo */}
+                        <View style={styles.container_secoes_ficha}>
+    
+                            {/* Dados da vacina */}
+                            <View style={styles.card_ficha_novo}>
+                                <View style={styles.titulo_secao_ficha}>
+                                    <Icon source="needle" size={24} color={colors.rosaEscuro}/>
+                                    <Text style={styles.texto_titulo_secao_ficha}>Dados da vacina</Text>
+                                </View>
 
+                                <View style={styles.linha_2}/>
+
+                                <Text style={styles.seletor_label}>Nome da vacina *</Text>
+
+                                <TextInput
+                                    mode="outlined"
+                                    placeholder="Ex.: Antirrábica"
+                                    value={vacina}
+                                    onChangeText={setvacina}
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    outlineStyle={{ borderRadius: 28 }}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                />
+                                <Text style={styles.seletor_label}>Data da aplicação *</Text>
+                                <TextInput
+                                    mode="outlined"
+                                    placeholder="DD/MM/AAAA"
+                                    value={aplicacao}
+                                    onChangeText={setaplicacao}
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    outlineStyle={{ borderRadius: 28 }}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                />
+                                <Text style={styles.seletor_label}>Próxima dose</Text>
+                                <TextInput
+                                    mode="outlined"
+                                    placeholder="DD/MM/AAAA"
+                                    value={proximadose}
+                                    onChangeText={setproximadose}
+                                    style={styles.campo_ficha_rosa}
+                                    outlineColor={colors.rosa}
+                                    outlineStyle={{ borderRadius: 28 }}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                />
+                                <Text style={styles.seletor_label}>Observações</Text>
+                                <TextInput
+                                    mode="outlined"
+                                    placeholder="Adicione observações sobre a aplicação..."
+                                    value={observacoes}
+                                    onChangeText={setobservacoes}
+                                    multiline
+                                    numberOfLines={4}
+                                    style={ styles.campo_ficha_multilinha_m
+                                    }
+                                    outlineColor={colors.rosa}
+                                    outlineStyle={{ borderRadius: 28 }}
+                                    activeOutlineColor={colors.rosaEscuro}
+                                />
+                            </View>
+
+                            {/* Botão de salvar */}
+                            <Pressable style={styles.botao_principal} onPress={editarvacina}>
+                                <View style={ styles.botao_principal_conteudo }>
+                                    <Icon  source="content-save" size={22} color={colors.branco}/>
+                                    <Text style={styles.texto_botao_principal}>Salvar vacina</Text>
+                                </View>
+                            </Pressable>
+                        </View>
                     </View>
                 </ScrollView>
-
-        
             </ImageBackground>
-        </KeyboardAvoidingView>
+        </View>
     );
 }
