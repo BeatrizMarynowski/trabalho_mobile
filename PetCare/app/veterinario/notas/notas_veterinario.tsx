@@ -1,7 +1,7 @@
-import { Link, router, useLocalSearchParams } from "expo-router";
 import * as React from "react";
-import { Alert, Image, ScrollView, View, Pressable } from "react-native";
-import { FAB, Icon, Text } from 'react-native-paper';
+import { Link, router, useLocalSearchParams } from "expo-router";
+import { Alert, Image, ImageBackground, ScrollView, View, Pressable, TouchableOpacity } from "react-native";
+import { FAB, Icon, PaperProvider, Text, Portal } from 'react-native-paper';
 import { colors, styles } from '../../../style';
 
 import { getFirestore, collection, onSnapshot, query, where } from "firebase/firestore"; 
@@ -10,7 +10,7 @@ import { getAuth } from "firebase/auth";
 
 export default function Index() {
     const { petId } = useLocalSearchParams<{ petId: string }>();
-    const [notas, setnotas] = React.useState<any[]>([]);
+    const [notas, setNotas] = React.useState<any[]>([]);
     const [loading, setLoading] = React.useState(true);
     
       React.useEffect(() => {
@@ -35,7 +35,7 @@ export default function Index() {
             id: doc.id,
             ...doc.data()
           }));
-          setnotas(listanotas);
+          setNotas(listanotas);
           setLoading(false);
         }, (error) => {
           console.error("Erro ao carregar os seus pets:", error);
@@ -46,22 +46,34 @@ export default function Index() {
       }, [petId]);
 return (
 /*view principal*/
-    <View style={styles.view_principal}>
-        {/*seta que volta para o menu*/}
-        <Link
-                  key={petId}
-                  href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`}
-                  style={styles.seta_voltar}
-                >
-            <Image source={require('../../../assets/images/seta_v.png')} style={styles.imagem_seta}/>
+    <PaperProvider>
+      <ImageBackground
+            source={require("../../../assets/images/fundo.png")}
+            style={{ flex: 1 }}
+            resizeMode="cover"
+          >
+
+             <Link key={petId}
+                  href={`./ficha_animal_visualizacao_veterinario?petId=${petId}`} style={styles.posicao_seta}>
+          <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>
+
         {/*view para dar espaço na tela*/}
         <View style={styles.espaco_10}/>
         {/*titulo da tela - NOTAS*/}
-        <View style={styles.Titulo_vacina}>
-            <Icon source="note-text-outline" size={20} color={colors.verde} />
-            <Text style={styles.titulo_vacinas_pagina}>notas</Text>
-        </View>
+        <TouchableOpacity activeOpacity={0.85} style={styles.card_resumo}>
+
+  <View style={styles.card_resumo_textos}>
+    <Text style={styles.card_resumo_titulo}>Notas</Text>
+    <Text style={styles.card_resumo_descricao}>
+      Faça observações e recomendações sobre animais sob seus cuidados.
+    </Text>
+  </View>
+
+
+</TouchableOpacity>
+  
+
 {/*view das info das notas - card*/}
 
 <ScrollView
@@ -74,45 +86,107 @@ return (
             showsVerticalScrollIndicator={false}
           >
             {loading ? (
-              <Text style={{ color: colors.cinza, textAlign: "center" }}>
-                Carregando vaconas...
-              </Text>
-            ) : notas.length === 0 ? (
-              <View style={{ alignItems: "center", marginTop: 35, padding: 20 }}>
+    <Text style={{ color: colors.cinza, textAlign: "center" }}>
+        Carregando notas...
+    </Text>
+) : notas.length === 0 ? (
+    <Link
+        href={`../ficha/ficha_animal_visualizacao_veterinario?petId=${petId}`}
+        asChild
+    >
+        <Pressable>
+            <View style={styles.vacinas_vazio}>
                 <Icon source="paw" size={55} color={colors.claro} />
-        
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "bold",
-                    color: colors.cinza,
-                    marginTop: 12,
-                  }}
-                >
-                  Nenhuma notas registrada
+
+                <Text style={styles.vacinas_vazio_titulo}>
+                    Nenhuma nota registrado
                 </Text>
-        
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: colors.cinza,
-                    textAlign: "center",
-                    marginTop: 6,
-                  }}
-                >
-                  nenhuma nota adiconada.
+
+                <Text style={styles.vacinas_vazio_descricao}>
+                    Nenhuma nota adicionada.
                 </Text>
-              </View>
-            ) : (
-              notas.map((nota) => (
-                  <View key={nota.id} style={styles.botao_animal}>
-                      <Text style={styles.nomePet}>{nota.notas}</Text>
-                        </View>
-                        ))
-                      )}
-              </ScrollView>
-        <FAB icon="pencil" style={{position:"absolute",bottom:"5%",right:"5%"}}/>
-        <FAB icon="plus" style={{position:"absolute",bottom:"15%",right:"5%"}}/>
+            </View>
+        </Pressable>
+    </Link>
+) : (
+   notas.map((notas) => (
+    <View key={notas.id} style={styles.card_vacina}>
+        <View style={styles.card_vacina_icone}>
+            <Icon
+                source="notebook-edit"
+                size={26}
+                color={colors.branco}
+            />
+        </View>
+
+        <View style={styles.card_vacina_textos}>
+            <Text style={styles.card_vacina_titulo}>
+                {notas.notas || "Notas"}
+            </Text>
+
+            <Text style={styles.card_vacina_descricao}>
+                Data: {notas.dataAplicacao || "Não informada"}
+            </Text>
+
+               {notas.categoria ? (
+                <Text style={styles.card_vacina_data}>
+                    Categoria: {notas.categoria}
+                </Text>              
+            ) : null}
+            
+                {notas.descricao ? (
+          <Text style={styles.card_vacina_data}>
+              Descrição: {notas.descricao}
+          </Text>
+      ) : null}
+
+          {notas.dataretorno ? (
+          <Text style={styles.card_vacina_data}>
+              Data de retorno: {notas.dataretorno}
+          </Text>
+      ) : null}
+        </View>
+        <View style={styles.card_vacina_acoes}>
+    <TouchableOpacity>
+        <Icon
+            source="trash-can-outline"
+            size={22}
+            color={colors.rosaEscuro}
+        />
+    </TouchableOpacity>
+
+    <TouchableOpacity>
+        <Icon
+            source="pencil-outline"
+            size={22}
+            color={colors.rosaEscuro}
+        />
+    </TouchableOpacity>
+</View>
     </View>
+    
+    ))
+)}
+</ScrollView>
+        <Portal>
+          <FAB
+          icon="plus"
+          color={colors.branco}
+          style={{
+              position: "absolute",
+              bottom: 30,
+              right: 15,
+              backgroundColor: colors.rosaEscuro,
+          }}
+          onPress={() =>
+              router.push({
+                  pathname: "./notas_criar_veterinario",
+                  params: { petId: petId },
+              })
+          }
+/>
+        </Portal>
+    </ImageBackground>
+    </PaperProvider>
   );
 }

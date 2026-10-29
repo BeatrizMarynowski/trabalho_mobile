@@ -68,9 +68,7 @@ return (
         <View style={styles.espaco_10}/>
         {/*titulo da tela - NOTAS*/}
         <TouchableOpacity activeOpacity={0.85} style={styles.card_resumo}>
-  <View style={styles.card_resumo_icone}>
-    <Icon source="needle" size={24} color={colors.branco} />
-  </View>
+
 
   <View style={styles.card_resumo_textos}>
     <Text style={styles.card_resumo_titulo}>Vacinas</Text>

@@ -62,9 +62,7 @@ return (
         <View style={styles.espaco_10}/>
         {/*titulo da tela - NOTAS*/}
         <TouchableOpacity activeOpacity={0.85} style={styles.card_resumo}>
-  <View style={styles.card_resumo_icone}>
-    <Icon source="flask-outline" size={24} color={colors.branco} />
-  </View>
+
 
   <View style={styles.card_resumo_textos}>
     <Text style={styles.card_resumo_titulo}>Exames</Text>
@@ -106,7 +104,7 @@ return (
                 </Text>
 
                 <Text style={styles.vacinas_vazio_descricao}>
-                    Nenhuma exame adicionado.
+                    Nenhum exame adicionado.
                 </Text>
             </View>
         </Pressable>

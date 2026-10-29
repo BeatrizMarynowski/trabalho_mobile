@@ -109,7 +109,7 @@ export default function Index() {
                         <View style={styles.cabecalho}>
                             <View style={styles.cabecalho_titulo_linha}>
                                 <Icon
-                                    source="needle"
+                                    source="flask-outline"
                                     size={28}
                                     color={colors.branco}
                                 />
@@ -131,7 +131,7 @@ export default function Index() {
                             </View>
 
                             <Text style={styles.cabecalho_legenda}>
-                                Registre uma exame na ficha do pet
+                                Registre um exame na ficha do pet
                             </Text>
                         </View>
 
@@ -143,7 +143,7 @@ export default function Index() {
                             <View style={styles.card_ficha_novo}>
                                 <View style={styles.titulo_secao_ficha}>
                                     <Icon
-                                        source="needle"
+                                        source="flask-outline"
                                         size={24}
                                         color={colors.rosaEscuro}
                                     />
