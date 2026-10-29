@@ -210,7 +210,7 @@ export default function Index() {
 
                 <View style={styles.card_ficha_novo}>
                     <View style={styles.titulo_secao_ficha}>
-                        <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
+                        <Icon source="needle" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Vacinas</Text>
                     </View>
                     <Link href={`../vacinas/vacinas_veterinario?petId=${petId}`} asChild>
@@ -223,7 +223,7 @@ export default function Index() {
 
                 <View style={styles.card_ficha_novo}>
                     <View style={styles.titulo_secao_ficha}>
-                        <Icon source="note-text-outline" size={22} color={colors.rosaEscuro} />
+                        <Icon source="flask-outline" size={22} color={colors.rosaEscuro} />
                         <Text style={styles.texto_titulo_secao_ficha}>Exames</Text>
                     </View>
                     <Link href={`../exames/exames_veterinario?petId=${petId}`} asChild>
