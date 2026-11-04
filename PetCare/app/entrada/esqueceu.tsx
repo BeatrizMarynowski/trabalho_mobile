@@ -43,7 +43,7 @@ export default function Index() {
      
       <View style={styles.view_25}>  
         <Image source={require('../../assets/images/icone_pata.png')} style={styles.imagem_pata}/>
-        <Link href="./login" style={styles.posicao_seta}>
+        <Link href="./login/login" style={styles.posicao_seta}>
           <Icon source="arrow-left" size={35} color={colors.cinza} />
         </Link>
       </View>
