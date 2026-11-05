@@ -4,25 +4,25 @@
     "slug": "PetCare",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon.jpg",
     "scheme": "petcare",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/icon.png"
+      "icon": "./assets/expo.icon"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/icon.jog",
+        "backgroundImage": "./assets/images/icon.jpg",
+        "monochromeImage": "./assets/images/icon.jpg"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.lmzim.PetCare"
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/icon.png"
+      "favicon": "./assets/images/icon.jpg"
     },
     "plugins": [
       "expo-router",
@@ -30,7 +30,7 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#E8B4C3",
-          "image": "./assets/images/icone_pata2.png",
+          "image": "./assets/images/icone_pata.png",
           "imageWidth": 200
         }
       ],

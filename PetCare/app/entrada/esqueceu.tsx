@@ -21,6 +21,9 @@ export default function Index() {
     try {
       await sendPasswordResetEmail(auth, email.trim().toLowerCase());
       Alert.alert("Sucesso!", "E-mail de redefinição enviado! Verifique sua caixa de entrada.");
+      router.push({
+                pathname: "./login/login",
+            });
     } catch (error) {
       console.error(error);
   
